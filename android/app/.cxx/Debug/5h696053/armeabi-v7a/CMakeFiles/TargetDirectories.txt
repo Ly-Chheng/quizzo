@@ -1,0 +1,2 @@
+/Users/beltei/Documents/Flutter/quizzo/android/app/.cxx/Debug/5h696053/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/beltei/Documents/Flutter/quizzo/android/app/.cxx/Debug/5h696053/armeabi-v7a/CMakeFiles/rebuild_cache.dir

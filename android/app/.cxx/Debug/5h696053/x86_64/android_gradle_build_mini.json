@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/Users/beltei/flutter/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/beltei/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/beltei/Documents/Flutter/quizzo/android/app/.cxx/Debug/5h696053/x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/beltei/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/beltei/Documents/Flutter/quizzo/android/app/.cxx/Debug/5h696053/x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}
