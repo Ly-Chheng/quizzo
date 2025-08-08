@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:quizzo/models/splash_controller.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -19,12 +20,12 @@ class SplashScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/icons/Flutter_logo.png',
-              fit: BoxFit.cover,
-              height: 250,
-            ),
+            Icon(Icons.quiz,size: 200,color: Color(0xFFFFA63D),),
+            Text("Qiuzzo",style: TextStyle(fontSize: 40,fontWeight:FontWeight.bold),),
+            const SizedBox(height: 150),
+            const CircularProgressIndicator(strokeWidth: 5,color: Color(0xFFFFA63D),),
           ],
+          
         ),
       ),
     );

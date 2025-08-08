@@ -8,9 +8,10 @@ class SplashController extends GetxController {
     super.onInit();
     Timer(
       const Duration(seconds: 5),
-      () => Get.off(
-        const BottomNavigationBarScreen(),
-      ),
+      // () => Get.off(
+      //   const BottomNavigationBarScreen(),
+      // ),
+      () => Get.toNamed('/onboarding'),
     );
   }
 }
