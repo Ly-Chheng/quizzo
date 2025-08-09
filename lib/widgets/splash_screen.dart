@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:quizzo/models/splash_controller.dart';
+import 'package:quizzo/widgets/loading_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -23,7 +24,7 @@ class SplashScreen extends StatelessWidget {
             Icon(Icons.quiz,size: 200,color: Color(0xFFFFA63D),),
             Text("Qiuzzo",style: TextStyle(fontSize: 40,fontWeight:FontWeight.bold),),
             const SizedBox(height: 150),
-            const CircularProgressIndicator(strokeWidth: 5,color: Color(0xFFFFA63D),),
+            RotatingDotsLoader()
           ],
           
         ),

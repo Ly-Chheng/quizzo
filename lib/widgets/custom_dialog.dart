@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizzo/widgets/loading_screen.dart';
 
 class SuccessDialog extends StatelessWidget {
   const SuccessDialog({super.key});
@@ -20,7 +21,7 @@ class SuccessDialog extends StatelessWidget {
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: LinearGradient(
-                  colors: [Color(0xFF9C27B0), Color(0xFF7B1FA2)],
+                  colors: [Color(0xFFFFA63D), Color.fromARGB(255, 238, 165, 81)],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -35,7 +36,7 @@ class SuccessDialog extends StatelessWidget {
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF7B1FA2),
+                color: Color(0xFFFFA63D),
               ),
             ),
             const SizedBox(height: 8),
@@ -49,10 +50,11 @@ class SuccessDialog extends StatelessWidget {
             const SizedBox(height: 24),
 
             // Loading dots
-            const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF7B1FA2)),
-              strokeWidth: 3,
-            ),
+            // const CircularProgressIndicator(
+            //   valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFFFA63D)),
+            //   strokeWidth: 5,
+            // ),
+            RotatingDotsLoader()
           ],
         ),
       ),

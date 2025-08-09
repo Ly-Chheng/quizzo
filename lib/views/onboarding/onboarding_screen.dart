@@ -63,56 +63,58 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          // Background gradient
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  _pages[_currentPage].color.withOpacity(0.1),
-                  _pages[_currentPage].color.withOpacity(0.05),
-                ],
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              _pages[_currentPage].color.withOpacity(0.1),
+              _pages[_currentPage].color.withOpacity(0.05),
+            ],
+          ),
+        ),
+        child: SafeArea(
+          child: Column(
+            children: [
+              // Skip button aligned to top right
+              Align(
+                alignment: Alignment.topRight,
+                child: _currentPage < _pages.length - 1
+                    ? TextButton(
+                        onPressed: () => Get.toNamed('/accountType'),
+                        child: Text(
+                          'Skip',
+                          style: TextStyle(
+                            color: _pages[_currentPage].color,
+                            fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      )
+                    : SizedBox.shrink(),
               ),
-            ),
+
+              // Expanded PageView to fill available space
+              Expanded(
+                child: PageView.builder(
+                  controller: _pageController,
+                  onPageChanged: _onPageChanged,
+                  itemCount: _pages.length,
+                  itemBuilder: (context, index) {
+                    return _buildPage(_pages[index]);
+                  },
+                ),
+              ),
+
+              // Bottom navigation with some padding
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                child: _buildBottomNavigation(),
+              ),
+            ],
           ),
-          // Page view
-          PageView.builder(
-            controller: _pageController,
-            onPageChanged: _onPageChanged,
-            itemCount: _pages.length,
-            itemBuilder: (context, index) {
-              return _buildPage(_pages[index]);
-            },
-          ),
-          // Skip button
-          Positioned(
-            top: 50,
-            right: 20,
-            child: _currentPage < _pages.length - 1
-                ? TextButton(
-                    onPressed: _skipOnboarding,
-                    child: Text(
-                      'Skip',
-                      style: TextStyle(
-                        color: _pages[_currentPage].color,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  )
-                : SizedBox(),
-          ),
-          // Bottom navigation
-          Positioned(
-            bottom: 50,
-            left: 10,
-            right: 10,
-            child: _buildBottomNavigation(),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -125,8 +127,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         children: [
           // Icon
           Container(
-            width: 200,
-            height: 200,
+            width: (Get.context?.isPhone ?? true) ? 200 : 300,
+            height: (Get.context?.isPhone ?? true) ? 200 : 300,
             decoration: BoxDecoration(
               color: page.color.withOpacity(0.1),
               shape: BoxShape.circle,
@@ -138,12 +140,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
           ),
         
-          SizedBox(height: 20),
+          SizedBox(height: (Get.context?.isPhone ?? true) ? 20 : 30,),
           // Description
           Text(
             page.description,
             style: TextStyle(
-              fontSize: 16,
+              fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
               fontWeight: FontWeight.w500,
               color: Colors.grey[600],
               height: 1.5,
@@ -170,8 +172,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         SizedBox(height: 20,),
         // Next/Get Started button
         AnimatedButton(
-          width: 300,
-          height: 60,
+          width: double.infinity,
+          height: (Get.context?.isPhone ?? true) ? 50 : 60,
           color: _pages[_currentPage].color,
           borderRadius: 16,
           shadowDegree: ShadowDegree.dark,
@@ -180,25 +182,28 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           onPressed: _nextPage,
           child: Text(
             _currentPage == _pages.length - 1 ? 'GET STARTED' : 'NEXT',
-            style: TextStyle(color: Colors.white, fontSize: 16,fontWeight: FontWeight.bold, fontFamily: 'Roboto',),
+            style: TextStyle(
+              color: Colors.white, 
+              fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
+              fontWeight: FontWeight.bold, 
+              fontFamily: 'Roboto',
+            ),
           ),
         ),
         SizedBox(height: 25,),
          Center(
         child: AnimatedButton(
-          width: 300,
-          height: 60,
+          width: double.infinity,
+          height: (Get.context?.isPhone ?? true) ? 50 : 60,
           color: Color(0XFF04A68B),
           borderRadius: 16,
           shadowDegree: ShadowDegree.dark,
           duration: 100,
           enabled: true,
-          onPressed: () {
-            const BottomNavigationBarScreen();
-          },
+          onPressed:(){},
           child: Text(
             "I ALREADY HAVE AN ACCOUNT",
-            style: TextStyle(color: Colors.white, fontSize: 16,fontWeight: FontWeight.bold, fontFamily: 'Roboto',),
+            style: TextStyle(color: Colors.white, fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,fontWeight: FontWeight.bold, fontFamily: 'Roboto',),
           ),
         ),)
 

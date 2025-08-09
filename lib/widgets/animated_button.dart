@@ -46,43 +46,51 @@ class _AnimatedButtonState extends State<AnimatedButton> {
     final double _height = widget.height - _shadowHeight;
 
     return GestureDetector(
-      // width here is required for centering the button in parent
-      child: Container(
-        width: widget.width,
-        height: _height + _shadowHeight,
-        child: Stack(
-          children: <Widget>[
-            // background shadow serves as drop shadow
-            // width is necessary for bottom shadow
-            Positioned(
-              bottom: 0,
-              child: Container(
-                height: _height,
-                width: widget.width,
-                decoration: BoxDecoration(
-                  color: widget.enabled
-                      ? darken(widget.color, widget.shadowDegree)
-                      : darken(widget.disabledColor, widget.shadowDegree),
-                  borderRadius: _getBorderRadius(),
+      // Use LayoutBuilder to handle double.infinity width
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final double actualWidth = widget.width == double.infinity 
+              ? constraints.maxWidth 
+              : widget.width;
+          
+          return Container(
+            width: actualWidth,
+            height: _height + _shadowHeight,
+            child: Stack(
+              children: <Widget>[
+                // background shadow serves as drop shadow
+                // width is necessary for bottom shadow
+                Positioned(
+                  bottom: 0,
+                  child: Container(
+                    height: _height,
+                    width: actualWidth,
+                    decoration: BoxDecoration(
+                      color: widget.enabled
+                          ? darken(widget.color, widget.shadowDegree)
+                          : darken(widget.disabledColor, widget.shadowDegree),
+                      borderRadius: _getBorderRadius(),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            AnimatedPositioned(
-              curve: _curve,
-              duration: Duration(milliseconds: widget.duration),
-              bottom: _position,
-              child: Container(
-                height: _height,
-                width: widget.width,
-                decoration: BoxDecoration(
-                  color: widget.enabled ? widget.color : widget.disabledColor,
-                  borderRadius: _getBorderRadius(),
+                AnimatedPositioned(
+                  curve: _curve,
+                  duration: Duration(milliseconds: widget.duration),
+                  bottom: _position,
+                  child: Container(
+                    height: _height,
+                    width: actualWidth,
+                    decoration: BoxDecoration(
+                      color: widget.enabled ? widget.color : widget.disabledColor,
+                      borderRadius: _getBorderRadius(),
+                    ),
+                    child: Center(child: widget.child),
+                  ),
                 ),
-                child: Center(child: widget.child),
-              ),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
       onTapDown: widget.enabled ? _pressed : null,
       onTapUp: widget.enabled ? _unPressedOnTapUp : null,
