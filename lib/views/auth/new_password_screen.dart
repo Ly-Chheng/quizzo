@@ -13,12 +13,55 @@ class NewPasswordScreen extends StatefulWidget {
 }
 
 class _NewPasswordScreenState extends State<NewPasswordScreen> {
-
-  final TextEditingController passwordController =
-      TextEditingController(text: "12345678");
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
 
   bool rememberMe = true;
   bool passwordVisible = false;
+  bool confirmPasswordVisible = false;
+
+  @override
+  void dispose() {
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  bool _validatePasswords() {
+    if (passwordController.text.isEmpty || confirmPasswordController.text.isEmpty) {
+      _showErrorDialog("Please fill in both password fields");
+      return false;
+    }
+    
+    if (passwordController.text.length < 8) {
+      _showErrorDialog("Password must be at least 8 characters long");
+      return false;
+    }
+    
+    if (passwordController.text != confirmPasswordController.text) {
+      _showErrorDialog("Passwords do not match");
+      return false;
+    }
+    
+    return true;
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Error"),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("OK"),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,9 +74,8 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            FocusScope.of(context).unfocus(); // Close the keyboard
-            // Get.back(); // Go back instead of pushing new route
-             Future.delayed(const Duration(milliseconds: 50), () {
+            FocusScope.of(context).unfocus();
+            Future.delayed(const Duration(milliseconds: 50), () {
               Get.back();
             });
           },
@@ -64,46 +106,48 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Title
-                        Center(
-                          child: Text(
-                            "Create an account ✏️",
-                            style: TextStyle(
-                                fontSize:
-                                    (Get.context?.isPhone ?? true) ? 22 : 25,
-                                fontWeight: FontWeight.bold),
+                        Text(
+                          "Create new password ✏️",
+                          style: TextStyle(
+                            fontSize: (Get.context?.isPhone ?? true) ? 22 : 25,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         SizedBox(
                           height: (Get.context?.isPhone ?? true) ? 8 : 10,
                         ),
-        
-                        // Subtitle
-                        Center(
-                          child: Text(
-                            "Please enter your username, email address and password. "
-                            "If you forget it, then you have to do forgot password.",
-                            style: TextStyle(
-                                fontSize:
-                                    (Get.context?.isPhone ?? true) ? 15 : 18,
-                                color: Colors.grey),
-                            textAlign: TextAlign.center,
+
+                        // Subtitle (fixed the duplicate text)
+                        Text(
+                          "Save the new password in a safe place. "
+                          "If you forget it, then you have to do forgot password again.",
+                          style: TextStyle(
+                            fontSize: (Get.context?.isPhone ?? true) ? 15 : 18,
+                            color: Colors.grey,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                         SizedBox(
                           height: (Get.context?.isPhone ?? true) ? 30 : 60,
                         ),
-        
-                      
-        
+
                         // Password
                         buildLabel("Create a new password"),
                         PasswordField(
                           controller: passwordController,
-                          hintText: 'Enter password',
+                          hintText: 'Enter new password',
                         ),
-        
+                        const SizedBox(height: 15),
+                        
+                        // Confirm Password (now uses separate controller)
+                        buildLabel("Confirm new password"),
+                        PasswordField(
+                          controller: confirmPasswordController,
+                          hintText: 'Confirm new password',
+                        ),
+
                         const SizedBox(height: 10),
-        
+
                         // Remember me
                         Row(
                           children: [
@@ -113,24 +157,19 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                               onChanged: (value) =>
                                   setState(() => rememberMe = value ?? false),
                             ),
-                            const Text("Remember me"),
+                            Text("Remember me",style: TextStyle(fontSize: (Get.context?.isPhone ?? true) ? 14 : 16,),),
                           ],
                         ),
                         SizedBox(
                           height: (Get.context?.isPhone ?? true) ? 30 : 40,
                         ),
-        
-                      
-                        const SizedBox(height: 15),
-        
-                       
                       ],
                     ),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 15,right: 15,bottom: 20),
+                padding: const EdgeInsets.only(left: 15, right: 15, bottom: 20),
                 child: AnimatedButton(
                   width: double.infinity,
                   height: (Get.context?.isPhone ?? true) ? 50 : 60,
@@ -139,17 +178,20 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                   shadowDegree: ShadowDegree.dark,
                   duration: 100,
                   enabled: true,
-                 onPressed: () {
-                    showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (context) => const SuccessDialog(),
-                    );
+                  onPressed: () {
+                    // Validate passwords before proceeding
+                    if (_validatePasswords()) {
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) => const SuccessDialog(),
+                      );
 
-                    Future.delayed(const Duration(seconds: 2), () {
-                      Navigator.pop(context); // Close dialog
-                      Get.toNamed('/BottomNavigationBar');
-                    });
+                      Future.delayed(const Duration(seconds: 2), () {
+                        Navigator.pop(context); // Close dialog
+                        Get.toNamed('/BottomNavigationBar');
+                      });
+                    }
                   },
                   child: Text(
                     "Continue",
@@ -161,7 +203,6 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                   ),
                 ),
               ),
-              
             ],
           ),
         ),

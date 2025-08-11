@@ -55,6 +55,9 @@ dependencies:
   get_storage: ^2.1.1
   flutter_dotenv: ^5.1.0
 
+  #Url
+  url_launcher: ^6.3.2
+
   intl: ^0.20.2
 
 dev_dependencies:

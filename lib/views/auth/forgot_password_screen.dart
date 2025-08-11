@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quizzo/widgets/animated_button.dart';
@@ -13,8 +15,31 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
-  final TextEditingController emailController =
-      TextEditingController(text: "chamroeun@gmail.com");
+  // final TextEditingController emailController =
+  //     TextEditingController(text: "chamroeun@gmail.com");
+  final TextEditingController emailController = TextEditingController();
+  bool isFormValid = false; 
+
+
+   @override
+  void initState() {
+    super.initState();
+    // Listen for changes
+    emailController.addListener(_validateForm);
+  }
+
+  void _validateForm() {
+    setState(() {
+      isFormValid = emailController.text.trim().isNotEmpty;
+    });
+  }
+
+  @override
+  void dispose() {
+    emailController.removeListener(_validateForm);
+    emailController.dispose();
+    super.dispose();
+  }
 
 
   @override
@@ -82,6 +107,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         TextField(
                           controller: emailController,
                           decoration: const InputDecoration(
+                            hintText: 'Enter your email',
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Color(0xFFFFA63D)),
                             ),
@@ -103,23 +129,26 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 15,right: 15,bottom: 20),
+                padding: const EdgeInsets.only(left: 15, right: 15, bottom: 20),
                 child: AnimatedButton(
                   width: double.infinity,
                   height: (Get.context?.isPhone ?? true) ? 50 : 60,
-                  color: const Color(0xFFFFA63D),
+                  color: isFormValid ? const Color(0xFFFFA63D) : Colors.grey,
                   borderRadius: 16,
                   shadowDegree: ShadowDegree.dark,
                   duration: 100,
-                  enabled: true,
-                 onPressed: () {
+                  enabled: isFormValid,
+                  onPressed: () {
+                    if (!isFormValid) return;
+                    // Your sign-in logic here
+                    log('Email: ${emailController.text}');
                     Get.toNamed('/OtpVerificationPage');
                   },
                   child: Text(
                     "Continue",
                     style: TextStyle(
                       fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
-                      color: Colors.white,
+                      color: isFormValid ?   Color(0xFFFFFFFF) : Colors.grey[400],
                       fontWeight: FontWeight.w600,
                     ),
                   ),

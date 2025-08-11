@@ -49,11 +49,6 @@ class SuccessDialog extends StatelessWidget {
             ),
             const SizedBox(height: 24),
 
-            // Loading dots
-            // const CircularProgressIndicator(
-            //   valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFFFA63D)),
-            //   strokeWidth: 5,
-            // ),
             RotatingDotsLoader()
           ],
         ),

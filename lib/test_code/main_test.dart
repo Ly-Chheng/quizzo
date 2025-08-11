@@ -17,37 +17,25 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Handle background Firebase messages
+  // Set the background messaging handler early on, as a named top-level function
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-
-  // Initialize Firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  // Init services
   await FirebaseServices().getInstance();
-  await LocalStorage.init();
-  await GetStorage.init();
+  await LocalStorage.init(); //? this use for store to local storage (Device)
+  await GetStorage.init(); //? this use for store to local storage (Device)
   await dotenv.load(fileName: "assets/.env");
-
-  // Read onboarding flag
-  final storage = GetStorage();
-  final hasSeenOnboarding = storage.read('hasSeenOnboarding') ?? false;
-
-  runApp(MyApp(hasSeenOnboarding: hasSeenOnboarding));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final bool hasSeenOnboarding;
-  const MyApp({super.key, required this.hasSeenOnboarding});
-
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
+    //? Declare for use ey kr ban
     final storage = GetStorage();
     return GetMaterialApp(
       navigatorKey: navigatorKey,
@@ -55,14 +43,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeService().lightTheme,
       darkTheme: ThemeService().darkTheme,
       themeMode: ThemeService().getThemeMode(),
-      // FIXED: First install → '/' | After onboarding → '/BottomNavigationBar'
-      initialRoute: hasSeenOnboarding ? '/SpleshGloble' : '/',
-      getPages: appRoute,
+      initialRoute: '/', //? initial route "SplashScreen"
+      getPages: appRoute, //? use for manage routes
       translations: AppTranslations(),
       fallbackLocale: AppTranslations().fallbackLocale,
-      locale: storage.read('langCode') != null
-          ? Locale(storage.read('langCode'), storage.read('countryCode'))
-          : const Locale('km', 'KM'),
+      locale: storage.read('langCode') != null ? Locale(storage.read('langCode'), storage.read('countryCode')) : const Locale('km', 'KM'),
     );
   }
 }

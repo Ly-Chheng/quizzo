@@ -4,6 +4,7 @@ import 'package:quizzo/widgets/animated_button.dart';
 import 'package:quizzo/widgets/custom_dialog.dart';
 import 'package:quizzo/widgets/custom_auth.dart';
 import 'package:quizzo/widgets/custom_label.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -232,8 +233,17 @@ class _SignUpPageState extends State<SignUpPage> {
           fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
         ),
       ),
-      onPressed: () {
-        // Get.toNamed('/CreateAccountPage');
+      onPressed: () async {
+        final gmailUrl = Uri.parse("googlegmail://");
+        final mailtoUrl = Uri.parse("mailto:");
+
+        if (await canLaunchUrl(gmailUrl)) {
+          await launchUrl(gmailUrl);
+        } else if (await canLaunchUrl(mailtoUrl)) {
+          await launchUrl(mailtoUrl);
+        } else {
+          Get.snackbar('Error', 'Could not open Gmail app or email client.');
+        }
       },
     );
   }

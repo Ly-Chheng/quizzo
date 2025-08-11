@@ -28,7 +28,8 @@ class AnimatedButton extends StatefulWidget {
     this.enabled = true,
     this.borderRadius = 12,
     this.color = Colors.blue,
-    this.disabledColor = Colors.grey,
+    // this.disabledColor = Colors.grey,
+    this.disabledColor = Colors.white70,
     this.shadowDegree = ShadowDegree.light,
   }) : super(key: key);
 

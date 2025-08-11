@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:quizzo/widgets/animated_button.dart';
+import 'package:quizzo/widgets/custom_dialog.dart';
 
 class OtpVerificationPage extends StatefulWidget {
   const OtpVerificationPage({Key? key}) : super(key: key);
@@ -43,20 +46,20 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 16),
-            const Text(
+             Text(
               "You've got mail 📩",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: (Get.context?.isPhone ?? true) ? 20 : 25, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            const Text(
+              Text(
               "We have sent the OTP verification code to your email address. "
               "Check your email and enter the code below.",
-              style: TextStyle(fontSize: 14, color: Colors.black54),
+              style: TextStyle(fontSize: (Get.context?.isPhone ?? true) ? 14 : 16, color: Colors.black54),
             ),
             const SizedBox(height: 32),
 
@@ -71,32 +74,32 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                 activeFillColor: Colors.white,
                 selectedFillColor: Colors.white,
                 inactiveFillColor: Colors.white,
-                activeColor: Colors.deepPurple,
-                selectedColor: Colors.deepPurple,
+                activeColor: Color(0xFFFFA63D),
+                selectedColor: Color(0xFFFFA63D),
                 inactiveColor: Colors.grey.shade300,
-                fieldHeight: 60,
-                fieldWidth: 50,
+                fieldHeight: (Get.context?.isPhone ?? true) ? 50 : 70,
+                fieldWidth: (Get.context?.isPhone ?? true) ? 60 : 80,
               ),
               keyboardType: TextInputType.number,
               enableActiveFill: true,
             ),
 
-            const SizedBox(height: 16),
+            SizedBox(height: (Get.context?.isPhone ?? true) ? 20 : 40,),
             Center(
               child: Text(
                 "Didn't receive email?",
-                style: TextStyle(fontSize: 14, color: Colors.black87),
+                style: TextStyle(fontSize: (Get.context?.isPhone ?? true) ? 16 : 18, color: Colors.black87),
               ),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: (Get.context?.isPhone ?? true) ? 5 : 15,),
             Center(
               child: Text(
                 countdown > 0
                     ? "You can resend code in $countdown s"
                     : "Resend code",
                 style: TextStyle(
-                  fontSize: 14,
-                  color: countdown > 0 ? Colors.black54 : Colors.deepPurple,
+                  fontSize: (Get.context?.isPhone ?? true) ? 14 : 16,
+                  color: countdown > 0 ? Colors.black54 : Color(0xFFFFA63D),
                   fontWeight:
                       countdown > 0 ? FontWeight.normal : FontWeight.bold,
                 ),
@@ -105,23 +108,71 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
             const Spacer(),
 
             /// Confirm Button
-            SizedBox(
-              width: double.infinity,
-              height: 56,
-              child: ElevatedButton(
-                onPressed: currentText.length == 4 ? () {} : null,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF6A4DFF),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(28),
-                  ),
-                ),
-                child: const Text(
-                  "Confirm",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
+            // SizedBox(
+            //   width: double.infinity,
+            //   height: (Get.context?.isPhone ?? true) ? 50 : 60,
+            //   child: ElevatedButton(
+            //     onPressed: currentText.length == 4
+            //         ? () {
+            //             showDialog(
+            //               context: context,
+            //               barrierDismissible: false,
+            //               builder: (context) => const SuccessDialog(),
+            //             );
+
+            //             Future.delayed(const Duration(seconds: 2), () {
+            //               Navigator.pop(context); // Close dialog
+            //               Get.toNamed('/NewPassword');
+            //             });
+            //           }
+            //         : null, // Disable when less than 4
+            //     style: ElevatedButton.styleFrom(
+            //       backgroundColor: const Color(0xFFFFA63D),
+            //       shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(28),
+            //       ),
+            //     ),
+            //     child: Text(
+            //       "Confirm",
+            //       style: TextStyle(
+            //         fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
+            //         fontWeight: FontWeight.bold,
+            //       ),
+            //     ),
+            //   ),
+            // ),
+
+          AnimatedButton(
+            width: double.infinity,
+            height: (Get.context?.isPhone ?? true) ? 50 : 60,
+            borderRadius: 16,
+            shadowDegree: ShadowDegree.dark,
+            duration: 100,
+            onPressed: () {
+              if (currentText.length != 4) return; // Prevent action if not 4 digits
+
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) => const SuccessDialog(),
+              );
+
+              Future.delayed(const Duration(seconds: 2), () {
+                Navigator.pop(context); // Close dialog
+                Get.toNamed('/NewPassword');
+              });
+            },
+            child: Text(
+              "Confirm",
+              style: TextStyle(
+                fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
+                fontWeight: FontWeight.bold,
+                color: currentText.length == 4 ?   Color(0xFFFFFFFF) : Colors.grey[400], // Disabled look
               ),
             ),
+          color: currentText.length == 4 ? const Color(0xFFFFA63D) : Colors.grey.shade200, // Disabled background
+        ),
+
             const SizedBox(height: 24),
           ],
         ),
