@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:quizzo/models/splash_controller.dart';
 import 'package:quizzo/widgets/loading_screen.dart';
 

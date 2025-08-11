@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quizzo/widgets/animated_button.dart';
-import 'package:quizzo/widgets/custom_dialog.dart';
 import 'package:quizzo/widgets/custom_auth.dart';
+import 'package:quizzo/widgets/custom_dialog.dart';
 import 'package:quizzo/widgets/custom_label.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+class HaveAccountScreen extends StatefulWidget {
+  const HaveAccountScreen({super.key});
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<HaveAccountScreen> createState() => _HaveAccountScreenState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
-  final TextEditingController usernameController =
-      TextEditingController(text: "Chamroeun");
+class _HaveAccountScreenState extends State<HaveAccountScreen> {
+
   final TextEditingController emailController =
       TextEditingController(text: "chamroeun@gmail.com");
   final TextEditingController passwordController =
@@ -22,37 +21,24 @@ class _SignUpPageState extends State<SignUpPage> {
 
   bool rememberMe = true;
   bool passwordVisible = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,
-      // AppBar with back button and progress bar
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            FocusScope.of(context).unfocus(); // Close the keyboard
-            // Get.back(); // Go back instead of pushing new route
+            FocusScope.of(context).unfocus(); 
              Future.delayed(const Duration(milliseconds: 50), () {
-              Get.back();
+              Get.offAllNamed('/HaveAccountScreen'); 
             });
           },
         ),
-        title: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: LinearProgressIndicator(
-            value: 1.0,
-            minHeight: (Get.context?.isPhone ?? true) ? 10 : 12,
-            backgroundColor: Colors.grey.shade300,
-            valueColor: const AlwaysStoppedAnimation<Color>(
-              Color(0xFFFFA63D),
-            ),
-          ),
-        ),
+       
         centerTitle: true,
       ),
       body: GestureDetector(
@@ -68,41 +54,17 @@ class _SignUpPageState extends State<SignUpPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Title
-                        Center(
-                          child: Text(
-                            "Create an account ✏️",
-                            style: TextStyle(
-                                fontSize:
-                                    (Get.context?.isPhone ?? true) ? 22 : 25,
-                                fontWeight: FontWeight.bold),
-                          ),
+                        Text(
+                          "Hello there ✏️",
+                          style: TextStyle(
+                              fontSize:
+                                  (Get.context?.isPhone ?? true) ? 22 : 25,
+                              fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(
-                          height: (Get.context?.isPhone ?? true) ? 8 : 10,
-                        ),
-        
-                        // Subtitle
-                        Center(
-                          child: Text(
-                            "Please enter your username, email address and password. "
-                            "If you forget it, then you have to do forgot password.",
-                            style: TextStyle(
-                                fontSize:
-                                    (Get.context?.isPhone ?? true) ? 15 : 18,
-                                color: Colors.grey),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
+
+                        
                         SizedBox(
                           height: (Get.context?.isPhone ?? true) ? 30 : 60,
-                        ),
-        
-                        // Username
-                        buildLabel("Username"),
-                        CustomUnderlineTextField(
-                          controller: usernameController,
-                          hintText: 'Enter username',
-                          suffixIcon: Icons.check,
                         ),
         
                         // Email
@@ -149,22 +111,19 @@ class _SignUpPageState extends State<SignUpPage> {
                         Row(
                           children: [
                             Expanded(child: Divider(color: Colors.grey.shade400)),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Text("or"),
-                            ),
-                            Expanded(child: Divider(color: Colors.grey.shade400)),
                           ],
                         ),
                         const SizedBox(height: 15),
         
-                        // Google button
-                        _buildSocialButton(
-                          icon: "assets/icons/google.png",
-                          text: "Continue with Google",
-                        ),
-        
-                        // const Spacer(),
+                       Center(child: TextButton(onPressed: (){
+                        Get.toNamed('/ForgotPasswordScreen');
+                       }, child: Text("Forgot Password?",
+                        style: TextStyle(
+                      fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
+                      color: const Color(0xFFFFA63D),
+                      fontWeight: FontWeight.w600,
+                    ),
+                       )))
                       ],
                     ),
                   ),
@@ -181,19 +140,10 @@ class _SignUpPageState extends State<SignUpPage> {
                   duration: 100,
                   enabled: true,
                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (context) => const SuccessDialog(),
-                    );
-
-                    Future.delayed(const Duration(seconds: 2), () {
-                      Navigator.pop(context); // Close dialog
-                      Get.toNamed('/BottomNavigationBar');
-                    });
+            
                   },
                   child: Text(
-                    "Sign up",
+                    "Sign In",
                     style: TextStyle(
                       fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
                       color: Colors.white,
@@ -207,34 +157,6 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ),
       ),
-    );
-  }
-
-
-
-  Widget _buildSocialButton({required String icon, required String text}) {
-    return OutlinedButton.icon(
-      style: OutlinedButton.styleFrom(
-        side: BorderSide(color: Colors.grey.shade300),
-        minimumSize: Size(
-          double.infinity,
-          (Get.context?.isPhone ?? true) ? 50 : 60,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ),
-      icon: Image.asset(icon, height: (Get.context?.isPhone ?? true) ? 24 : 35, width: (Get.context?.isPhone ?? true) ? 24 : 35,),
-      label: Text(
-        text,
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
-        ),
-      ),
-      onPressed: () {
-        // Get.toNamed('/CreateAccountPage');
-      },
     );
   }
 }

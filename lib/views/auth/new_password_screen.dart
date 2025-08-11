@@ -1,28 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quizzo/widgets/animated_button.dart';
-import 'package:quizzo/widgets/custom_dialog.dart';
 import 'package:quizzo/widgets/custom_auth.dart';
+import 'package:quizzo/widgets/custom_dialog.dart';
 import 'package:quizzo/widgets/custom_label.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+class NewPasswordScreen extends StatefulWidget {
+  const NewPasswordScreen({super.key});
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<NewPasswordScreen> createState() => _NewPasswordScreenState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
-  final TextEditingController usernameController =
-      TextEditingController(text: "Chamroeun");
-  final TextEditingController emailController =
-      TextEditingController(text: "chamroeun@gmail.com");
+class _NewPasswordScreenState extends State<NewPasswordScreen> {
+
   final TextEditingController passwordController =
       TextEditingController(text: "12345678");
 
   bool rememberMe = true;
   bool passwordVisible = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,31 +93,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           height: (Get.context?.isPhone ?? true) ? 30 : 60,
                         ),
         
-                        // Username
-                        buildLabel("Username"),
-                        CustomUnderlineTextField(
-                          controller: usernameController,
-                          hintText: 'Enter username',
-                          suffixIcon: Icons.check,
-                        ),
-        
-                        // Email
-                        buildLabel("Email"),
-                        TextField(
-                          controller: emailController,
-                          decoration: const InputDecoration(
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xFFFFA63D)),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Color(0xFFFFA63D), width: 2),
-                            ),
-                          ),
-                        ),
+                      
         
                         // Password
-                        buildLabel("Password"),
+                        buildLabel("Create a new password"),
                         PasswordField(
                           controller: passwordController,
                           hintText: 'Enter password',
@@ -145,26 +120,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           height: (Get.context?.isPhone ?? true) ? 30 : 40,
                         ),
         
-                        // Divider with OR
-                        Row(
-                          children: [
-                            Expanded(child: Divider(color: Colors.grey.shade400)),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Text("or"),
-                            ),
-                            Expanded(child: Divider(color: Colors.grey.shade400)),
-                          ],
-                        ),
+                      
                         const SizedBox(height: 15),
         
-                        // Google button
-                        _buildSocialButton(
-                          icon: "assets/icons/google.png",
-                          text: "Continue with Google",
-                        ),
-        
-                        // const Spacer(),
+                       
                       ],
                     ),
                   ),
@@ -193,7 +152,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     });
                   },
                   child: Text(
-                    "Sign up",
+                    "Continue",
                     style: TextStyle(
                       fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
                       color: Colors.white,
@@ -207,34 +166,6 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ),
       ),
-    );
-  }
-
-
-
-  Widget _buildSocialButton({required String icon, required String text}) {
-    return OutlinedButton.icon(
-      style: OutlinedButton.styleFrom(
-        side: BorderSide(color: Colors.grey.shade300),
-        minimumSize: Size(
-          double.infinity,
-          (Get.context?.isPhone ?? true) ? 50 : 60,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ),
-      icon: Image.asset(icon, height: (Get.context?.isPhone ?? true) ? 24 : 35, width: (Get.context?.isPhone ?? true) ? 24 : 35,),
-      label: Text(
-        text,
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
-        ),
-      ),
-      onPressed: () {
-        // Get.toNamed('/CreateAccountPage');
-      },
     );
   }
 }
