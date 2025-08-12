@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:quizzo/widgets/animated_button.dart';
 import 'package:quizzo/widgets/custom_dialog.dart';
 import 'package:quizzo/widgets/custom_auth.dart';
-import 'package:quizzo/widgets/custom_label.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -98,34 +97,38 @@ class _SignUpPageState extends State<SignUpPage> {
                           height: (Get.context?.isPhone ?? true) ? 30 : 60,
                         ),
         
-                        // Username
-                        buildLabel("Username"),
-                        CustomUnderlineTextField(
-                          controller: usernameController,
-                          hintText: 'Enter username',
-                          suffixIcon: Icons.check,
+                      
+                        // Normal text field
+                        CustomUnderlineInput(
+                          controller: TextEditingController(),
+                          labelText: "Username",
+                          isRequired: true,
+                          // suffixIcon: Icons.check,
+                          // iconColor: Colors.orange,
                         ),
-        
-                        // Email
-                        buildLabel("Email"),
-                        TextField(
+                        SizedBox(
+                          height: 20,
+                        ),
+                        
+                         CustomUnderlineInput(
                           controller: emailController,
-                          decoration: const InputDecoration(
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xFFFFA63D)),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Color(0xFFFFA63D), width: 2),
-                            ),
-                          ),
+                          labelText: "Email",
+                          isRequired: true,
+                          // suffixIcon: Icons.check,
+                          // iconColor: Colors.orange,
                         ),
-        
-                        // Password
-                        buildLabel("Password"),
-                        PasswordField(
+                       
+                       SizedBox(
+                          height: 20,
+                        ),
+                        
+                        // Password field
+                        CustomUnderlineInput(
                           controller: passwordController,
-                          hintText: 'Enter password',
+                          labelText: "Password",
+                          isRequired: true,
+                          isPassword: true,
+                          underlineColor: Colors.orange,
                         ),
         
                         const SizedBox(height: 10),
@@ -190,7 +193,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
                     Future.delayed(const Duration(seconds: 2), () {
                       Navigator.pop(context); // Close dialog
-                      Get.toNamed('/BottomNavigationBar');
+                      Get.offAllNamed('/BottomNavigationBar');
                     });
                   },
                   child: Text(

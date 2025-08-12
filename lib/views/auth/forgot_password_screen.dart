@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quizzo/widgets/animated_button.dart';
-import 'package:quizzo/widgets/custom_dialog.dart';
-import 'package:quizzo/widgets/custom_label.dart';
+import 'package:quizzo/widgets/custom_auth.dart';
+
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -77,7 +77,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       children: [
                         // Title
                         Text(
-                          "Forgot Password ✏️",
+                          "Forgot Password",
                           style: TextStyle(
                               fontSize:
                                   (Get.context?.isPhone ?? true) ? 22 : 25,
@@ -102,22 +102,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         ),
         
         
-                        // Email
-                        buildLabel("Email"),
-                        TextField(
+                        CustomUnderlineInput(
                           controller: emailController,
-                          decoration: const InputDecoration(
-                            hintText: 'Enter your email',
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xFFFFA63D)),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Color(0xFFFFA63D), width: 2),
-                            ),
-                          ),
+                          labelText: "Email",
+                          isRequired: true,
                         ),
-        
+                                
                         SizedBox(
                           height: (Get.context?.isPhone ?? true) ? 30 : 40,
                         ),

@@ -130,7 +130,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
               duration: 100,
               enabled: true,
               onPressed: () {
-                Get.toNamed('/SignUpPage');
+                Get.offAllNamed('/SignUpPage');
               },
               child: const Text(
                 "Continue",

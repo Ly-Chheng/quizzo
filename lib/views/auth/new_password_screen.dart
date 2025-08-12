@@ -1,9 +1,9 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quizzo/widgets/animated_button.dart';
 import 'package:quizzo/widgets/custom_auth.dart';
 import 'package:quizzo/widgets/custom_dialog.dart';
-import 'package:quizzo/widgets/custom_label.dart';
 
 class NewPasswordScreen extends StatefulWidget {
   const NewPasswordScreen({super.key});
@@ -17,57 +17,45 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
   final TextEditingController confirmPasswordController = TextEditingController();
 
   bool rememberMe = true;
-  bool passwordVisible = false;
-  bool confirmPasswordVisible = false;
+  bool _isFormValid = false;
+
+  @override
+  void initState() {
+    super.initState();
+    passwordController.addListener(_validateForm);
+    confirmPasswordController.addListener(_validateForm);
+  }
 
   @override
   void dispose() {
+    passwordController.removeListener(_validateForm);
+    confirmPasswordController.removeListener(_validateForm);
     passwordController.dispose();
     confirmPasswordController.dispose();
     super.dispose();
   }
 
-  bool _validatePasswords() {
-    if (passwordController.text.isEmpty || confirmPasswordController.text.isEmpty) {
-      _showErrorDialog("Please fill in both password fields");
-      return false;
-    }
-    
-    if (passwordController.text.length < 8) {
-      _showErrorDialog("Password must be at least 8 characters long");
-      return false;
-    }
-    
-    if (passwordController.text != confirmPasswordController.text) {
-      _showErrorDialog("Passwords do not match");
-      return false;
-    }
-    
-    return true;
-  }
+ void _validateForm() {
+  final password = passwordController.text;
+  final confirm = confirmPasswordController.text;
 
-  void _showErrorDialog(String message) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text("Error"),
-        content: Text(message),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text("OK"),
-          ),
-        ],
-      ),
-    );
+  final isValid = password.isNotEmpty && confirm.isNotEmpty; // no match check here
+
+  if (isValid != _isFormValid) {
+    setState(() {
+      _isFormValid = isValid;
+    });
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
+    final isPhone = (Get.context?.isPhone ?? true);
+
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,
-      // AppBar with back button and progress bar
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -79,17 +67,6 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
               Get.back();
             });
           },
-        ),
-        title: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: LinearProgressIndicator(
-            value: 1.0,
-            minHeight: (Get.context?.isPhone ?? true) ? 10 : 12,
-            backgroundColor: Colors.grey.shade300,
-            valueColor: const AlwaysStoppedAnimation<Color>(
-              Color(0xFFFFA63D),
-            ),
-          ),
         ),
         centerTitle: true,
       ),
@@ -105,50 +82,42 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Title
                         Text(
-                          "Create new password ✏️",
+                          "Create new password ",
                           style: TextStyle(
-                            fontSize: (Get.context?.isPhone ?? true) ? 22 : 25,
+                            fontSize: isPhone ? 22 : 25,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(
-                          height: (Get.context?.isPhone ?? true) ? 8 : 10,
-                        ),
-
-                        // Subtitle (fixed the duplicate text)
+                        SizedBox(height: isPhone ? 8 : 10),
                         Text(
                           "Save the new password in a safe place. "
                           "If you forget it, then you have to do forgot password again.",
                           style: TextStyle(
-                            fontSize: (Get.context?.isPhone ?? true) ? 15 : 18,
+                            fontSize: isPhone ? 15 : 18,
                             color: Colors.grey,
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        SizedBox(
-                          height: (Get.context?.isPhone ?? true) ? 30 : 60,
-                        ),
-
-                        // Password
-                        buildLabel("Create a new password"),
-                        PasswordField(
+                        SizedBox(height: isPhone ? 30 : 60),
+                       
+                        CustomUnderlineInput(
                           controller: passwordController,
-                          hintText: 'Enter new password',
+                          labelText: "Create a new password",
+                          isRequired: true,
+                          isPassword: true,
+                          underlineColor: Color(0xFFFFA63D),
                         ),
-                        const SizedBox(height: 15),
-                        
-                        // Confirm Password (now uses separate controller)
-                        buildLabel("Confirm new password"),
-                        PasswordField(
+                        const SizedBox(height: 20),
+                   
+                        CustomUnderlineInput(
                           controller: confirmPasswordController,
-                          hintText: 'Confirm new password',
+                          labelText: "Confirm a new password",
+                          isPassword: true,
+                          isRequired: true,
+                          underlineColor: Color(0xFFFFA63D),
                         ),
-
                         const SizedBox(height: 10),
-
-                        // Remember me
                         Row(
                           children: [
                             Checkbox(
@@ -157,12 +126,15 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                               onChanged: (value) =>
                                   setState(() => rememberMe = value ?? false),
                             ),
-                            Text("Remember me",style: TextStyle(fontSize: (Get.context?.isPhone ?? true) ? 14 : 16,),),
+                            Text(
+                              "Remember me",
+                              style: TextStyle(
+                                fontSize: isPhone ? 14 : 16,
+                              ),
+                            ),
                           ],
                         ),
-                        SizedBox(
-                          height: (Get.context?.isPhone ?? true) ? 30 : 40,
-                        ),
+                        SizedBox(height: isPhone ? 30 : 40),
                       ],
                     ),
                   ),
@@ -172,32 +144,32 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                 padding: const EdgeInsets.only(left: 15, right: 15, bottom: 20),
                 child: AnimatedButton(
                   width: double.infinity,
-                  height: (Get.context?.isPhone ?? true) ? 50 : 60,
-                  color: const Color(0xFFFFA63D),
+                  height: isPhone ? 50 : 60,
+                  color: _isFormValid ? const Color(0xFFFFA63D) : Colors.grey.shade400,
                   borderRadius: 16,
                   shadowDegree: ShadowDegree.dark,
                   duration: 100,
-                  enabled: true,
+                  enabled: _isFormValid,
                   onPressed: () {
-                    // Validate passwords before proceeding
-                    if (_validatePasswords()) {
-                      showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (context) => const SuccessDialog(),
-                      );
-
-                      Future.delayed(const Duration(seconds: 2), () {
-                        Navigator.pop(context); // Close dialog
-                        Get.toNamed('/BottomNavigationBar');
-                      });
-                    }
+                    if (!_isFormValid) return;
+                    
+                  // Show success dialog
+                    showDialog(
+                      context: context,
+                      builder: (context) => SuccessDialog(
+                        icon: Icons.check_box,
+                        title: 'Welcome Back!',
+                        subtitle: 'You have successfully reset and created a new password.',
+                        showLoader: false,
+                      ),
+                    );
+                      Get.offAllNamed('/BottomNavigationBar');
                   },
                   child: Text(
                     "Continue",
                     style: TextStyle(
-                      fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
-                      color: Colors.white,
+                      fontSize: isPhone ? 16 : 18,
+                      color: _isFormValid ? const Color(0xFFFFFFFF) : Colors.grey[400],
                       fontWeight: FontWeight.w600,
                     ),
                   ),

@@ -10,6 +10,7 @@ import 'package:quizzo/views/onboarding/onboarding_screen.dart';
 import 'package:quizzo/views/home/home_screen.dart';
 import 'package:quizzo/views/home/test.dart';
 import 'package:quizzo/views/onboarding/splesh_globle_screen.dart';
+import 'package:quizzo/test_code/settings/setting_screen.dart';
 import 'package:quizzo/views/type_account/type_account_screen.dart';
 import 'package:quizzo/widgets/splash_screen.dart';
 
@@ -27,5 +28,7 @@ final appRoute = [
   GetPage(name: '/ForgotPasswordScreen', page: () =>  ForgotPasswordScreen()),
   GetPage(name: '/OtpVerificationPage', page: () =>  OtpVerificationPage()),
   GetPage(name: '/NewPassword', page: () =>  NewPasswordScreen()),
+  GetPage(name: '/SettingsPage', page: () =>  SettingsPage()),
+  
   
 ];

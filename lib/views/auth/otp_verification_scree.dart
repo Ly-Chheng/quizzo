@@ -148,19 +148,20 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
             borderRadius: 16,
             shadowDegree: ShadowDegree.dark,
             duration: 100,
+            enabled: currentText.length == 4, 
             onPressed: () {
               if (currentText.length != 4) return; // Prevent action if not 4 digits
 
-              showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (context) => const SuccessDialog(),
-              );
+              // showDialog(
+              //   context: context,
+              //   barrierDismissible: false,
+              //   builder: (context) => const SuccessDialog(),
+              // );
 
-              Future.delayed(const Duration(seconds: 2), () {
-                Navigator.pop(context); // Close dialog
+              // Future.delayed(const Duration(seconds: 2), () {
+              //   Navigator.pop(context); // Close dialog
                 Get.toNamed('/NewPassword');
-              });
+              // });
             },
             child: Text(
               "Confirm",

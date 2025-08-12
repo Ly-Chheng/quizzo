@@ -27,6 +27,15 @@ titleTextSyle() {
   );
 }
 
+description() {
+  return const TextStyle(
+    fontFamily: poppins,
+    fontSize: 14,
+    fontWeight: FontWeight.w300,
+    // color: AppColor.darkColor,
+  );
+}
+
 TextStyle text10 = const TextStyle(
   fontSize: 10,
   fontWeight: FontWeight.w500,

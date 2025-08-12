@@ -45,14 +45,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      _finishOnboarding();
+      // _finishOnboarding();
+      final storage = GetStorage();
+      storage.write('hasSeenOnboarding', true); // Save flag
+      Get.offAllNamed('/accountType'); // Navigate and remove onboarding from stack
     }
   }
 
   void _finishOnboarding() {
     final storage = GetStorage();
     storage.write('hasSeenOnboarding', true); // Save flag
-    Get.offAllNamed('/accountType'); // Navigate and remove onboarding from stack
+    Get.offAllNamed('/BottomNavigationBar'); // Navigate and remove onboarding from stack
   }
 
   @override

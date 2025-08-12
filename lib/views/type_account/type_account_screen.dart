@@ -19,12 +19,12 @@ class _TypeAccountScreenState extends State<TypeAccountScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Get.toNamed('/onboarding');
-          },
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.arrow_back, color: Colors.black),
+        //   onPressed: () {
+        //     Get.toNamed('/onboarding');
+        //   },
+        // ),
         title: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: LinearProgressIndicator(

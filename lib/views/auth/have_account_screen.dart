@@ -1,10 +1,8 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quizzo/widgets/animated_button.dart';
 import 'package:quizzo/widgets/custom_auth.dart';
-import 'package:quizzo/widgets/custom_label.dart';
 
 class HaveAccountScreen extends StatefulWidget {
   const HaveAccountScreen({super.key});
@@ -53,23 +51,23 @@ class _HaveAccountScreenState extends State<HaveAccountScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Get.toNamed('/onboarding');
-          },
-        ),
-        title: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: LinearProgressIndicator(
-            value: 0.5,
-            minHeight: (Get.context?.isPhone ?? true) ? 10 : 12,
-            backgroundColor: Colors.grey.shade300,
-            valueColor: const AlwaysStoppedAnimation<Color>(
-              Color(0xFFFFA63D),
-            ),
-          ),
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.arrow_back, color: Colors.black),
+        //   onPressed: () {
+        //     Get.toNamed('/onboarding');
+        //   },
+        // ),
+        // title: ClipRRect(
+        //   borderRadius: BorderRadius.circular(10),
+        //   child: LinearProgressIndicator(
+        //     value: 0.5,
+        //     minHeight: (Get.context?.isPhone ?? true) ? 10 : 12,
+        //     backgroundColor: Colors.grey.shade300,
+        //     valueColor: const AlwaysStoppedAnimation<Color>(
+        //       Color(0xFFFFA63D),
+        //     ),
+        //   ),
+        // ),
         centerTitle: true,
       ),
       body: GestureDetector(
@@ -80,7 +78,8 @@ class _HaveAccountScreenState extends State<HaveAccountScreen> {
               Expanded(
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -95,86 +94,96 @@ class _HaveAccountScreenState extends State<HaveAccountScreen> {
                         SizedBox(
                           height: (Get.context?.isPhone ?? true) ? 30 : 60,
                         ),
-
-                        // Email
-                        buildLabel("Email"),
-                        TextField(
+                        CustomUnderlineInput(
                           controller: emailController,
-                        
-                          keyboardType: TextInputType.emailAddress,
-                          
-                          decoration: const InputDecoration(
-                            hintText: 'Enter your email',
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xFFFFA63D)),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xFFFFA63D), width: 2),
-                            ),
-                          ),
+                          labelText: "Email",
+                          isRequired: true,
                         ),
 
-                        // Password
-                        buildLabel("Password"),
-                        PasswordField(
+                        const SizedBox(height: 20),
+                        // Password field
+                        CustomUnderlineInput(
                           controller: passwordController,
-                          hintText: 'Enter password',
-                        ),
-
-                        const SizedBox(height: 10),
-
-                        // Remember me
-                        Row(
-                          children: [
-                            Checkbox(
-                              activeColor: const Color(0xFFFFA63D),
-                              value: rememberMe,
-                              onChanged: (value) =>
-                                  setState(() => rememberMe = value ?? false),
-                            ),
-                            const Text("Remember me"),
-                          ],
+                          labelText: "Password",
+                          isPassword: true,
+                          isRequired: true,
+                          underlineColor: Color(0xFFFFA63D),
                         ),
                         SizedBox(
                           height: (Get.context?.isPhone ?? true) ? 30 : 40,
                         ),
 
-                        // Divider
-                        Row(
-                          children: [
-                            Expanded(child: Divider(color: Colors.grey.shade400)),
-                          ],
-                        ),
-                        const SizedBox(height: 15),
+                        // // Divider
+                        // Row(
+                        //   children: [
+                        //     Expanded(child: Divider(color: Colors.grey.shade400)),
+                        //   ],
+                        // ),
+                       
 
-                        // Forgot Password Button
-                        Center(
-                          child: TextButton(
-                            onPressed: () {
-                              Get.toNamed('/ForgotPasswordScreen');
-                            },
-                            child: Text(
-                              "Forgot Password?",
-                              style: TextStyle(
-                                fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
-                                color: const Color(0xFFFFA63D),
-                                fontWeight: FontWeight.w600,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              
+                              children: [
+                                Checkbox(
+                                  activeColor: const Color(0xFFFFA63D),
+                                  value: rememberMe,
+                                  onChanged: (value) => setState(
+                                      () => rememberMe = value ?? false),
+                                ),
+                                const Text("Remember me"),
+                              ],
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Get.toNamed('/ForgotPasswordScreen');
+                              },
+                              child: Text(
+                                "Forgot Password?",
+                                style: TextStyle(
+                                  fontSize: (Get.context?.isPhone ?? true)
+                                      ? 16
+                                      : 18,
+                                  color: const Color(0xFFFFA63D),
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
+                        SizedBox(
+                          height: (Get.context?.isPhone ?? true) ? 30 : 60,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Dont't have an account ?"),
+                            TextButton(onPressed: (){
+                              Get.offAllNamed('/accountType');
+                            }, child: Text("Sing Up", style: TextStyle(
+                                  fontSize: (Get.context?.isPhone ?? true)
+                                      ? 16
+                                      : 18,
+                                  color: const Color(0xFFFFA63D),
+                                  fontWeight: FontWeight.w600,
+                                ),),)
+                          ],
+                        )
                       ],
                     ),
                   ),
                 ),
               ),
+
               // Sign In Button
               Padding(
                 padding: const EdgeInsets.only(left: 15, right: 15, bottom: 20),
                 child: AnimatedButton(
                   width: double.infinity,
                   height: (Get.context?.isPhone ?? true) ? 50 : 60,
-                  color: isFormValid ?  Color(0xFFFFA63D) :   Colors.grey,
+                  color: isFormValid ? Color(0xFFFFA63D) : Colors.grey,
                   borderRadius: 16,
                   shadowDegree: ShadowDegree.dark,
                   duration: 100,
@@ -184,12 +193,15 @@ class _HaveAccountScreenState extends State<HaveAccountScreen> {
                     log('Email: ${emailController.text}');
                     log('Password: ${passwordController.text}');
                     log('Remember Me: $rememberMe');
+                    Get.offAllNamed('/BottomNavigationBar');
                   },
                   child: Text(
                     "Sign In",
                     style: TextStyle(
                       fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
-                      color: isFormValid ? const Color(0xFFFFFFFF) : Colors.grey[400],
+                      color: isFormValid
+                          ? const Color(0xFFFFFFFF)
+                          : Colors.grey[400],
                       fontWeight: FontWeight.w600,
                     ),
                   ),

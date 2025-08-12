@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
 
 customAppBar({
-  required String title,
+  final String? title,
   final Color? backgroundColor,
   final Color? leadingColor,
   final Color? titleColor,
@@ -17,10 +17,13 @@ customAppBar({
     elevation: 0,
     centerTitle: true,
     backgroundColor: backgroundColor ?? Theme.of(context).colorScheme.inversePrimary,
-    title: Text(
-      title,
-      overflow: TextOverflow.ellipsis,
-      style: appbarTextSyle(),
+    title: Container(
+      alignment: Alignment.topLeft,
+      child: Text(
+        title!,
+        overflow: TextOverflow.ellipsis,
+        style: appbarTextSyle(),
+      ),
     ),
     automaticallyImplyLeading: false,
     leading: isLeading
