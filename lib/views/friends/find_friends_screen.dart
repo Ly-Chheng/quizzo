@@ -56,6 +56,9 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                 filled: true,
                 fillColor: Color(0xFFF5F5F5),
                 hintText: 'Search email, name, or phone number',
+               hintStyle: TextStyle(
+                  fontSize: 13, 
+                ),
                 contentPadding: const EdgeInsets.only(
                     left: 10.0, bottom: 8.0, top: 8.0, right: 8),
                 focusedBorder: OutlineInputBorder(
