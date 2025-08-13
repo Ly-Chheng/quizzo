@@ -254,11 +254,7 @@ Widget topCollections({required String name, required String imageUrl}) {
             bottom: 8,
             left: 8,
             child: Container(
-              // padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-              // decoration: BoxDecoration(
-              //   color: Colors.black.withOpacity(0.85),
-              //   borderRadius: BorderRadius.circular(8),
-              // ),
+            
               child: Text(
                 name,
                 style: const TextStyle(
