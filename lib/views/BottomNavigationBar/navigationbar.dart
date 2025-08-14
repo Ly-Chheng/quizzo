@@ -8,7 +8,8 @@ class BottomNavigationBarScreen extends StatefulWidget {
   const BottomNavigationBarScreen({super.key});
 
   @override
-  State<BottomNavigationBarScreen> createState() => _BottomNavigationBarScreenState();
+  State<BottomNavigationBarScreen> createState() =>
+      _BottomNavigationBarScreenState();
 }
 
 class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
@@ -32,60 +33,41 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
         leading: Row(
           children: [
             IconButton(
-              icon: const Icon(
-                Icons.quiz,
-                size: 40,
-                color: Color(0xFFFFA63D),
-              ),
+               icon: Image(
+              image: AssetImage('assets/icons/quiz.png'),
+              width: 30,
+              height: 30,
+            ),
               onPressed: () {
                 // controller.scaffoldKey.currentState?.openDrawer();
               },
             ),
-            
           ],
         ),
         actions: [
           Row(
             children: [
-              IconButton(onPressed: (){},  icon: const Icon(
-                  Icons.search,
-                  color: Colors.black,
-                ),),
               IconButton(
-                icon: const Icon(
-                  Icons.notifications_none_outlined,
-                  color: Colors.black,
+                onPressed: () {},
+                icon: Image.asset(
+                  'assets/icons/search.png',  
+                  width: 28,
+                  height: 28,
                 ),
+              ),
+              IconButton(
                 onPressed: () {
-                
                 },
+                icon: Image.asset(
+                  'assets/icons/notification.png',  
+                  width: 24,
+                  height: 24,
+                ),
               ),
             ],
           ),
         ],
       ),
-      // drawer: CustomDrawer(
-      //   child: ListView(
-      //     physics: const NeverScrollableScrollPhysics(),
-      //     padding: EdgeInsets.zero,
-      //     children: [
-      //       SizedBox(
-      //         height: Get.height * 0.18,
-      //         child: DrawerHeader(
-      //           decoration: BoxDecoration(
-      //             color: Theme.of(context).colorScheme.inversePrimary,
-      //           ),
-      //           child: Text(
-      //             'Drawer Header',
-      //             style: appbarTextSyle(),
-      //           ),
-      //         ),
-      //       ),
-      //       // const ChangeLanguageView(),
-      //       // DarkModeView(),
-      //     ],
-      //   ),
-      // ),
       body: Center(
         child: controller.screenWidget.elementAt(controller.selectedIndex),
       ),

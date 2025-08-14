@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizzo/core/utils/app_fonts.dart';
 
 customNavigationBar({
   final List<BottomNavigationBarItem>? items,
@@ -21,8 +22,13 @@ customNavigationBar({
             label: 'Library',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.quiz_outlined),
-            activeIcon: Icon(Icons.quiz),
+            // icon: Icon(Icons.quiz_outlined),
+            icon: Image(
+              image: AssetImage('assets/icons/quiz.png'),
+              width: 25,
+              height: 25,
+            ),
+            // activeIcon: Icon(Icons.quiz),
             label: 'Join',
           ),
           BottomNavigationBarItem(
@@ -43,8 +49,8 @@ customNavigationBar({
     type: BottomNavigationBarType.fixed,
     elevation: 10,
     showUnselectedLabels: true,
-    selectedLabelStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
-    unselectedLabelStyle: const TextStyle(fontSize: 12),
+    selectedLabelStyle:   TextStyle(fontFamily: AppFontStyle().fontebold,fontSize: 13),
+    unselectedLabelStyle:  TextStyle( fontFamily: AppFontStyle().fontBold,fontSize: 12),
     onTap: onTap,
   );
 }

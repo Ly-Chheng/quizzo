@@ -97,17 +97,3 @@ class SuccessDialog extends StatelessWidget {
     ); 
   } 
 }
-
-// void handleApiSuccess(BuildContext context) {
-//   // Your API call logic here...
-  
-//   // Show success dialog
-//   showDialog(
-//     context: context,
-//     builder: (context) => SuccessDialog(
-//       title: 'Data Saved!',
-//       subtitle: 'Your information has been saved successfully',
-//       showLoader: false,
-//     ),
-//   );
-// }

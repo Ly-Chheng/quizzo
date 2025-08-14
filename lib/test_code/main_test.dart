@@ -7,7 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:quizzo/core/services/firebase_services.dart';
 import 'package:quizzo/core/services/themes_services.dart';
 import 'package:quizzo/core/utils/app_language.dart';
-import 'package:quizzo/core/utils/local_storage.dart';
+import 'package:quizzo/core/functions/local_storage.dart';
 import 'package:quizzo/firebase_options.dart';
 import 'package:quizzo/route.dart';
 

@@ -16,13 +16,17 @@ customAppBar({
   return AppBar(
     elevation: 0,
     centerTitle: true,
-    backgroundColor: backgroundColor ?? Theme.of(context).colorScheme.inversePrimary,
+    backgroundColor:
+        backgroundColor ?? Theme.of(context).colorScheme.inversePrimary,
     title: Container(
       alignment: Alignment.topLeft,
       child: Text(
         title!,
         overflow: TextOverflow.ellipsis,
-        style: appbarTextSyle(),
+        style: TextStyle(
+          fontFamily: AppFontStyle().fontebold,
+          fontSize: AppFontSize(context).titleSize,
+        ),
       ),
     ),
     automaticallyImplyLeading: false,

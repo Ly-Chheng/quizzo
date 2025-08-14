@@ -88,14 +88,20 @@ flutter:
     - assets/sound.wav
 
 
-  # To add custom fonts to your application, add a fonts section here,
-  # "family" key with the font family name, and a "fonts" key with a
+
   fonts:
-    - family: KH-REGULAR
-      fonts:
-        - asset: assets/fonts/KHMEROSBATTAMBANG.TTF
-    - family: KH-Bold
-      fonts:
-        - asset: assets/fonts/KHMEROSBATTAMBANG-BOLD.TTF
+  - family: Nunito-regular
+    fonts:
+      - asset: assets/fonts/Nunito-Regular.ttf
+  - family: Nunito-Medium
+    fonts:
+      - asset: assets/fonts/Nunito-Medium.ttf
+  - family: Nunito-bold
+    fonts:
+      - asset: assets/fonts/Nunito-Bold.ttf
+  - family: Nunito-ExtraBold
+    fonts:
+      - asset: assets/fonts/Nunito-ExtraBold.ttf
+
 
 

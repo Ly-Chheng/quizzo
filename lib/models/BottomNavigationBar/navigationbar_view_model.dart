@@ -20,7 +20,8 @@ class BottomNavigationBarController extends GetxController {
     const MyHomePage(),
     Text(
       'Library',
-      style: appbarTextSyle(),
+      style: TextStyle(fontFamily: AppFontStyle().fontRegular,
+            fontSize: 29),
     ),
     const MoreScreen(),
     const CreateScreen(),

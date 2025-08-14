@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/views/friends/find_friends_screen.dart';
+import 'package:quizzo/views/home/discover/discover_list_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -13,14 +15,16 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Map<String, String>> quizData = [
     {
       "image":
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEw8gnY1BFM7LQbcnqht6FatzV6Ukhc2ZcaQ&s",
+          "https://ahaslides.com/wp-content/uploads/2022/11/SEO1599thumb.png",
       "title":
           "Get Smarter and Boost Your Skills with the Ultimate Productivity Quiz",
       "questions": "12 Qs",
       "name": "Reoun",
       "subject": "Educational",
-      "profile": "https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4866.jpg",
-      "imagesb": "https://www.cae.net/wp-content/uploads/2024/07/elearning-classroom.jpg"
+      "profile":
+          "https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4866.jpg",
+      "imagesb":
+          "https://www.cae.net/wp-content/uploads/2024/07/elearning-classroom.jpg"
     },
     {
       "image": "https://i.ytimg.com/vi/OQjkFQAIOck/maxresdefault.jpg",
@@ -28,42 +32,32 @@ class _MyHomePageState extends State<MyHomePage> {
       "questions": "15 Qs",
       "name": "Soklin",
       "subject": "Quiz",
-      "profile":''
+      "profile": ''
           "https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4869.jpg",
-      "imagesb": "https://www.sacap.edu.za/wp-content/uploads/2023/10/unique-study-tips-sacap-768x512.jpg"
+      "imagesb":
+          "https://www.sacap.edu.za/wp-content/uploads/2023/10/unique-study-tips-sacap-768x512.jpg"
+    },
+  ];
+  final List<Map<String, String>> topAuthors = [
+    {
+      "name": "Reoun",
+      "profile":
+          "https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4866.jpg",
     },
     {
-      "image":
-          "https://ahaslides.com/wp-content/uploads/2022/11/SEO1599thumb.png",
-      "title": "Create idea come for cambodai",
-      "questions": "5 Qs",
+      "name": "Soklin",
+      "profile": ''
+          "https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4869.jpg",
+    },
+    {
       "name": "Heng",
-      "subject": "Math",
       "profile":
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCVkFXQuP6SeZ0ZFnqxL6LuJ3qf8L2uqHB8XYr6dS3zzlHbyj2vp2GuFJ4LggiL7vq-Ks&usqp=CAU",
-      "imagesb": "https://www.teachhub.com/wp-content/uploads/2020/10/Oct-7-Study-Techniques-Backed-by-Research_web.jpg"
     },
     {
-      "image":
-          "https://ahaslides.com/wp-content/uploads/2022/11/SEO1599thumb.png",
-      "title": "Create idea come for cambodai",
-      "questions": "5 Qs",
       "name": "Vanak",
-      "subject": "Computer",
       "profile":
           "https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4853.jpg?w=360",
-      "imagesb": "https://thedigitalbridges.com/wp-content/uploads/2016/05/educator-gamesites.jpg",
-    },
-    {
-      "image":
-          "https://ahaslides.com/wp-content/uploads/2022/11/SEO1599thumb.png",
-      "title": "Create idea come for cambodai",
-      "questions": "5 Qs",
-      "name": "Heng",
-      "subject": "Course",
-      "profile":
-          "https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4853.jpg?w=360",
-      "imagesb": "https://theedvolution.com/wp-content/uploads/2023/11/Educational-Games-for-Kids.jpg"
     },
   ];
 
@@ -77,15 +71,19 @@ class _MyHomePageState extends State<MyHomePage> {
       body: RefreshIndicator(
         onRefresh: _refreshContent,
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildBanner(),
-              SizedBox(height: 10,),
-              _buildSectionTitle("Discover"),
               SizedBox(
-                height: 195,
+                height: 15,
+              ),
+              _buildSectionTitle("Discover", onTap: () {
+                Get.to(DiscoverListScreen());
+              }),
+              SizedBox(
+                height: 220,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: quizData.map((quiz) {
@@ -99,25 +97,29 @@ class _MyHomePageState extends State<MyHomePage> {
                   }).toList(),
                 ),
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 15,
+              ),
               _buildSectionTitle("Top Authors"),
               SizedBox(
                 height: 120,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: quizData.length,
+                  itemCount: topAuthors.length,
                   itemBuilder: (context, index) {
-                    final quiz = quizData[index];
+                    final Authors = topAuthors[index];
                     return topAuthor(
-                      name: quiz['name']!,
-                      profileUrl: quiz['profile']!,
+                      name: Authors['name']!,
+                      profileUrl: Authors['profile']!,
                     );
                   },
                 ),
               ),
-              SizedBox(height: 10,),
-             _buildSectionTitle("Top Collections"),
-             SizedBox(
+              SizedBox(
+                height: 15,
+              ),
+              _buildSectionTitle("Top Collections"),
+              SizedBox(
                 height: 120,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -131,8 +133,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
               )
-             
-              
             ],
           ),
         ),
@@ -148,61 +148,81 @@ class _MyHomePageState extends State<MyHomePage> {
         decoration: BoxDecoration(
           image: const DecorationImage(
             image: AssetImage('assets/images/home/banner.png'),
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.circular(15),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               "Play quiz together with\n your friends now!",
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
+                  fontFamily: AppFontStyle().fontebold,
+                  fontSize: AppFontSize(context).titleSize,
+                  color: Colors.white),
             ),
             const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {
-                Get.to(FindFriendsScreen());
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                foregroundColor: const Color(0xFFFFA63D),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)),
-              ),
-              child: const Text("Find Friends"),
-            ),
+          GestureDetector(
+  onTap: () {
+    Get.to(FindFriendsScreen());
+  },
+  child: Container(
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 7),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(30),
+    ),
+    child: Text(
+      "Find Friends",
+      style: TextStyle(
+        fontFamily: AppFontStyle().fontebold,
+        fontSize: AppFontSize(context).normalTextSize,
+        color: const Color(0xFFFFA63D),
+      ),
+    ),
+  ),
+)
+
           ],
         ),
       ),
     );
   }
 
-  Widget _buildSectionTitle(String title) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(title,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-        Row(
+  Widget _buildSectionTitle(String title, {VoidCallback? onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: SizedBox(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "View all",
+              title,
               style: TextStyle(
-                  color: Color(0xFFFFA63D),
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16),
+                fontFamily: AppFontStyle().fontebold,
+                fontSize: AppFontSize(context).titleSize,
+              ),
             ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.east_outlined, color: Color(0xFFFFA63D)),
-            )
+            Row(
+              children: [
+                Text(
+                  "View all",
+                  style: TextStyle(
+                    fontFamily: AppFontStyle().fontebold,
+                    fontSize: AppFontSize(context).normalTextSize,
+                    color: Color(0xFFFFA63D),
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.east_outlined, color: Color(0xFFFFA63D)),
+                )
+              ],
+            ),
           ],
         ),
-      ],
+      ),
     );
   }
 
@@ -219,7 +239,10 @@ class _MyHomePageState extends State<MyHomePage> {
           const SizedBox(height: 8),
           Text(
             name,
-            style: const TextStyle(fontSize: 16,fontWeight: FontWeight.w500),
+            style: TextStyle(
+              fontFamily: AppFontStyle().fontebold,
+              fontSize: AppFontSize(context).descriptionLargeSize,
+            ),
             overflow: TextOverflow.ellipsis,
           ),
         ],
@@ -227,50 +250,47 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-Widget topCollections({required String name, required String imageUrl}) {
-  return Container(
-    width: 160,
-    margin: const EdgeInsets.symmetric(horizontal: 6),
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(15),
-      boxShadow: const [
-        BoxShadow(
-          color: Color.fromRGBO(0, 0, 0, 0.1),
-          blurRadius: 3,
-          offset: Offset(0, 1),
-        ),
-      ],
-    ),
-    child: ClipRRect(
-      borderRadius: BorderRadius.circular(15),
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          Image.network(
-            imageUrl,
-            fit: BoxFit.cover,
-          ),
-          Positioned(
-            bottom: 8,
-            left: 8,
-            child: Container(
-            
-              child: Text(
-                name,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+  Widget topCollections({required String name, required String imageUrl}) {
+    return Container(
+      width: 170,
+      margin: const EdgeInsets.symmetric(horizontal: 6),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: const [
+          BoxShadow(
+            color: Color.fromRGBO(0, 0, 0, 0.1),
+            blurRadius: 3,
+            offset: Offset(0, 1),
           ),
         ],
       ),
-    ),
-  );
-}
-
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(15),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Image.network(
+              imageUrl,
+              fit: BoxFit.cover,
+            ),
+            Positioned(
+              bottom: 8,
+              left: 8,
+              child: Container(
+                child: Text(
+                  name,
+                  style: TextStyle(
+                      fontFamily: AppFontStyle().fontebold,
+                      fontSize: AppFontSize(context).subTitleSize,
+                      color: Colors.white),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class QuizCard extends StatelessWidget {
@@ -312,9 +332,7 @@ class QuizCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          // Top Image Background
           Expanded(
-            flex: 4,
             child: Stack(
               children: [
                 Container(
@@ -336,27 +354,24 @@ class QuizCard extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                     decoration: BoxDecoration(
-                      color: Colors.deepPurpleAccent,
+                      color: Color(0XFF6848FE),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
                       questionCount,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(
+                          fontFamily: AppFontStyle().fontRegular,
+                          fontSize: AppFontSize(context).subNormalSize,
+                          color: Colors.white),
                     ),
                   ),
                 ),
               ],
             ),
           ),
-          // Bottom Content
           Expanded(
-            flex: 3,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(15.0),
               child: Column(
                 children: [
                   Text(
@@ -364,13 +379,11 @@ class QuizCard extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.start,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      height: 1.3,
-                    ),
+                    style: TextStyle(
+                        fontFamily: AppFontStyle().fontebold,
+                        fontSize: AppFontSize(context).normalTextSize,),
                   ),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 7),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -378,10 +391,13 @@ class QuizCard extends StatelessWidget {
                         radius: 11,
                         backgroundImage: NetworkImage(profileUrl),
                       ),
-                      const SizedBox(width: 10),
+                      const SizedBox(width: 12),
                       Text(
                         name,
-                        style: const TextStyle(fontSize: 12),
+                        style: TextStyle(
+                          fontFamily: AppFontStyle().fontRegular,
+                          fontSize: AppFontSize(context).subNormalSize,
+                        ),
                       ),
                     ],
                   ),

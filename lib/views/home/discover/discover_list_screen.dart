@@ -1,0 +1,228 @@
+import 'package:flutter/material.dart';
+import 'package:quizzo/core/utils/app_fonts.dart';
+
+class DiscoverListScreen extends StatefulWidget {
+  const DiscoverListScreen({super.key});
+
+  @override
+  State<DiscoverListScreen> createState() => _DiscoverListScreenState();
+}
+
+class _DiscoverListScreenState extends State<DiscoverListScreen> {
+  final List<Map<String, String>> discoverlistdata = [
+    {
+      "image":
+          "https://ahaslides.com/wp-content/uploads/2022/11/SEO1599thumb.png",
+      "title":
+          "Get Smarter and Boost Your Skills with the Ultimate Productivity Quiz",
+      "questions": "12 Qs",
+      "date": "6 month ago . 5.6k plays",
+      "name": "Reoun",
+      "subject": "Educational",
+      "profile":
+          "https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4866.jpg",
+      "imagesb":
+          "https://www.cae.net/wp-content/uploads/2024/07/elearning-classroom.jpg"
+    },
+    {
+      "image": "https://i.ytimg.com/vi/OQjkFQAIOck/maxresdefault.jpg",
+      "title": "Boost Your Brainpower with Engaging Productivity Quizzes",
+      "questions": "10 Qs",
+      "date": "6 month ago . 5.6k plays",
+      "name": "Soklin",
+      "subject": "Educational",
+      "profile":
+          "https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4869.jpg",
+      "imagesb":
+          "https://www.cae.net/wp-content/uploads/2024/07/elearning-classroom.jpg"
+    },
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        title: Text(
+          'Descover',
+          style: TextStyle(
+            fontFamily: AppFontStyle().fontebold,
+            fontSize: AppFontSize(context).titleSize,
+          ),
+        ),
+        centerTitle: false,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: Image.asset(
+              'assets/icons/search.png',
+              width: 28,
+              height: 28,
+            ),
+          )
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+        child: ListView.builder(
+          itemCount: discoverlistdata.length,
+          itemBuilder: (context, index) {
+            final quiz = discoverlistdata[index];
+            return QuizCard(
+              imageUrl: quiz['image']!,
+              title: quiz['title']!,
+              questionCount: quiz['questions']!,
+              date: quiz['date']!,
+              name: quiz['name']!,
+              profileUrl: quiz['profile']!,
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class QuizCard extends StatelessWidget {
+  final String imageUrl;
+  final String title;
+  final String questionCount;
+  final String name, date;
+  final String profileUrl;
+
+  const QuizCard({
+    super.key,
+    required this.imageUrl,
+    required this.title,
+    required this.questionCount,
+    required this.name,
+    required this.profileUrl,
+    required this.date,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: Container(
+        height: 115,
+        width: MediaQuery.of(context).size.width,
+        margin: const EdgeInsets.all(5),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Color.fromRGBO(0, 0, 0, 0.05),
+                blurRadius: 24,
+                spreadRadius: 0,
+                offset: Offset(
+                  0,
+                  6,
+                ),
+              ),
+              BoxShadow(
+                color: Color.fromRGBO(0, 0, 0, 0.08),
+                blurRadius: 0,
+                spreadRadius: 1,
+                offset: Offset(
+                  0,
+                  0,
+                ),
+              ),
+            ]),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                      ),
+                      image: DecorationImage(
+                        image: NetworkImage(imageUrl),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 8,
+                    right: 8,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: Color(0XFF6848FE),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        questionCount,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              flex: 3,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontFamily: AppFontStyle().fontebold,
+                        fontSize: AppFontSize(context).subTitleSize,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      date,
+                      style: TextStyle(
+                          fontFamily: AppFontStyle().fontBold,
+                          fontSize: AppFontSize(context).subNormalSize,
+                          color: Colors.grey),
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        CircleAvatar(
+                          radius: 11,
+                          backgroundImage: NetworkImage(profileUrl),
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          name,
+                          style: TextStyle(
+                              fontFamily: AppFontStyle().fontRegular,
+                              fontSize: AppFontSize(context).subNormalSize,
+                              color: Colors.grey),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

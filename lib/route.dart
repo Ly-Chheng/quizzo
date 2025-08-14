@@ -7,11 +7,12 @@ import 'package:quizzo/views/auth/new_password_screen.dart';
 import 'package:quizzo/views/auth/otp_verification_scree.dart';
 import 'package:quizzo/views/auth/sign_up.dart';
 import 'package:quizzo/views/friends/find_friends_screen.dart';
+import 'package:quizzo/views/home/discover/discover_list_screen.dart';
 import 'package:quizzo/views/onboarding/onboarding_screen.dart';
 import 'package:quizzo/views/home/home_screen.dart';
 import 'package:quizzo/views/home/test.dart';
 import 'package:quizzo/views/onboarding/splesh_globle_screen.dart';
-import 'package:quizzo/views/type_account/type_account_screen.dart';
+import 'package:quizzo/views/onboarding/type_account_screen.dart';
 import 'package:quizzo/widgets/splash_screen.dart';
 
 final appRoute = [
@@ -29,5 +30,7 @@ final appRoute = [
   GetPage(name: '/OtpVerificationPage', page: () =>  OtpVerificationPage()),
   GetPage(name: '/NewPassword', page: () =>  NewPasswordScreen()),
   GetPage(name: '/FindFriends', page: () =>  FindFriendsScreen()),
+ 
+  
   
 ];

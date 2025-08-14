@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizzo/core/utils/app_fonts.dart';
 
 class FindFriendsScreen extends StatefulWidget {
   const FindFriendsScreen({super.key});
@@ -11,23 +12,23 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
  final people = [
     {
       'name': 'Darron Kulikowski',
-      'avatarColor': const Color.fromARGB(255, 233, 188, 121),
-      'imageUrl': 'https://randomuser.me/api/portraits/men/32.jpg',
+      'avatarColor': Color(0XFFFF947A),
+       'imageUrl': 'assets/icons/avatar1.png',
     },
     {
       'name': 'Maryland Winkles',
-      'avatarColor': const Color.fromARGB(255, 146, 235, 149),
-      'imageUrl': 'https://randomuser.me/api/portraits/women/45.jpg',
+      'avatarColor': const Color.fromARGB(255, 238, 229, 151),
+      'imageUrl': 'assets/icons/avatar2.png',
     },
     {
       'name': 'Lauralee Quintero',
       'avatarColor': const Color.fromARGB(255, 235, 137, 170),
-      'imageUrl': 'https://randomuser.me/api/portraits/women/68.jpg',
+     'imageUrl': 'assets/icons/avatar3.png',
     },
     {
       'name': 'Alfonzo Schuessler',
       'avatarColor': const Color.fromARGB(255, 75, 38, 22),
-      'imageUrl': 'https://randomuser.me/api/portraits/men/85.jpg',
+      'imageUrl': 'assets/icons/avatar4.png',
     },
   ];
   @override
@@ -37,13 +38,9 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
         elevation: 0,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        title: const Text('Find Friends',style: TextStyle(fontWeight: FontWeight.w500),),
+        title: Text('Find Friends',style: TextStyle(fontFamily: AppFontStyle().fontebold, fontSize: AppFontSize(context).titleSize,),),
         centerTitle: false,
-        // leading: IconButton(
-        //   icon: const Icon(Icons.arrow_back),
-        //   // onPressed: () {},
-        //   Get.ba
-        // ),
+       
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -51,13 +48,21 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
           child: Column(
             children: [
               TextFormField(
-                  decoration: InputDecoration(
-                prefixIcon: Icon(Icons.search),
+              decoration: InputDecoration(
+               prefixIcon: Padding(
+                  padding: const EdgeInsets.all(8.0),  
+                  child: Image.asset(
+                    'assets/icons/search.png',
+                    width: 28,
+                    height: 28,
+                  ),
+                ),
                 filled: true,
                 fillColor: Color(0xFFF5F5F5),
                 hintText: 'Search email, name, or phone number',
                hintStyle: TextStyle(
-                  fontSize: 13, 
+                 fontFamily: AppFontStyle().fontBold,
+                 fontSize: AppFontSize(context).normalTextSize, 
                 ),
                 contentPadding: const EdgeInsets.only(
                     left: 10.0, bottom: 8.0, top: 8.0, right: 8),
@@ -141,14 +146,20 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: ClipOval(
-                              child: Image.network(
+                              // child: Image.network(
+                              //   person['imageUrl'] as String,
+                              //   fit: BoxFit.cover,
+                              //   width: 40,
+                              //   height: 40,
+                              //   errorBuilder: (context, error, stackTrace) {
+                              //     return const Icon(Icons.person, size: 24);
+                              //   },
+                              // ),
+                              child: Image.asset(
                                 person['imageUrl'] as String,
                                 fit: BoxFit.cover,
                                 width: 40,
                                 height: 40,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return const Icon(Icons.person, size: 24);
-                                },
                               ),
                             ),
                           ),
@@ -157,7 +168,8 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                         Expanded(
                           child: Text(
                             person['name'] as String,
-                            style: const TextStyle(fontSize: 16,fontWeight: FontWeight.w600),
+                            style: TextStyle(fontFamily: AppFontStyle().fontebold,
+                            fontSize: AppFontSize(context).subTitleSize,),
                           ),
                         ),
                         GestureDetector(
@@ -170,12 +182,12 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                               color: Colors.orange,
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: const Text(
+                            child: Text(
                               "Follow",
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w500,
+                              fontFamily: AppFontStyle().fontebold,
+                              fontSize: AppFontSize(context).subNormalSize,
                               ),
                             ),
                           ),
@@ -208,11 +220,13 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
       
       title: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Text(title,style: TextStyle(fontWeight: FontWeight.w600),),
+        child: Text(title,style: TextStyle(fontFamily: AppFontStyle().fontebold,
+            fontSize: AppFontSize(context).subTitleSize,),),
       ),
       subtitle: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Text(subtitle),
+        child: Text(subtitle,style: TextStyle(fontFamily: AppFontStyle().fontRegular,
+            fontSize: AppFontSize(context).subNormalSize,),),
       ),
       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
       onTap: onTap,
@@ -225,15 +239,17 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(title,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            style: TextStyle(fontFamily: AppFontStyle().fontebold,
+            fontSize: AppFontSize(context).subTitleSize,)),
         Row(
           children: [
             Text(
               "View all",
               style: TextStyle(
                   color: Color(0xFFFFA63D),
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16),
+                 fontFamily: AppFontStyle().fontRegular,
+            fontSize: AppFontSize(context).descriptionLargeSize,
+                  ),
             ),
             IconButton(
               onPressed: () {},
