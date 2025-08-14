@@ -53,8 +53,8 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                   padding: const EdgeInsets.all(8.0),  
                   child: Image.asset(
                     'assets/icons/search.png',
-                    width: 28,
-                    height: 28,
+                    width: 25,
+                    height: 25,
                   ),
                 ),
                 filled: true,
@@ -234,30 +234,39 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
     );
   }
 
-   Widget _buildSectionTitle(String title) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(title,
-            style: TextStyle(fontFamily: AppFontStyle().fontebold,
-            fontSize: AppFontSize(context).subTitleSize,)),
-        Row(
+    Widget _buildSectionTitle(String title, {VoidCallback? onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: SizedBox(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "View all",
+              title,
               style: TextStyle(
-                  color: Color(0xFFFFA63D),
-                 fontFamily: AppFontStyle().fontRegular,
-            fontSize: AppFontSize(context).descriptionLargeSize,
-                  ),
+                fontFamily: AppFontStyle().fontebold,
+                fontSize: AppFontSize(context).titleSize,
+              ),
             ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.east_outlined, color: Color(0xFFFFA63D)),
-            )
+            Row(
+              children: [
+                Text(
+                  "View all",
+                  style: TextStyle(
+                    fontFamily: AppFontStyle().fontebold,
+                    fontSize: AppFontSize(context).normalTextSize,
+                    color: Color(0xFFFFA63D),
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.east_outlined, color: Color(0xFFFFA63D)),
+                )
+              ],
+            ),
           ],
         ),
-      ],
+      ),
     );
   }
 }

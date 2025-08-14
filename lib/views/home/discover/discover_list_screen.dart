@@ -37,6 +37,11 @@ class _DiscoverListScreenState extends State<DiscoverListScreen> {
           "https://www.cae.net/wp-content/uploads/2024/07/elearning-classroom.jpg"
     },
   ];
+
+    Future<void> _refreshContent() async {
+    await Future.delayed(const Duration(seconds: 1));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,21 +68,24 @@ class _DiscoverListScreenState extends State<DiscoverListScreen> {
           )
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
-        child: ListView.builder(
-          itemCount: discoverlistdata.length,
-          itemBuilder: (context, index) {
-            final quiz = discoverlistdata[index];
-            return QuizCard(
-              imageUrl: quiz['image']!,
-              title: quiz['title']!,
-              questionCount: quiz['questions']!,
-              date: quiz['date']!,
-              name: quiz['name']!,
-              profileUrl: quiz['profile']!,
-            );
-          },
+      body: RefreshIndicator(
+         onRefresh: _refreshContent,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+          child: ListView.builder(
+            itemCount: discoverlistdata.length,
+            itemBuilder: (context, index) {
+              final quiz = discoverlistdata[index];
+              return QuizCard(
+                imageUrl: quiz['image']!,
+                title: quiz['title']!,
+                questionCount: quiz['questions']!,
+                date: quiz['date']!,
+                name: quiz['name']!,
+                profileUrl: quiz['profile']!,
+              );
+            },
+          ),
         ),
       ),
     );
