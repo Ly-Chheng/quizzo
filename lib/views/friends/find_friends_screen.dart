@@ -44,17 +44,18 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(15.0),
           child: Column(
             children: [
               TextFormField(
               decoration: InputDecoration(
                prefixIcon: Padding(
-                  padding: const EdgeInsets.all(8.0),  
+                  padding: const EdgeInsets.all(12.0),  
                   child: Image.asset(
                     'assets/icons/search.png',
-                    width: 25,
-                    height: 25,
+                    width: 10,
+                    height: 10,
+                    color: Colors.grey,
                   ),
                 ),
                 filled: true,
@@ -63,9 +64,9 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                hintStyle: TextStyle(
                  fontFamily: AppFontStyle().fontBold,
                  fontSize: AppFontSize(context).normalTextSize, 
+                 color: Colors.grey
                 ),
-                contentPadding: const EdgeInsets.only(
-                    left: 10.0, bottom: 8.0, top: 8.0, right: 8),
+               
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white),
                   borderRadius: BorderRadius.circular(10.7),
@@ -75,7 +76,7 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                   borderRadius: BorderRadius.circular(10.7),
                 ),
               )),
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
@@ -132,12 +133,12 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
               _buildSectionTitle("People you many know"),
               Column(
                 children: people.map((person) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 6),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Row(
                       children: [
                        CircleAvatar(
@@ -146,15 +147,6 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: ClipOval(
-                              // child: Image.network(
-                              //   person['imageUrl'] as String,
-                              //   fit: BoxFit.cover,
-                              //   width: 40,
-                              //   height: 40,
-                              //   errorBuilder: (context, error, stackTrace) {
-                              //     return const Icon(Icons.person, size: 24);
-                              //   },
-                              // ),
                               child: Image.asset(
                                 person['imageUrl'] as String,
                                 fit: BoxFit.cover,
@@ -177,7 +169,7 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
                         
                           },
                           child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
                             decoration: BoxDecoration(
                               color: Colors.orange,
                               borderRadius: BorderRadius.circular(20),
@@ -237,34 +229,40 @@ class _FindFriendsScreenState extends State<FindFriendsScreen> {
     Widget _buildSectionTitle(String title, {VoidCallback? onTap}) {
     return GestureDetector(
       onTap: onTap,
-      child: SizedBox(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                fontFamily: AppFontStyle().fontebold,
-                fontSize: AppFontSize(context).titleSize,
-              ),
-            ),
-            Row(
-              children: [
-                Text(
-                  "View all",
-                  style: TextStyle(
-                    fontFamily: AppFontStyle().fontebold,
-                    fontSize: AppFontSize(context).normalTextSize,
-                    color: Color(0xFFFFA63D),
-                  ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: SizedBox(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  fontFamily: AppFontStyle().fontebold,
+                  fontSize: AppFontSize(context).titleSize,
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.east_outlined, color: Color(0xFFFFA63D)),
-                )
-              ],
-            ),
-          ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    "View all",
+                    style: TextStyle(
+                      fontFamily: AppFontStyle().fontebold,
+                      fontSize: AppFontSize(context).normalTextSize,
+                      color: Color(0xFFFFA63D),
+                    ),
+                  ),
+                  SizedBox(width: 10,),
+                  Image.asset(
+                    'assets/icons/next.png',
+                    width: 20,
+                    height: 20,
+                     color: Color(0xFFFFA63D),
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

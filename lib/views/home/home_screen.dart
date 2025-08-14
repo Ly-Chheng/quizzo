@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/views/friends/find_friends_screen.dart';
 import 'package:quizzo/views/home/discover/discover_list_screen.dart';
+import 'package:quizzo/views/top_conllections/top_conllections_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -27,7 +28,8 @@ class _MyHomePageState extends State<MyHomePage> {
           "https://www.cae.net/wp-content/uploads/2024/07/elearning-classroom.jpg"
     },
     {
-      "image": "https://i.ytimg.com/vi/OQjkFQAIOck/maxresdefault.jpg",
+      "image":
+          "https://img.freepik.com/premium-photo/3d-mystery-gift-box-white-banner-frame-with-question-marks-render-background-concept-contest-quiz-game-with-bonus-surprise-present-open-package-giveaway-post-poster_645257-2790.jpg",
       "title": "Boost Your Brainpower with Engaging Productivity Quizzes",
       "questions": "15 Qs",
       "name": "Soklin",
@@ -36,6 +38,17 @@ class _MyHomePageState extends State<MyHomePage> {
           "https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4869.jpg",
       "imagesb":
           "https://www.sacap.edu.za/wp-content/uploads/2023/10/unique-study-tips-sacap-768x512.jpg"
+    },
+    {
+      "image": "https://i.ytimg.com/vi/OQjkFQAIOck/maxresdefault.jpg",
+      "title": "Boost Your Brainpower with Engaging Productivity Quizzes",
+      "questions": "15 Qs",
+      "name": "Soklin",
+      "subject": "Business",
+      "profile": ''
+          "https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4869.jpg",
+      "imagesb":
+          "https://img.freepik.com/premium-vector/realistic-3d-mock-up-desktop-computer-blank-screen-monitor-mobile-phone-tablet_662181-111.jpg"
     },
   ];
   final List<Map<String, String>> topAuthors = [
@@ -53,6 +66,11 @@ class _MyHomePageState extends State<MyHomePage> {
       "name": "Heng",
       "profile":
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCVkFXQuP6SeZ0ZFnqxL6LuJ3qf8L2uqHB8XYr6dS3zzlHbyj2vp2GuFJ4LggiL7vq-Ks&usqp=CAU",
+    },
+    {
+      "name": "Vanak",
+      "profile":
+          "https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4853.jpg?w=360",
     },
     {
       "name": "Vanak",
@@ -77,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               _buildBanner(),
               SizedBox(
-                height: 15,
+                height: 4,
               ),
               _buildSectionTitle("Discover", onTap: () {
                 Get.to(DiscoverListScreen());
@@ -97,9 +115,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   }).toList(),
                 ),
               ),
-              SizedBox(
-                height: 15,
-              ),
               _buildSectionTitle("Top Authors"),
               SizedBox(
                 height: 120,
@@ -115,10 +130,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
               ),
-              SizedBox(
-                height: 15,
+              _buildSectionTitle(
+                "Top Collections",
+                onTap: () {
+                  Get.to(TopCollectionsScreen());
+                },
               ),
-              _buildSectionTitle("Top Collections"),
               SizedBox(
                 height: 120,
                 child: ListView.builder(
@@ -144,7 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Center(
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         decoration: BoxDecoration(
           image: const DecorationImage(
             image: AssetImage('assets/images/home/banner.png'),
@@ -163,27 +180,27 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: Colors.white),
             ),
             const SizedBox(height: 10),
-          GestureDetector(
-  onTap: () {
-    Get.to(FindFriendsScreen());
-  },
-  child: Container(
-    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 7),
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(30),
-    ),
-    child: Text(
-      "Find Friends",
-      style: TextStyle(
-        fontFamily: AppFontStyle().fontebold,
-        fontSize: AppFontSize(context).normalTextSize,
-        color: const Color(0xFFFFA63D),
-      ),
-    ),
-  ),
-)
-
+            GestureDetector(
+              onTap: () {
+                Get.to(FindFriendsScreen());
+              },
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 7),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Text(
+                  "Find Friends",
+                  style: TextStyle(
+                    fontFamily: AppFontStyle().fontebold,
+                    fontSize: AppFontSize(context).normalTextSize,
+                    color: const Color(0xFFFFA63D),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),
@@ -193,34 +210,42 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _buildSectionTitle(String title, {VoidCallback? onTap}) {
     return GestureDetector(
       onTap: onTap,
-      child: SizedBox(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                fontFamily: AppFontStyle().fontebold,
-                fontSize: AppFontSize(context).titleSize,
-              ),
-            ),
-            Row(
-              children: [
-                Text(
-                  "View all",
-                  style: TextStyle(
-                    fontFamily: AppFontStyle().fontebold,
-                    fontSize: AppFontSize(context).normalTextSize,
-                    color: Color(0xFFFFA63D),
-                  ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        child: SizedBox(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  fontFamily: AppFontStyle().fontebold,
+                  fontSize: AppFontSize(context).titleSize,
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.east_outlined, color: Color(0xFFFFA63D)),
-                )
-              ],
-            ),
-          ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    "View all",
+                    style: TextStyle(
+                      fontFamily: AppFontStyle().fontebold,
+                      fontSize: AppFontSize(context).normalTextSize,
+                      color: Color(0xFFFFA63D),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Image.asset(
+                    'assets/icons/next.png',
+                    width: 20,
+                    height: 20,
+                    color: Color(0xFFFFA63D),
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -229,7 +254,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget topAuthor({required String name, required String profileUrl}) {
     return Container(
       width: 75,
-      margin: const EdgeInsets.symmetric(horizontal: 6),
+      margin: const EdgeInsets.symmetric(
+        horizontal: 10,
+      ),
       child: Column(
         children: [
           CircleAvatar(
@@ -252,8 +279,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget topCollections({required String name, required String imageUrl}) {
     return Container(
-      width: 170,
-      margin: const EdgeInsets.symmetric(horizontal: 6),
+      width: 160,
+      margin: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         boxShadow: const [
@@ -273,16 +300,29 @@ class _MyHomePageState extends State<MyHomePage> {
               imageUrl,
               fit: BoxFit.cover,
             ),
+             Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.transparent,
+                    Colors.black.withOpacity(0.5),
+                  ],
+                ),
+              ),
+            ),
             Positioned(
               bottom: 8,
               left: 8,
-              child: Container(
+              child: SizedBox(
                 child: Text(
                   name,
                   style: TextStyle(
-                      fontFamily: AppFontStyle().fontebold,
-                      fontSize: AppFontSize(context).subTitleSize,
-                      color: Colors.white),
+                    fontFamily: AppFontStyle().fontebold,
+                    fontSize: AppFontSize(context).subTitleSize,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
@@ -313,7 +353,7 @@ class QuizCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 160,
-      margin: const EdgeInsets.all(5),
+      margin: const EdgeInsets.only(top: 5, bottom: 10, left: 5, right: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: Colors.white,
@@ -380,8 +420,9 @@ class QuizCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                        fontFamily: AppFontStyle().fontebold,
-                        fontSize: AppFontSize(context).normalTextSize,),
+                      fontFamily: AppFontStyle().fontebold,
+                      fontSize: AppFontSize(context).normalTextSize,
+                    ),
                   ),
                   const SizedBox(height: 7),
                   Row(
