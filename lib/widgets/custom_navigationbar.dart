@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
 
 customNavigationBar({
@@ -12,8 +13,8 @@ customNavigationBar({
     items: items ??
         const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),  
-            activeIcon: Icon(Icons.home), 
+            icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
@@ -45,14 +46,14 @@ customNavigationBar({
     currentIndex: currentIndex,
     selectedItemColor: selectedItemColor ?? const Color(0xFFFFA63D),
     unselectedItemColor: unselectedItemColor ?? Colors.grey.shade600,
-    backgroundColor: Colors.white,
+    backgroundColor: Theme.of(Get.context!).cardColor,
     type: BottomNavigationBarType.fixed,
     elevation: 10,
     showUnselectedLabels: true,
-    selectedLabelStyle:   TextStyle(fontFamily: AppFontStyle().fontebold,fontSize: 13),
-    unselectedLabelStyle:  TextStyle( fontFamily: AppFontStyle().fontBold,fontSize: 12),
+    selectedLabelStyle:
+        TextStyle(fontFamily: AppFontStyle().fontebold, fontSize: 13),
+    unselectedLabelStyle:
+        TextStyle(fontFamily: AppFontStyle().fontBold, fontSize: 12),
     onTap: onTap,
   );
 }
-
- 
