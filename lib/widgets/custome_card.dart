@@ -8,6 +8,7 @@ Widget quizCard({
   required String questionCount,
   required String name,
   required String date,
+  String? view,
   required String profileUrl,
 }) {
   return Padding(
@@ -16,29 +17,29 @@ Widget quizCard({
       height: 115,
       width: MediaQuery.of(context).size.width,
       margin: const EdgeInsets.all(5),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.05),
-                blurRadius: 24,
-                spreadRadius: 0,
-                offset: Offset(
-                  0,
-                  6,
-                ),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Color.fromRGBO(0, 0, 0, 0.05),
+              blurRadius: 24,
+              spreadRadius: 0,
+              offset: Offset(
+                0,
+                6,
               ),
-              BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.08),
-                blurRadius: 0,
-                spreadRadius: 1,
-                offset: Offset(
-                  0,
-                  0,
-                ),
+            ),
+            BoxShadow(
+              color: Color.fromRGBO(0, 0, 0, 0.08),
+              blurRadius: 0,
+              spreadRadius: 1,
+              offset: Offset(
+                0,
+                0,
               ),
-            ]),
+            ),
+          ]),
       child: Row(
         children: [
           Expanded(
@@ -61,8 +62,8 @@ Widget quizCard({
                   bottom: 8,
                   right: 8,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 6),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                     decoration: BoxDecoration(
                       color: Color(0XFF6848FE),
                       borderRadius: BorderRadius.circular(8),
@@ -98,12 +99,34 @@ Widget quizCard({
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Text(
-                    date,
-                    style: TextStyle(
-                        fontFamily: AppFontStyle().fontBold,
-                        fontSize: AppFontSize(context).subNormalSize,
-                        color: Colors.grey),
+                  Row(
+                    children: [
+                      Text(
+                        date,
+                        style: TextStyle(
+                            fontFamily: AppFontStyle().fontBold,
+                            fontSize: AppFontSize(context).subNormalSize,
+                            color: Colors.grey),
+                      ),
+                       const SizedBox(width: 5),
+                       Text(
+                        ".",
+                        style: TextStyle(
+                          fontFamily: AppFontStyle().fontBold ?? 'Roboto',
+                          fontSize: AppFontSize(context).subNormalSize,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(width: 5),
+                      Text(
+                        view ?? "",
+                        style: TextStyle(
+                          fontFamily: AppFontStyle().fontBold ?? 'Roboto',
+                          fontSize: AppFontSize(context).subNormalSize,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 10),
                   Row(
@@ -132,14 +155,3 @@ Widget quizCard({
     ),
   );
 }
-
-// Usage example:
-// quizCard(
-//   context: context,
-//   imageUrl: 'your_image_url',
-//   title: 'Quiz Title',
-//   questionCount: '10 Questions',
-//   name: 'Author Name',
-//   date: '2024-01-15',
-//   profileUrl: 'profile_image_url',
-// )
