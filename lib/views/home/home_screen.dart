@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/views/friends/find_friends_screen.dart';
 import 'package:quizzo/views/home/discover/discover_list_screen.dart';
@@ -300,7 +301,7 @@ class _MyHomePageState extends State<MyHomePage> {
               imageUrl,
               fit: BoxFit.cover,
             ),
-             Container(
+            Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -356,18 +357,14 @@ class QuizCard extends StatelessWidget {
       margin: const EdgeInsets.only(top: 5, bottom: 10, left: 5, right: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: Colors.white,
-        boxShadow: const [
-          BoxShadow(
-            color: Color.fromRGBO(0, 0, 0, 0.1),
-            blurRadius: 3,
-            offset: Offset(0, 1),
-          ),
-          BoxShadow(
-            color: Color.fromRGBO(0, 0, 0, 0.06),
-            blurRadius: 2,
-            offset: Offset(0, 1),
-          ),
+        color: Theme.of(context).cardColor,
+        border: Border.all(
+          color: Get.context!.isDarkMode
+              ? Color.fromARGB(255, 0, 0, 0)
+              : Color.fromARGB(255, 229, 226, 226),
+        ),
+        boxShadow: [
+          AppColor.defaultShadow,
         ],
       ),
       child: Column(
