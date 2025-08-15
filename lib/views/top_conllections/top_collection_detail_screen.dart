@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/widgets/custome_card.dart';
 
@@ -62,19 +63,25 @@ class _TopCollectionDetailScreenState extends State<TopCollectionDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AppTheme();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         foregroundColor: Colors.black,
         title: Text(
           'Education',
           style: TextStyle(
             fontFamily: AppFontStyle().fontebold,
             fontSize: AppFontSize(context).titleSize,
+            color: theme.iconTheme,
           ),
         ),
         centerTitle: false,
+        iconTheme: IconThemeData(
+          color: theme.iconTheme,
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
@@ -82,6 +89,7 @@ class _TopCollectionDetailScreenState extends State<TopCollectionDetailScreen> {
               'assets/icons/search.png',
               width: 28,
               height: 28,
+              color: theme.iconTheme,
             ),
           )
         ],
@@ -128,15 +136,18 @@ class _TopCollectionDetailScreenState extends State<TopCollectionDetailScreen> {
                           Text("Defualt",
                               style: TextStyle(
                                 fontFamily: AppFontStyle().fontebold,
-                                fontSize: AppFontSize(context).descriptionLargeSize,
-                                 color: const Color(0xFFFFA63D),
+                                fontSize:
+                                    AppFontSize(context).descriptionLargeSize,
+                                color: const Color(0xFFFFA63D),
                               )),
-                          SizedBox(width: 10,),
+                          SizedBox(
+                            width: 10,
+                          ),
                           Image.asset(
                             'assets/icons/transfer.png',
                             width: 20,
                             height: 20,
-                             color: const Color(0xFFFFA63D),
+                            color: const Color(0xFFFFA63D),
                           ),
                         ],
                       ),

@@ -46,7 +46,7 @@ customNavigationBar({
     currentIndex: currentIndex,
     selectedItemColor: selectedItemColor ?? const Color(0xFFFFA63D),
     unselectedItemColor: unselectedItemColor ?? Colors.grey.shade600,
-    backgroundColor: Theme.of(Get.context!).cardColor,
+    backgroundColor: Theme.of(Get.context!).scaffoldBackgroundColor,
     type: BottomNavigationBarType.fixed,
     elevation: 10,
     showUnselectedLabels: true,

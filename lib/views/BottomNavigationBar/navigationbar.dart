@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/models/BottomNavigationBar/navigationbar_view_model.dart';
 import 'package:quizzo/widgets/custom_appbar.dart';
@@ -25,6 +26,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AppTheme();
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: ((didPop, result) async {
@@ -135,6 +137,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
                     'assets/icons/search.png',
                     width: 28,
                     height: 28,
+                     color: theme.iconTheme,
                   ),
                 ),
                 IconButton(
@@ -143,6 +146,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
                     'assets/icons/notification.png',
                     width: 24,
                     height: 24,
+                     color: theme.iconTheme,
                   ),
                 ),
               ],

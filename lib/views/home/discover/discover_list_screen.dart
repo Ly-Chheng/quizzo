@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
-import 'package:quizzo/views/home/home_screen.dart';
 import 'package:quizzo/widgets/custome_card.dart';
 
 class DiscoverListScreen extends StatefulWidget {
@@ -18,9 +18,10 @@ class _DiscoverListScreenState extends State<DiscoverListScreen> {
       "title":
           "Get Smarter and Boost Your Skills with the Ultimate Productivity Quiz",
       "questions": "12 Qs",
-      "date": "6 month ago . 5.6k plays",
+      "date": "6 month ago",
       "name": "Reoun",
       "subject": "Educational",
+      "view": "5.6k plays",
       "profile":
           "https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4866.jpg",
       "imagesb":
@@ -30,8 +31,9 @@ class _DiscoverListScreenState extends State<DiscoverListScreen> {
       "image": "https://i.ytimg.com/vi/OQjkFQAIOck/maxresdefault.jpg",
       "title": "Boost Your Brainpower with Engaging Productivity Quizzes",
       "questions": "10 Qs",
-      "date": "6 month ago . 5.6k plays",
+      "date": "6 month ago",
       "name": "Soklin",
+       "view": "1.6k plays",
       "subject": "Educational",
       "profile":
           "https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4869.jpg",
@@ -46,19 +48,25 @@ class _DiscoverListScreenState extends State<DiscoverListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AppTheme();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         foregroundColor: Colors.black,
         title: Text(
           'Descover',
           style: TextStyle(
             fontFamily: AppFontStyle().fontebold,
             fontSize: AppFontSize(context).titleSize,
+            color: theme.iconTheme,
           ),
         ),
         centerTitle: false,
+              iconTheme: IconThemeData(
+          color: theme.iconTheme,
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
@@ -66,6 +74,7 @@ class _DiscoverListScreenState extends State<DiscoverListScreen> {
               'assets/icons/search.png',
               width: 28,
               height: 28,
+              color: theme.iconTheme,
             ),
           )
         ],
@@ -85,6 +94,7 @@ class _DiscoverListScreenState extends State<DiscoverListScreen> {
                 questionCount: quiz['questions']!,
                 date: quiz['date']!,
                 name: quiz['name']!,
+                view: quiz['view'], 
                 profileUrl: quiz['profile']!,
               );
             },

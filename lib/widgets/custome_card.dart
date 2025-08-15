@@ -108,7 +108,7 @@ Widget quizCard({
                             fontSize: AppFontSize(context).subNormalSize,
                             color: Colors.grey),
                       ),
-                       const SizedBox(width: 5),
+                       const SizedBox(width: 3),
                        Text(
                         ".",
                         style: TextStyle(
@@ -117,7 +117,7 @@ Widget quizCard({
                           color: Colors.black,
                         ),
                       ),
-                      const SizedBox(width: 5),
+                      const SizedBox(width: 3),
                       Text(
                         view ?? "",
                         style: TextStyle(

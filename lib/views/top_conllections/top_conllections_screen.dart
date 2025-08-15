@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/views/top_conllections/top_collection_detail_screen.dart';
 
@@ -156,19 +157,25 @@ class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AppTheme();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         foregroundColor: Colors.black,
         title: Text(
           'Top Collections',
           style: TextStyle(
             fontFamily: AppFontStyle().fontebold,
             fontSize: AppFontSize(context).titleSize,
+            color: theme.iconTheme,
           ),
         ),
         centerTitle: false,
+          iconTheme: IconThemeData(
+          color: theme.iconTheme,
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
@@ -176,6 +183,7 @@ class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
               'assets/icons/search.png',
               width: 28,
               height: 28,
+              color: theme.iconTheme,
             ),
           )
         ],

@@ -169,6 +169,16 @@ class _MyHomePageState extends State<MyHomePage> {
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Get.context!.isDarkMode
+                  ? Color.fromARGB(255, 81, 57, 175)
+                  : Color.fromARGB(255, 81, 57, 175),
+              blurRadius: 0,
+              offset: Offset(0, 5),
+              spreadRadius: 0,
+            )
+          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -352,15 +362,16 @@ class QuizCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AppTheme();
     return Container(
       width: 160,
-      margin: const EdgeInsets.only(top: 5, bottom: 10, left: 5, right: 5),
+      margin: EdgeInsets.only(top: 5, bottom: 10, left: 5, right: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: Theme.of(context).cardColor,
+        color: theme.cardTheme,
         border: Border.all(
           color: Get.context!.isDarkMode
-              ? Color.fromARGB(255, 0, 0, 0)
+              ? Color(0xff272B36)
               : Color.fromARGB(255, 229, 226, 226),
         ),
         boxShadow: [

@@ -54,6 +54,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeService().lightTheme,
       darkTheme: ThemeService().darkTheme,
+      
       themeMode: ThemeService().getThemeMode(),
       // FIXED: First install → '/' | After onboarding → '/BottomNavigationBar'
       initialRoute: hasSeenOnboarding ? '/SpleshGloble' : '/',

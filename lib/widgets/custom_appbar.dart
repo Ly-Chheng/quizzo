@@ -16,8 +16,8 @@ customAppBar({
   return AppBar(
     elevation: 0,
     centerTitle: true,
-    backgroundColor:
-        backgroundColor ?? Theme.of(context).colorScheme.inversePrimary,
+    scrolledUnderElevation: 0,
+    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
     title: Container(
       alignment: Alignment.topLeft,
       child: Text(
