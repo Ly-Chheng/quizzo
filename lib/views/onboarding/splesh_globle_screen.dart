@@ -17,7 +17,7 @@ class _SpleshGlobleScreenState extends State<SpleshGlobleScreen> {
     super.initState();
 
     Timer(const Duration(seconds: 3), () {
-      Get.off(() => const BottomNavigationBarScreen()); 
+      Get.off(() => const BottomNavigationBarScreen());
     });
   }
 
@@ -33,7 +33,12 @@ class _SpleshGlobleScreenState extends State<SpleshGlobleScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.quiz, size: 200, color: Color(0xFFFFA63D)),
+            Image(
+              image: AssetImage('assets/icons/quiz.png'),
+              width:170,
+              height: 170,
+            ),
+            
             const Text(
               "Qiuzzo",
               style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),

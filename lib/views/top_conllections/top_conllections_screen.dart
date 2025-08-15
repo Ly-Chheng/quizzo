@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
+import 'package:quizzo/views/top_conllections/top_collection_detail_screen.dart';
 
 class TopCollectionsScreen extends StatefulWidget {
   const TopCollectionsScreen({super.key});
@@ -17,7 +19,7 @@ class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
           "Get Smarter and Boost Your Skills with the Ultimate Productivity Quiz",
       "questions": "12 Qs",
       "name": "Reoun",
-      "subject": "Educational",
+      "subject": "Education",
       "profile":
           "https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4866.jpg",
       "imagesb":
@@ -179,7 +181,7 @@ class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         child: ListView.builder(
           itemCount: (quizData.length / 2).ceil(),
           itemBuilder: (context, index) {
@@ -216,68 +218,73 @@ class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
   }
 
   Widget topCollections({required String name, required String imageUrl}) {
-    return Container(
-      height: 110,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: const [
-          BoxShadow(
-            color: Color.fromRGBO(0, 0, 0, 0.1),
-            blurRadius: 3,
-            offset: Offset(0, 1),
-          ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(15),
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            Image.network(
-              imageUrl,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  color: Colors.grey[300],
-                  child: const Icon(
-                    Icons.image_not_supported,
-                    color: Colors.grey,
-                  ),
-                );
-              },
-            ),
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    Colors.black.withOpacity(0.5),
-                  ],
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 8,
-              left: 8,
-              child: Text(
-                name,
-                style: TextStyle(
-                  fontFamily: AppFontStyle().fontebold,
-                  fontSize: AppFontSize(context).subTitleSize,
-                  color: Colors.white,
-                  // shadows: const [
-                  //   Shadow(
-                  //     offset: Offset(1, 1),
-                  //     blurRadius: 2,
-                  //     color: Colors.black54,
-                  //   ),
-                  // ],
-                ),
-              ),
+    return GestureDetector(
+      onTap: () {
+        Get.to(TopCollectionDetailScreen());
+      },
+      child: Container(
+        height: 110,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: const [
+            BoxShadow(
+              color: Color.fromRGBO(0, 0, 0, 0.1),
+              blurRadius: 3,
+              offset: Offset(0, 1),
             ),
           ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Image.network(
+                imageUrl,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    color: Colors.grey[300],
+                    child: const Icon(
+                      Icons.image_not_supported,
+                      color: Colors.grey,
+                    ),
+                  );
+                },
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.transparent,
+                      Colors.black.withOpacity(0.5),
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 8,
+                left: 8,
+                child: Text(
+                  name,
+                  style: TextStyle(
+                    fontFamily: AppFontStyle().fontebold,
+                    fontSize: AppFontSize(context).subTitleSize,
+                    color: Colors.white,
+                    // shadows: const [
+                    //   Shadow(
+                    //     offset: Offset(1, 1),
+                    //     blurRadius: 2,
+                    //     color: Colors.black54,
+                    //   ),
+                    // ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
