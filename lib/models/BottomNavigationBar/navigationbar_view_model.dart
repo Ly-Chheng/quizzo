@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quizzo/core/utils/app_fonts.dart';
+import 'package:quizzo/views/library/library_page.dart';
 import 'package:quizzo/views/create/create_screen.dart';
 import 'package:quizzo/views/home/home_screen.dart';
 import 'package:quizzo/views/more/more.dart';
@@ -18,11 +18,7 @@ class BottomNavigationBarController extends GetxController {
   ];
   List screenWidget = [
     const MyHomePage(),
-    Text(
-      'Library',
-      style: TextStyle(fontFamily: AppFontStyle().fontRegular,
-            fontSize: 29),
-    ),
+    const LibraryPage(),
     const MoreScreen(),
     const CreateScreen(),
     const ProfileScreen(),

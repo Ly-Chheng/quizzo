@@ -231,7 +231,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 title,
                 style: TextStyle(
                   fontFamily: AppFontStyle().fontebold,
-                  fontSize: AppFontSize(context).titleSize,
+                  fontSize: Get.context!.isPhone ? 14 : 16,
                 ),
               ),
               Row(
@@ -240,7 +240,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     "View all",
                     style: TextStyle(
                       fontFamily: AppFontStyle().fontebold,
-                      fontSize: AppFontSize(context).normalTextSize,
+                      fontSize: Get.context!.isPhone ? 14 : 16,
                       color: Color(0xFFFFA63D),
                     ),
                   ),

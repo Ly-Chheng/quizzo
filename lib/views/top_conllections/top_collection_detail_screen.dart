@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
-import 'package:quizzo/widgets/custome_card.dart';
+import 'package:quizzo/widgets/custom_card.dart';
 
 class TopCollectionDetailScreen extends StatefulWidget {
   const TopCollectionDetailScreen({super.key});

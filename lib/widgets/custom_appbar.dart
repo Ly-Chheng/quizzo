@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
 
 customAppBar({
@@ -12,6 +13,8 @@ customAppBar({
   required BuildContext context,
   final bool isLeading = true,
   void Function()? onTap,
+  EdgeInsetsGeometry actionPadding =
+      const EdgeInsets.symmetric(horizontal: 8.0), // Default padding
 }) {
   return AppBar(
     elevation: 0,
@@ -22,10 +25,9 @@ customAppBar({
       alignment: Alignment.topLeft,
       child: Text(
         title!,
-        overflow: TextOverflow.ellipsis,
         style: TextStyle(
           fontFamily: AppFontStyle().fontebold,
-          fontSize: AppFontSize(context).titleSize,
+          fontSize: Get.context!.isPhone ? 22 : 24,
         ),
       ),
     ),
@@ -35,7 +37,7 @@ customAppBar({
             ? GestureDetector(
                 onTap: onTap ??
                     () {
-                      Navigator.pop(context);
+                      Get.back();
                     },
                 child: Icon(
                   Icons.arrow_back,
@@ -45,7 +47,7 @@ customAppBar({
             : GestureDetector(
                 onTap: onTap ??
                     () {
-                      Navigator.pop(context);
+                      Get.back();
                     },
                 child: Icon(
                   Icons.arrow_back_ios,
@@ -53,6 +55,11 @@ customAppBar({
                 ),
               )
         : leading,
-    actions: actions,
+    actions: actions?.map((action) {
+      return Padding(
+        padding: actionPadding,
+        child: action,
+      );
+    }).toList(),
   );
 }
