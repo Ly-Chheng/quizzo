@@ -96,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildBanner(),
+              // _buildBanner(),
               SizedBox(
                 height: 4,
               ),
