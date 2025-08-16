@@ -106,12 +106,18 @@ class _TopCollectionDetailScreenState extends State<TopCollectionDetailScreen> {
                 height: 200,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20), color: Colors.red),
+                    borderRadius: BorderRadius.circular(20)),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Image.network(
                     'https://www.cae.net/wp-content/uploads/2024/07/elearning-classroom.jpg',
                     fit: BoxFit.fill,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        color: Colors.grey[300],
+                        child: Icon(Icons.broken_image, size: 40, color: Colors.grey),
+                      );
+                    },
                   ),
                 ),
               ),

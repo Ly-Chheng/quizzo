@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
 
 Widget quizCard({
@@ -11,6 +13,7 @@ Widget quizCard({
   String? view,
   required String profileUrl,
 }) {
+  final theme = AppTheme();
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 5),
     child: Container(
@@ -19,10 +22,13 @@ Widget quizCard({
       margin: const EdgeInsets.all(5),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Colors.white,
+          color: theme.cardTheme,
           boxShadow: [
             BoxShadow(
-              color: Color.fromRGBO(0, 0, 0, 0.05),
+              // color: Color.fromRGBO(0, 0, 0, 0.05),
+              color: Get.context!.isDarkMode
+                  ? Color.fromRGBO(0, 0, 0, 0.05)
+                  : Color.fromARGB(2255, 229, 226, 226),
               blurRadius: 24,
               spreadRadius: 0,
               offset: Offset(
@@ -31,7 +37,10 @@ Widget quizCard({
               ),
             ),
             BoxShadow(
-              color: Color.fromRGBO(0, 0, 0, 0.08),
+              // color: Color.fromRGBO(0, 0, 0, 0.08),
+              color: Get.context!.isDarkMode
+                  ? const Color.fromARGB(255, 70, 69, 69)
+                  : Color.fromRGBO(0, 0, 0, 0.08),
               blurRadius: 0,
               spreadRadius: 1,
               offset: Offset(
@@ -59,8 +68,8 @@ Widget quizCard({
                   ),
                 ),
                 Positioned(
-                  bottom: 8,
-                  right: 8,
+                  bottom: 13,
+                  right: 13,
                   child: Container(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -108,15 +117,16 @@ Widget quizCard({
                             fontSize: AppFontSize(context).subNormalSize,
                             color: Colors.grey),
                       ),
-                       const SizedBox(width: 3),
-                       Text(
-                        ".",
-                        style: TextStyle(
-                          fontFamily: AppFontStyle().fontBold ?? 'Roboto',
-                          fontSize: AppFontSize(context).subNormalSize,
-                          color: Colors.black,
-                        ),
+                      const SizedBox(width: 3),
+                     Icon(
+                        Icons.circle,  
+                      
+                        size: 5,
+                        color: Get.context!.isDarkMode
+                            ? Colors.grey
+                            : Colors.grey,
                       ),
+
                       const SizedBox(width: 3),
                       Text(
                         view ?? "",

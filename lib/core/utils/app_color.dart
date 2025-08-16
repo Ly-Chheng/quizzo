@@ -24,6 +24,7 @@ class AppColor {
   Color white = Colors.white;
   Color black = Colors.black;
   Color tableHeader = const Color(0xFFC9FAFF);
+  Color filltextForm = Color(0XFFF5F5F5);
 
   // Dark
   Color darkPrimaryColor = Colors.black;
@@ -75,5 +76,7 @@ class AppTheme {
   Color skeletonbaseColorTheme = Get.isDarkMode ? Color(0xFF404040)  : Color(0xFFF0F2F6);
   Color skeletonhighlightColorTheme = Get.isDarkMode ? Colors.grey[700]! : Color.fromARGB(255, 233, 235, 237);
   Color iconTheme = Get.isDarkMode ? AppColor().lightCard : AppColor().darkCard;
+  Color fillColor = Get.isDarkMode ? AppColor().darkCard : AppColor().filltextForm;
+  
 }
 

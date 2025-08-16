@@ -53,7 +53,7 @@ customNavigationBar({
     selectedLabelStyle:
         TextStyle(fontFamily: AppFontStyle().fontebold, fontSize: 13),
     unselectedLabelStyle:
-        TextStyle(fontFamily: AppFontStyle().fontBold, fontSize: 12),
+        TextStyle(fontFamily: AppFontStyle().fontebold, fontSize: 12),
     onTap: onTap,
   );
 }

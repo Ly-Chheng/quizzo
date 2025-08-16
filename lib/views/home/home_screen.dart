@@ -4,6 +4,8 @@ import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/views/friends/find_friends_screen.dart';
 import 'package:quizzo/views/home/discover/discover_list_screen.dart';
+import 'package:quizzo/views/top_anthors/authors_details_screen.dart';
+import 'package:quizzo/views/top_anthors/top_authors_list_screen.dart';
 import 'package:quizzo/views/top_conllections/top_conllections_screen.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -116,7 +118,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   }).toList(),
                 ),
               ),
-              _buildSectionTitle("Top Authors"),
+              _buildSectionTitle("Top Authors", onTap: (){
+                Get.to(AuthorsDetailsScreen());
+                }),
               SizedBox(
                 height: 120,
                 child: ListView.builder(
@@ -310,6 +314,12 @@ class _MyHomePageState extends State<MyHomePage> {
             Image.network(
               imageUrl,
               fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  color: Colors.grey[300],
+                  child: Icon(Icons.broken_image, size: 40, color: Colors.grey),
+                );
+              },
             ),
             Container(
               decoration: BoxDecoration(
@@ -375,7 +385,15 @@ class QuizCard extends StatelessWidget {
               : Color.fromARGB(255, 229, 226, 226),
         ),
         boxShadow: [
-          AppColor.defaultShadow,
+          // AppColor.defaultShadow,
+           BoxShadow(
+              color: Get.context!.isDarkMode
+                  ? Color(0xff272B36)
+                  : Color.fromARGB(2255, 229, 226, 226),
+              blurRadius: 0,
+              offset: Offset(0, 5),
+              spreadRadius: 0,
+            )
         ],
       ),
       child: Column(

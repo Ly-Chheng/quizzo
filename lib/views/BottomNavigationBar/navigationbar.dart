@@ -156,10 +156,24 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
         body: Center(
           child: controller.screenWidget.elementAt(controller.selectedIndex),
         ),
-        bottomNavigationBar: customNavigationBar(
-          currentIndex: controller.selectedIndex,
-          onTap: _onItemTapped,
-        ),
+        // bottomNavigationBar: customNavigationBar(
+          
+        //   currentIndex: controller.selectedIndex,
+        //   onTap: _onItemTapped,
+        // ),
+        bottomNavigationBar:  Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Divider(
+                  color: theme.skeletonbaseColorTheme,
+                  thickness: 1,
+                ),
+                customNavigationBar(
+                 currentIndex: controller.selectedIndex,
+                  onTap: _onItemTapped,
+                ),
+              ],
+        )
       ),
     );
   }

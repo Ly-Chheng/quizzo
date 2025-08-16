@@ -56,7 +56,7 @@ class _DiscoverListScreenState extends State<DiscoverListScreen> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         foregroundColor: Colors.black,
         title: Text(
-          'Descover',
+          'Discover',
           style: TextStyle(
             fontFamily: AppFontStyle().fontebold,
             fontSize: AppFontSize(context).titleSize,
@@ -64,7 +64,7 @@ class _DiscoverListScreenState extends State<DiscoverListScreen> {
           ),
         ),
         centerTitle: false,
-              iconTheme: IconThemeData(
+        iconTheme: IconThemeData(
           color: theme.iconTheme,
         ),
         actions: [
