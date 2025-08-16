@@ -114,39 +114,44 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
           isLeading: false,
           title: controller.listTitle.elementAt(controller.selectedIndex),
           context: context,
-          leading: Row(
-            children: [
-              IconButton(
-                icon: Image(
-                  image: AssetImage('assets/icons/quiz.png'),
-                  width: 30,
-                  height: 30,
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 5),
+            child: Row(
+              children: [
+                IconButton(
+                  icon: Image(
+                    image: AssetImage('assets/icons/quiz.png'),
+                    width: Get.context!.isPhone ? 35 : 40,
+                    height: Get.context!.isPhone ? 35 : 40,
+                  ),
+                  onPressed: () {
+                    // controller.scaffoldKey.currentState?.openDrawer();
+                  },
                 ),
-                onPressed: () {
-                  // controller.scaffoldKey.currentState?.openDrawer();
-                },
-              ),
-            ],
+              ],
+            ),
           ),
           actions: [
             Row(
               children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: Image.asset(
-                    'assets/icons/search.png',
-                    width: 28,
-                    height: 28,
-                     color: theme.iconTheme,
+                if (controller.selectedIndex != 1 &&
+                    controller.selectedIndex != 2)
+                  IconButton(
+                    onPressed: () {},
+                    icon: Image.asset(
+                      'assets/icons/search.png',
+                      width: 28,
+                      height: 28,
+                      color: theme.iconTheme,
+                    ),
                   ),
-                ),
                 IconButton(
                   onPressed: () {},
                   icon: Image.asset(
                     'assets/icons/notification.png',
                     width: 24,
                     height: 24,
-                     color: theme.iconTheme,
+                    color: theme.iconTheme,
                   ),
                 ),
               ],

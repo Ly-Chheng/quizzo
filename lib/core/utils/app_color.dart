@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
-
-
 class AppColor {
   static BoxShadow defaultShadow = BoxShadow(
     color: Get.context!.isDarkMode
@@ -13,7 +10,6 @@ class AppColor {
     offset: Offset(0, 3),
     spreadRadius: 0,
   );
-
   // main color
 
   Color primaryColor = const Color(0xFFFFA63D);
@@ -30,8 +26,6 @@ class AppColor {
   Color darkPrimaryColor = Colors.black;
   Color darkSecondaryColor = const Color(0xFF282828);
   Color shadowCardColor = Color.fromARGB(255, 229, 226, 226);
-
-
 
   // light colors
   Color lightBackgroundColor = const Color(0xFFF8FCFF);
@@ -67,16 +61,23 @@ class AppColor {
 }
 
 class AppTheme {
-  Color backgroundTheme = Get.isDarkMode ? AppColor().darkBackgroundColor : AppColor().lightBackgroundColor;
+  Color backgroundTheme = Get.isDarkMode
+      ? AppColor().darkBackgroundColor
+      : AppColor().lightBackgroundColor;
   Color cardTheme = Get.isDarkMode ? AppColor().darkCard : AppColor().lightCard;
   Color textTheme = Get.isDarkMode ? AppColor().darkText : AppColor().lightText;
-  Color borderTheme = Get.isDarkMode ? AppColor().darkBorder : AppColor().lightBorder;
-  Color disableTheme = Get.isDarkMode ? AppColor().darkDisableColor : AppColor().lightDisableColor;
-  Color activeTheme = Get.isDarkMode ? AppColor().darkActive : AppColor().lightActive;
-  Color skeletonbaseColorTheme = Get.isDarkMode ? Color(0xFF404040)  : Color(0xFFF0F2F6);
-  Color skeletonhighlightColorTheme = Get.isDarkMode ? Colors.grey[700]! : Color.fromARGB(255, 233, 235, 237);
+  Color borderTheme =
+      Get.isDarkMode ? AppColor().darkBorder : AppColor().lightBorder;
+  Color disableTheme = Get.isDarkMode
+      ? AppColor().darkDisableColor
+      : AppColor().lightDisableColor;
+  Color activeTheme =
+      Get.isDarkMode ? AppColor().darkActive : AppColor().lightActive;
+  Color skeletonbaseColorTheme =
+      Get.isDarkMode ? Color(0xFF404040) : Color(0xFFF0F2F6);
+  Color skeletonhighlightColorTheme =
+      Get.isDarkMode ? Colors.grey[700]! : Color.fromARGB(255, 233, 235, 237);
   Color iconTheme = Get.isDarkMode ? AppColor().lightCard : AppColor().darkCard;
   Color fillColor = Get.isDarkMode ? AppColor().darkCard : AppColor().filltextForm;
   
 }
-
