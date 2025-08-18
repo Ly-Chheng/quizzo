@@ -6,6 +6,7 @@ import 'package:quizzo/controllers/library/collection_controller.dart';
 import 'package:quizzo/controllers/library/quizzo_controller.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/core/utils/app_color.dart';
+import 'package:quizzo/widgets/animate_shimmerEffect.dart';
 import 'package:quizzo/widgets/custom_section_title.dart';
 import 'package:quizzo/widgets/custome_card.dart';
 import 'package:share_plus/share_plus.dart';
@@ -297,14 +298,11 @@ class _AuthorsDetailsScreenState extends State<AuthorsDetailsScreen> {
             CachedNetworkImage(
               imageUrl: collection['imagesb'] ?? '',
               fit: BoxFit.cover,
-              placeholder: (context, url) => Container(
-                color: Colors.grey[300],
-                // child: const Center(child: CircularProgressIndicator()),
-              ),
+              
+              placeholder: (context, url) => ShimmerEffect(),
               errorWidget: (context, url, error) => Container(
                 color: Colors.grey[300],
-                child:
-                    const Icon(Icons.image_not_supported, color: Colors.grey),
+                child:const Icon(Icons.image_not_supported, color: Colors.grey),
               ),
             ),
             Container(

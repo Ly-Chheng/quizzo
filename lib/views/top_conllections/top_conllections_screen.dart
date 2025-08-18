@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quizzo/controllers/home/top_collections_controller.dart';
 import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/views/top_conllections/top_collection_detail_screen.dart';
+import 'package:quizzo/widgets/animate_shimmerEffect.dart';
 
 class TopCollectionsScreen extends StatefulWidget {
   const TopCollectionsScreen({super.key});
@@ -90,19 +92,17 @@ class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              Image.network(
-                imageUrl,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    color: Colors.grey[300],
-                    child: const Icon(
-                      Icons.image_not_supported,
-                      color: Colors.grey,
-                    ),
-                  );
-                },
-              ),
+              CachedNetworkImage(
+              imageUrl: imageUrl,
+              fit: BoxFit.cover,
+              placeholder: (context, url) => ShimmerEffect(),
+              errorWidget: (context, url, error) => Container(
+                color: Colors.grey[300],
+                child: const Icon(
+                  Icons.image_not_supported,
+                  color: Colors.grey,
+                ),
+              ),),
               Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
