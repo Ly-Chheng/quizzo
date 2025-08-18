@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:quizzo/controllers/home/top_collections_controller.dart';
 import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
+import 'package:quizzo/views/home/component/top_collection_card';
 import 'package:quizzo/views/top_conllections/top_collection_detail_screen.dart';
 import 'package:quizzo/widgets/animate_shimmerEffect.dart';
 
@@ -15,8 +16,6 @@ class TopCollectionsScreen extends StatefulWidget {
 }
 
 class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     final theme = AppTheme();
@@ -61,76 +60,12 @@ class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
             ),
             itemCount: quizData.length,
             itemBuilder: (context, index) {
-              return topCollections(
+              return TopCollectionCard(
                 name: quizData[index]['subject']!,
                 imageUrl: quizData[index]['imagesb']!,
               );
             },
           )),
-    );
-  }
-
-  Widget topCollections({required String name, required String imageUrl}) {
-    return GestureDetector(
-      onTap: () {
-        Get.to(TopCollectionDetailScreen());
-      },
-      child: Container(
-        height: 110,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: const [
-            BoxShadow(
-              color: Color.fromRGBO(0, 0, 0, 0.1),
-              blurRadius: 3,
-              offset: Offset(0, 1),
-            ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(15),
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              CachedNetworkImage(
-              imageUrl: imageUrl,
-              fit: BoxFit.cover,
-              placeholder: (context, url) => ShimmerEffect(),
-              errorWidget: (context, url, error) => Container(
-                color: Colors.grey[300],
-                child: const Icon(
-                  Icons.image_not_supported,
-                  color: Colors.grey,
-                ),
-              ),),
-              Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.transparent,
-                      Colors.black.withOpacity(0.5),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 8,
-                left: 8,
-                child: Text(
-                  name,
-                  style: TextStyle(
-                    fontFamily: AppFontStyle().fontebold,
-                    fontSize: AppFontSize(context).subTitleSize,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

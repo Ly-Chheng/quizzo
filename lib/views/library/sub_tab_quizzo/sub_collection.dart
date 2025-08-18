@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:quizzo/controllers/library/collection_controller.dart';
 import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
+import 'package:quizzo/views/home/component/top_collection_card';
+import 'package:quizzo/views/library/sub_tab_quizzo/create_collection.dart';
 import 'package:quizzo/widgets/custom_section_title.dart';
 
 class SubCollectionTab extends StatefulWidget {
@@ -22,7 +24,7 @@ class _SubCollectionTabState extends State<SubCollectionTab> {
         children: [
           SectionTitle(
             count: 7,
-            title: ' Collection'.tr,
+            title: ' Collections'.tr,
             icon: Icon(
               Icons.swap_vert,
               color: AppColor().primaryColor,
@@ -39,69 +41,9 @@ class _SubCollectionTabState extends State<SubCollectionTab> {
               ),
               itemCount: colController.collectionData.length,
               itemBuilder: (context, index) {
-                return Container(
-                  height: 110,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color.fromRGBO(0, 0, 0, 0.1),
-                        blurRadius: 3,
-                        offset: Offset(0, 1),
-                      ),
-                    ],
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: Stack(
-                      fit: StackFit.expand,
-                      children: [
-                        CachedNetworkImage(
-                          imageUrl: colController.collectionData[index]
-                              ['imagesb']!,
-                          fit: BoxFit.cover,
-                          placeholder: (context, url) => Container(
-                            color: Colors.grey[300],
-                            child: const Center(
-                                child: CircularProgressIndicator()),
-                          ),
-                          errorWidget: (context, url, error) {
-                            return Container(
-                              color: Colors.grey[300],
-                              child: const Icon(
-                                Icons.image_not_supported,
-                                color: Colors.grey,
-                              ),
-                            );
-                          },
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Colors.transparent,
-                                Colors.black.withOpacity(0.5),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 8,
-                          left: 8,
-                          child: Text(
-                            colController.collectionData[index]['subject']!,
-                            style: TextStyle(
-                              fontFamily: AppFontStyle().fontebold,
-                              fontSize: AppFontSize(context).subTitleSize,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                return TopCollectionCard(
+                  name: colController.collectionData[index]['imagesb']!,
+                  imageUrl: colController.collectionData[index]['subject']!,
                 );
               },
             ),
@@ -120,7 +62,33 @@ class _SubCollectionTabState extends State<SubCollectionTab> {
           ],
         ),
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+              ),
+              builder: (BuildContext context) {
+                return DraggableScrollableSheet(
+                  initialChildSize: 1,
+                  expand: false,
+                  builder: (context, scrollController) {
+                    return Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(24)),
+                      ),
+                      child: CreateCollection(
+                        scrollController: scrollController,
+                      ),
+                    );
+                  },
+                );
+              },
+            );
+          },
           elevation: 0,
           shape: const CircleBorder(),
           backgroundColor: AppColor().primaryColor,

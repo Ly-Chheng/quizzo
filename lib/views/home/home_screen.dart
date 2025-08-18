@@ -1,11 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
-import 'package:quizzo/views/friends/find_friends_screen.dart';
+import 'package:quizzo/views/home/component/top_collection_card'
+    show TopCollectionCard;
 import 'package:quizzo/views/home/discover/discover_list_screen.dart';
-import 'package:quizzo/views/top_anthors/top_authors_list_screen.dart';
+import 'package:quizzo/views/top_anthors/authors_details_screen.dart';
 import 'package:quizzo/views/top_conllections/top_conllections_screen.dart';
+import 'package:quizzo/widgets/animate_shimmerEffect.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -118,7 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               _buildSectionTitle("Top Authors", onTap: () {
-                Get.to(TopAuthorsListScreen());
+                Get.to(AuthorsDetailsScreen());
               }),
               SizedBox(
                 height: 120,
@@ -127,9 +131,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   itemCount: topAuthors.length,
                   itemBuilder: (context, index) {
                     final Authors = topAuthors[index];
-                    return topAuthor(
-                      name: Authors['name']!,
-                      profileUrl: Authors['profile']!,
+                    return AnimationConfiguration.staggeredList(
+                      position: index,
+                      child: FadeInAnimation(
+                        duration: const Duration(milliseconds: 600),
+                        child: topAuthor(
+                          name: Authors['name']!,
+                          profileUrl: Authors['profile']!,
+                        ),
+                      ),
                     );
                   },
                 ),
@@ -141,13 +151,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               SizedBox(
-                height: 120,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: quizData.length,
                   itemBuilder: (context, index) {
                     final quiz = quizData[index];
-                    return topCollections(
+                    return TopCollectionCard(
                       name: quiz['subject']!,
                       imageUrl: quiz['imagesb']!,
                     );
@@ -281,67 +290,6 @@ class _MyHomePageState extends State<MyHomePage> {
             overflow: TextOverflow.ellipsis,
           ),
         ],
-      ),
-    );
-  }
-
-  Widget topCollections({required String name, required String imageUrl}) {
-    return Container(
-      width: 160,
-      margin: const EdgeInsets.symmetric(horizontal: 10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: const [
-          BoxShadow(
-            color: Color.fromRGBO(0, 0, 0, 0.1),
-            blurRadius: 3,
-            offset: Offset(0, 1),
-          ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(15),
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            Image.network(
-              imageUrl,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  color: Colors.grey[300],
-                  child: Icon(Icons.broken_image, size: 40, color: Colors.grey),
-                );
-              },
-            ),
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    Colors.black.withOpacity(0.5),
-                  ],
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 8,
-              left: 8,
-              child: SizedBox(
-                child: Text(
-                  name,
-                  style: TextStyle(
-                    fontFamily: AppFontStyle().fontebold,
-                    fontSize: AppFontSize(context).subTitleSize,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

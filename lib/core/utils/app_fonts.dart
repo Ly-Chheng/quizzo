@@ -49,7 +49,7 @@ class AppFontSize {
 
   AppFontSize(BuildContext context) {
     // iphone
-    titleSize = Get.context!.isPhone ? 16 : 18;
+    titleSize = Get.context!.isPhone ? 20 : 22;
     subTitleSize = Get.context!.isPhone ? 16 : 18;
     descriptionLargeSize = Get.context!.isPhone ? 14 : 16;
     normalTextSize = Get.context!.isPhone ? 12 : 14;

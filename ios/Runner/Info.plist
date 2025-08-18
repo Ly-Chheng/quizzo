@@ -26,6 +26,18 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>We need camera access</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need your location to provide continuous services in the background.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to show you nearby tasks.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Please allow us to access your microphopne to records the video</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Please allow us to access your photo to use in user profile.</string>
+	<key>NSUserNotificationUsageDescription</key>
+	<string>This app requires notification permissions to send you updates.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
@@ -48,7 +60,6 @@
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>

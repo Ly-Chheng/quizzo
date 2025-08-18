@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:quizzo/views/auth/sign_up.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -12,7 +14,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text("Profile Screen")
+        GestureDetector(
+            onTap: () {
+              Get.to(() => SignUpPage());
+            },
+            child: Text("Profile Screen"))
       ],
     );
   }
