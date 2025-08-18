@@ -210,7 +210,7 @@ class _TopAuthorsListScreenState extends State<TopAuthorsListScreen> {
                   color: author['isFollowing']
                       ? (isDarkMode
                           ? Colors.white
-                          : const Color.fromARGB(255, 229, 226, 226))
+                          :  Colors.white)
                       : const Color(0xFFFFA63D),
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: author['isFollowing']

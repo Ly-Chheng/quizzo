@@ -4,7 +4,6 @@ import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/views/friends/find_friends_screen.dart';
 import 'package:quizzo/views/home/discover/discover_list_screen.dart';
-import 'package:quizzo/views/top_anthors/authors_details_screen.dart';
 import 'package:quizzo/views/top_anthors/top_authors_list_screen.dart';
 import 'package:quizzo/views/top_conllections/top_conllections_screen.dart';
 
@@ -96,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // _buildBanner(),
+              _buildBanner(),
               SizedBox(
                 height: 4,
               ),
@@ -118,9 +117,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   }).toList(),
                 ),
               ),
-              _buildSectionTitle("Top Authors", onTap: (){
+              _buildSectionTitle("Top Authors", onTap: () {
                 Get.to(TopAuthorsListScreen());
-                }),
+              }),
               SizedBox(
                 height: 120,
                 child: ListView.builder(
@@ -163,60 +162,54 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _buildBanner() {
+    final theme = AppTheme();
     return Center(
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        decoration: BoxDecoration(
-          image: const DecorationImage(
-            image: AssetImage('assets/images/home/banner.png'),
-            fit: BoxFit.cover,
-          ),
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: [
-            BoxShadow(
-              color: Get.context!.isDarkMode
-                  ? Color.fromARGB(255, 81, 57, 175)
-                  : Color.fromARGB(255, 81, 57, 175),
-              blurRadius: 0,
-              offset: Offset(0, 5),
-              spreadRadius: 0,
-            )
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Play quiz together with\n your friends now!",
-              style: TextStyle(
-                  fontFamily: AppFontStyle().fontebold,
-                  fontSize: AppFontSize(context).titleSize,
-                  color: Colors.white),
+      child: GestureDetector(
+        // onTap: () {
+        //   Get.to(FindFriendsScreen());
+        // },
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          decoration: BoxDecoration(
+            image: const DecorationImage(
+              image: AssetImage('assets/images/home/quick_play.png'),
+              fit: BoxFit.cover,
             ),
-            const SizedBox(height: 10),
-            GestureDetector(
-              onTap: () {
-                Get.to(FindFriendsScreen());
-              },
-              child: Container(
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [
+              BoxShadow(
+                color: Get.context!.isDarkMode
+                    ? Color.fromARGB(255, 57, 29, 167)
+                    : Color.fromARGB(255, 57, 29, 167),
+                blurRadius: 0,
+                offset: Offset(0, 5),
+                spreadRadius: 0,
+              )
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.play_arrow,
+                color: Colors.white,
+                size: 50,
+              ),
+              Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 7),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(30),
-                ),
                 child: Text(
-                  "Find Friends",
+                  "Quick Play",
                   style: TextStyle(
                     fontFamily: AppFontStyle().fontebold,
-                    fontSize: AppFontSize(context).normalTextSize,
-                    color: const Color(0xFFFFA63D),
+                    fontSize: AppFontSize(context).titleSize,
+                    color: Get.isDarkMode ? Colors.white : Colors.white,
                   ),
                 ),
               ),
-            )
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -386,14 +379,14 @@ class QuizCard extends StatelessWidget {
         ),
         boxShadow: [
           // AppColor.defaultShadow,
-           BoxShadow(
-              color: Get.context!.isDarkMode
-                  ? Color(0xff272B36)
-                  : Color.fromARGB(2255, 229, 226, 226),
-              blurRadius: 0,
-              offset: Offset(0, 5),
-              spreadRadius: 0,
-            )
+          BoxShadow(
+            color: Get.context!.isDarkMode
+                ? Color(0xff272B36)
+                : Color.fromARGB(2255, 229, 226, 226),
+            blurRadius: 0,
+            offset: Offset(0, 5),
+            spreadRadius: 0,
+          )
         ],
       ),
       child: Column(
@@ -426,7 +419,7 @@ class QuizCard extends StatelessWidget {
                     child: Text(
                       questionCount,
                       style: TextStyle(
-                          fontFamily: AppFontStyle().fontRegular,
+                          fontFamily: 'Nunito-Regular',
                           fontSize: AppFontSize(context).subNormalSize,
                           color: Colors.white),
                     ),
@@ -462,7 +455,7 @@ class QuizCard extends StatelessWidget {
                       Text(
                         name,
                         style: TextStyle(
-                          fontFamily: AppFontStyle().fontRegular,
+                          fontFamily: 'Nunito-Regular',
                           fontSize: AppFontSize(context).subNormalSize,
                         ),
                       ),

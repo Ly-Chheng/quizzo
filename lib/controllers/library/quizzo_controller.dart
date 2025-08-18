@@ -27,7 +27,7 @@ class QuizzoController extends GetxController {
       "view": "1.6k plays",
       "subject": "Educational",
       "profile":
-          "https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4869.jpg",
+          "https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4866.jpg",
       "imagesb":
           "https://www.sacap.edu.za/wp-content/uploads/2023/10/unique-study-tips-sacap-768x512.jpg",
       'type': "Private",

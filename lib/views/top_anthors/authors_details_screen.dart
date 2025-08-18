@@ -8,6 +8,7 @@ import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/widgets/custom_section_title.dart';
 import 'package:quizzo/widgets/custome_card.dart';
+import 'package:share_plus/share_plus.dart';
 
 class AuthorsDetailsScreen extends StatefulWidget {
   const AuthorsDetailsScreen({super.key});
@@ -42,44 +43,6 @@ class _AuthorsDetailsScreenState extends State<AuthorsDetailsScreen> {
     {'title': 'Following', 'value': '128'},
   ];
 
-  final List<Map<String, String>> appList = [
-    {
-      "name": "WhatsApp",
-      "icon": "https://cdn.jim-nielsen.com/ios/512/phone-2023-10-05.png?rf=1024"
-    },
-    {
-      "name": "Twitter",
-      "icon": "https://cdn-icons-png.flaticon.com/512/2496/2496110.png"
-    },
-    {
-      "name": "Facebook",
-      "icon":
-          "https://static.vecteezy.com/system/resources/previews/021/495/985/non_2x/facebook-social-media-logo-icon-free-png.png"
-    },
-    {
-      "name": "Instagram",
-      "icon": "https://cdn.pixabay.com/photo/2021/06/15/12/14/instagram-6338393_1280.png"
-    },
-        {
-      "name": "Yahoo",
-      "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJvj2yqr27O9sTpC5m5AeVTbnbK_WSi3xdy89poj8YIF3OPHICWE8QNaSo06qDdz5vmE&usqp=CAU"
-    },
-    {
-      "name": "Tiktok",
-      "icon": "https://img.pixers.pics/pho(s3:700/PI/54/88/85/48/91/700_PI5488854891_fd892e1ebe755b56602e9f6421f22762_5f9fed4c9f302_.,700,700,jpg)/posters-tiktok-vector-logo.jpg.jpg"
-    },
-    {
-      "name": "Chat",
-      "icon":
-          "https://i.pinimg.com/736x/42/fb/f1/42fbf1a3a819847213d38f064d6c3313.jpg"
-    },
-    {
-      "name": "WeChat",
-      "icon":
-          "https://t3.ftcdn.net/jpg/12/08/98/92/360_F_1208989253_JhXUmLsLbkhgQ3qLjZJB8uFnyBgD1Dk8.jpg"
-    },
-  ];
-
   int selectedTabIndex = 0;
 
   void _toggleFollow(String authorId) {
@@ -109,6 +72,134 @@ class _AuthorsDetailsScreenState extends State<AuthorsDetailsScreen> {
         return _buildQuizzoContent();
     }
   }
+
+  // void _shareAuthor() {
+  //   final author = authors.first; // Get the first author
+  //   String message = "Check out ${author['name']} (@${author['username']}) on Quizzo! 🚀\n"
+  //       "Quizzes: ${author['quizzes']}\n"
+  //       "Followers: ${author['followers']}\n\n"
+  //       "Download Quizzo now!";
+
+  //   Share.share(
+  //     message,
+  //     subject: "Check out this amazing Quizzo author!",
+  //   );
+  // }
+
+  // Optional: Keep the platform-specific share method for future use
+  // void _shareContent(String platform) {
+  //   final author = authors.first;
+  //   // String message = "Check out ${author['name']} (@${author['username']}) on Quizzo! 🚀";
+  //   String message = "Share";
+
+  //   switch (platform) {
+  //     case "WhatsApp":
+  //       Share.share(message, subject: "Shared via WhatsApp");
+  //       break;
+  //     case "Twitter":
+  //       Share.share("$message #Quizzo #Quiz", subject: "Shared via Twitter");
+  //       break;
+  //     case "Facebook":
+  //       Share.share(message, subject: "Shared via Facebook");
+  //       break;
+  //     case "Instagram":
+  //       Share.share(message, subject: "Shared via Instagram");
+  //       break;
+  //     case "Yahoo":
+  //       Share.share(message, subject: "Shared via Yahoo");
+  //       break;
+  //     case "Tiktok":
+  //       Share.share(message, subject: "Shared via TikTok");
+  //       break;
+  //     case "Chat":
+  //       Share.share(message, subject: "Shared via Chat");
+  //       break;
+  //     case "WeChat":
+  //       Share.share(message, subject: "Shared via WeChat");
+  //       break;
+  //     default:
+  //       Share.share(message);
+  //   }
+  // }
+
+  // Show share options bottom sheet
+  // void _showShareOptions() {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     shape: const RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+  //     ),
+  //     builder: (BuildContext context) {
+  //       return Container(
+  //         padding: const EdgeInsets.all(20),
+  //         child: Column(
+  //           mainAxisSize: MainAxisSize.min,
+  //           children: [
+  //             Text(
+  //               'Share Author Profile',
+  //               style: TextStyle(
+  //                 fontSize: 18,
+  //                 fontWeight: FontWeight.bold,
+  //                 fontFamily: AppFontStyle().fontebold,
+  //               ),
+  //             ),
+  //             const SizedBox(height: 20),
+  //             Wrap(
+  //               spacing: 20,
+  //               runSpacing: 20,
+  //               children: [
+  //                 _buildShareOption('WhatsApp', FontAwesomeIcons.whatsapp, Colors.green),
+  //                 _buildShareOption('Twitter', FontAwesomeIcons.twitter, Colors.blue),
+  //                 _buildShareOption('Facebook', FontAwesomeIcons.facebook, Colors.blue[800]!),
+  //                 _buildShareOption('Instagram', FontAwesomeIcons.instagram, Colors.pink),
+  //                 _buildShareOption('More', Icons.more_horiz, Colors.grey),
+  //               ],
+  //             ),
+  //             const SizedBox(height: 20),
+  //           ],
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
+
+  //  Widget _buildShareOption(String platform, dynamic icon, Color color) {
+  //   return GestureDetector(
+  //     onTap: () {
+  //       Navigator.pop(context);
+  //       if (platform == 'More') {
+  //         _shareAuthor(); // Use simple share for "More" option
+  //       } else {
+  //         _shareContent(platform);
+  //       }
+  //     },
+  //     child: Column(
+  //       children: [
+  //         Container(
+  //           width: 50,
+  //           height: 50,
+  //           decoration: BoxDecoration(
+  //             color: color.withOpacity(0.1),
+  //             borderRadius: BorderRadius.circular(25),
+  //           ),
+  //           child: Icon(
+  //             icon,
+  //             color: color,
+  //             size: 24,
+  //           ),
+  //         ),
+  //         const SizedBox(height: 8),
+  //         Text(
+  //           platform,
+  //           style: TextStyle(
+  //             fontSize: 12,
+  //             fontFamily: AppFontStyle().fontebold,
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _buildQuizzoContent() {
     final quizzoController = Get.put(QuizzoController());
@@ -208,7 +299,7 @@ class _AuthorsDetailsScreenState extends State<AuthorsDetailsScreen> {
               fit: BoxFit.cover,
               placeholder: (context, url) => Container(
                 color: Colors.grey[300],
-                child: const Center(child: CircularProgressIndicator()),
+                // child: const Center(child: CircularProgressIndicator()),
               ),
               errorWidget: (context, url, error) => Container(
                 color: Colors.grey[300],
@@ -247,7 +338,7 @@ class _AuthorsDetailsScreenState extends State<AuthorsDetailsScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 8),
+        const SizedBox(height: 15),
         Text(
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \n\nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
           style: TextStyle(
@@ -257,7 +348,7 @@ class _AuthorsDetailsScreenState extends State<AuthorsDetailsScreen> {
             height: 1.5,
           ),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 25),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: const [
@@ -386,7 +477,7 @@ class _AuthorsDetailsScreenState extends State<AuthorsDetailsScreen> {
               width: 1,
               height: 60,
               color: Get.context!.isDarkMode
-                  ? const Color.fromARGB(255, 211, 209, 209)
+                  ? const Color.fromARGB(255, 122, 121, 121)
                   : Color.fromARGB(255, 211, 209, 209));
         }
         final item = data[index ~/ 2];
@@ -465,145 +556,20 @@ class _AuthorsDetailsScreenState extends State<AuthorsDetailsScreen> {
         actions: [
           IconButton(
               onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50),
-                      topRight: Radius.circular(50),
-                    ),
-                  ),
-                  builder: (BuildContext context) {
-                    return Stack(
-                      alignment: AlignmentDirectional.center,
-                      clipBehavior: Clip.none,
-                      children: [
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.4,
-                          width: double.infinity,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(50),
-                              topRight: Radius.circular(50),
-                            ),
-                          ),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 10,horizontal: 20),
-                                child: Container(
-                                  height: 4,
-                                  width: 50,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 10, bottom: 10),
-                                child: Text(
-                                  "Share",
-                                  style: TextStyle(
-                                    fontFamily: AppFontStyle().fontebold,
-                                    fontSize: AppFontSize(context).titleSize,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ),
-                              Divider(
-                                thickness: 1,
-                                endIndent: 20,
-                                indent: 20,
-                                color: Get.context!.isDarkMode
-                                    ? const Color.fromARGB(255, 211, 209, 209)
-                                    : const Color.fromARGB(255, 211, 209, 209),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: GridView.builder(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: appList.length,
-                                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 4,
-                                    crossAxisSpacing: 8,
-                                    mainAxisSpacing: 8,
-                                    childAspectRatio: 0.8,
-                                  ),
-                                  itemBuilder: (context, index) {
-                                    final item = appList[index];
-                                    return Container(
-                                      constraints: const BoxConstraints(
-                                        maxWidth: 80,
-                                        maxHeight: 100,
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            width: 50,
-                                            height: 50,
-                                            child: ClipRRect(
-                                              borderRadius: BorderRadius.circular(8),
-                                              child: Image.network(
-                                                item["icon"]!,
-                                                fit: BoxFit.cover,
-                                                errorBuilder: (context, error, stackTrace) {
-                                                  return Container(
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.grey[300],
-                                                      borderRadius: BorderRadius.circular(8),
-                                                    ),
-                                                    child: const Icon(
-                                                      Icons.broken_image,
-                                                      color: Colors.black54,
-                                                      size: 20,
-                                                    ),
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(height: 4),
-                                          Expanded(
-                                            child: Text(
-                                              item["name"]!,
-                                              style: TextStyle(
-                                              fontFamily: 'Nunito-Medium',
-                                              fontSize: AppFontSize(context).subTitleSize,
-                                              ),
-                                              textAlign: TextAlign.center,
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                );
+                // _shareAuthor();
+                 Share.share('Share',);
               },
               icon: Image.network(
                 'https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/phosphor-light/telegram-logo-light-81nvt6to578dvjiggf7hw6.png/telegram-logo-light-1qpz5f7i4zngpne9mrbjsw.png?_a=DATAg1AAZAA0',
                 height: 25,
+                color: theme.iconTheme,
               )),
           IconButton(
               onPressed: () {},
               icon: Image.network(
                 'https://cdn-icons-png.flaticon.com/512/570/570223.png',
                 height: 25,
+                color: theme.iconTheme,
               ))
         ],
       ),
@@ -619,9 +585,6 @@ class _AuthorsDetailsScreenState extends State<AuthorsDetailsScreen> {
                   height: 110,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).brightness == Brightness.dark
-                        ? Colors.grey[800]
-                        : Colors.blue,
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: ClipRRect(
@@ -639,11 +602,11 @@ class _AuthorsDetailsScreenState extends State<AuthorsDetailsScreen> {
               Divider(
                   thickness: 1,
                   color: Get.context!.isDarkMode
-                      ? const Color.fromARGB(255, 211, 209, 209)
+                      ? const Color.fromARGB(255, 122, 121, 121)
                       : Color.fromARGB(255, 211, 209, 209)),
 
               // Stats rows
-              const SizedBox(height: 10),
+              const SizedBox(height: 8),
               _buildStatRow(statsTopRow),
               const Divider(thickness: 1),
               const SizedBox(height: 8),
@@ -651,7 +614,7 @@ class _AuthorsDetailsScreenState extends State<AuthorsDetailsScreen> {
               Divider(
                   thickness: 1,
                   color: Get.context!.isDarkMode
-                      ? const Color.fromARGB(255, 211, 209, 209)
+                      ? const Color.fromARGB(255, 122, 121, 121)
                       : Color.fromARGB(255, 211, 209, 209)),
               const SizedBox(height: 15),
               Row(

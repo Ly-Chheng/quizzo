@@ -48,6 +48,9 @@ class SectionTitle extends StatelessWidget {
                       fontSize: AppFontSize(context).titleSize,
                     ),
                   ),
+                   SizedBox(
+                    width: 5,
+                  ),
                   Text(
                     title,
                     style: TextStyle(

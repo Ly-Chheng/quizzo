@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/models/BottomNavigationBar/navigationbar_view_model.dart';
+import 'package:quizzo/views/home/search/search_screen.dart';
 import 'package:quizzo/widgets/custom_appbar.dart';
 import 'package:quizzo/widgets/custom_navigationbar.dart';
 
@@ -137,7 +138,9 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
                 if (controller.selectedIndex != 1 &&
                     controller.selectedIndex != 2)
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(SearchScreen());
+                    },
                     icon: Image.asset(
                       'assets/icons/search.png',
                       width: 28,
