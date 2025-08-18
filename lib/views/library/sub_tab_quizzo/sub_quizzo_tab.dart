@@ -7,7 +7,6 @@ import 'package:quizzo/core/utils/app_fonts.dart'
 import 'package:quizzo/widgets/custom_card.dart';
 import 'package:quizzo/widgets/custom_section_title.dart';
 
-
 class SubQuizzoTab extends StatefulWidget {
   const SubQuizzoTab({super.key});
 
@@ -25,7 +24,7 @@ class _SubQuizzoTabState extends State<SubQuizzoTab> {
         children: [
           SectionTitle(
             count: 45,
-            title: 'Quizzes'.tr,
+            title: ' Quizzes'.tr,
             icon: Icon(
               Icons.swap_vert,
               color: AppColor().primaryColor,

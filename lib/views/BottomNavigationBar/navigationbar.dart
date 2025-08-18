@@ -109,77 +109,62 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
         );
       }),
       child: Scaffold(
-        key: controller.scaffoldKey,
-        appBar: customAppBar(
-          isLeading: false,
-          title: controller.listTitle.elementAt(controller.selectedIndex),
-          context: context,
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 5),
-            child: Row(
-              children: [
-                IconButton(
-                  icon: Image(
-                    image: AssetImage('assets/icons/quiz.png'),
-                    width: Get.context!.isPhone ? 35 : 40,
-                    height: Get.context!.isPhone ? 35 : 40,
+          key: controller.scaffoldKey,
+          appBar: customAppBar(
+            isLeading: false,
+            title: controller.listTitle.elementAt(controller.selectedIndex),
+            context: context,
+            leading: Padding(
+              padding: const EdgeInsets.only(left: 5),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: Image(
+                      image: AssetImage('assets/icons/quiz.png'),
+                      width: Get.context!.isPhone ? 35 : 40,
+                      height: Get.context!.isPhone ? 35 : 40,
+                    ),
+                    onPressed: () {
+                      // controller.scaffoldKey.currentState?.openDrawer();
+                    },
                   ),
-                  onPressed: () {
-                    // controller.scaffoldKey.currentState?.openDrawer();
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          actions: [
-            Row(
-              children: [
-                if (controller.selectedIndex != 1 &&
-                    controller.selectedIndex != 2)
+            actions: [
+              Row(
+                children: [
+                  if (controller.selectedIndex != 1 &&
+                      controller.selectedIndex != 2)
+                    IconButton(
+                      onPressed: () {},
+                      icon: Image.asset(
+                        'assets/icons/search.png',
+                        width: 28,
+                        height: 28,
+                        color: theme.iconTheme,
+                      ),
+                    ),
                   IconButton(
                     onPressed: () {},
                     icon: Image.asset(
-                      'assets/icons/search.png',
-                      width: 28,
-                      height: 28,
+                      'assets/icons/notification.png',
+                      width: 24,
+                      height: 24,
                       color: theme.iconTheme,
                     ),
                   ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Image.asset(
-                    'assets/icons/notification.png',
-                    width: 24,
-                    height: 24,
-                    color: theme.iconTheme,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-        body: Center(
-          child: controller.screenWidget.elementAt(controller.selectedIndex),
-        ),
-        // bottomNavigationBar: customNavigationBar(
-          
-        //   currentIndex: controller.selectedIndex,
-        //   onTap: _onItemTapped,
-        // ),
-        bottomNavigationBar:  Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Divider(
-                  color: theme.skeletonbaseColorTheme,
-                  thickness: 1,
-                ),
-                customNavigationBar(
-                 currentIndex: controller.selectedIndex,
-                  onTap: _onItemTapped,
-                ),
-              ],
-        )
-      ),
+                ],
+              ),
+            ],
+          ),
+          body: Center(
+            child: controller.screenWidget.elementAt(controller.selectedIndex),
+          ),
+          bottomNavigationBar: customNavigationBar(
+            currentIndex: controller.selectedIndex,
+            onTap: _onItemTapped,
+          )),
     );
   }
 }

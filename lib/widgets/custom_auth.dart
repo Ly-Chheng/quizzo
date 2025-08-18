@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class CustomUnderlineInput extends StatefulWidget {
   final TextEditingController controller;
-  final String? labelText; // Changed from hintText for clarity
+  final String? labelText;
   final bool isPassword;
   final IconData? suffixIcon;
   final Color underlineColor;
@@ -42,7 +42,7 @@ class _CustomUnderlineInputState extends State<CustomUnderlineInput> {
               color: widget.underlineColor,
               fontWeight: FontWeight.w600,
             ),
-           children: (widget.isRequired ?? false)
+            children: (widget.isRequired ?? false)
                 ? const [
                     TextSpan(
                       text: ' *',

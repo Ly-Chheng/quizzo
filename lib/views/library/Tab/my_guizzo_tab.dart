@@ -15,22 +15,11 @@ class MyGuizzoTab extends StatefulWidget {
 class _MyGuizzoTabState extends State<MyGuizzoTab> {
   int _selectedIndex = 0;
 
-  // Widget selectedTabView() {
-  //   switch (_selectedIndex) {
-  //     case 0:
-  //       return SubQuizzoTab();
-  //     case 1:
-  //       return SubCollectionTab();
-  //     default:
-  //       return SubQuizzoTab();
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
+        padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
         child: Column(
           children: [
             Row(

@@ -14,7 +14,7 @@ class AppColor {
 
   Color primaryColor = const Color(0xFFFFA63D);
   Color secondaryColor = const Color(0xFF04A68B);
-
+  Color errorColor = const Color(0xFFFF0000);
   // Light
   Color backgroundColor = const Color(0xFFFFF5EA);
   Color white = Colors.white;
@@ -33,12 +33,13 @@ class AppColor {
   Color lightText = const Color(0xFF212121);
   Color lightBorder = const Color(0xFFF0F2F6);
   Color lightActive = const Color(0xFFF1F9FF);
+  Color greyText = const Color.fromARGB(255, 199, 197, 197);
 
   // Dark colors
   Color darkBackgroundColor = const Color(0xFF121212);
   Color darkCard = const Color(0xFF1F222B);
   Color darkText = const Color(0xFFE0E0E0);
-  Color darkBorder = const Color(0xFF4B4B4B);
+  Color darkBorder = const Color.fromARGB(255, 88, 88, 88).withOpacity(0.5);
   Color darkActive = const Color(0xFF2A3336);
 
   // other​ secondary
@@ -78,6 +79,6 @@ class AppTheme {
   Color skeletonhighlightColorTheme =
       Get.isDarkMode ? Colors.grey[700]! : Color.fromARGB(255, 233, 235, 237);
   Color iconTheme = Get.isDarkMode ? AppColor().lightCard : AppColor().darkCard;
-  Color fillColor = Get.isDarkMode ? AppColor().darkCard : AppColor().filltextForm;
-  
+  Color fillColor =
+      Get.isDarkMode ? AppColor().darkCard : AppColor().filltextForm;
 }

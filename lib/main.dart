@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_device_type/flutter_device_type.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -38,7 +40,17 @@ Future<void> main() async {
   // Read onboarding flag
   final storage = GetStorage();
   final hasSeenOnboarding = storage.read('hasSeenOnboarding') ?? false;
-
+if (Device.get().isTablet) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+    ]);
+  } else {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+  }
   runApp(MyApp(hasSeenOnboarding: hasSeenOnboarding));
 }
 
@@ -56,7 +68,6 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeService().darkTheme,
       
       themeMode: ThemeService().getThemeMode(),
-      // FIXED: First install → '/' | After onboarding → '/BottomNavigationBar'
       initialRoute: hasSeenOnboarding ? '/SpleshGloble' : '/',
       getPages: appRoute,
       translations: AppTranslations(),

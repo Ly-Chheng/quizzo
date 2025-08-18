@@ -15,9 +15,10 @@ class LibraryPage extends StatelessWidget {
       length: 3,
       child: Scaffold(
         body: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: context.isPhone ? 10 : 25,
-              vertical: context.isPhone ? 15 : 20),
+          padding: EdgeInsets.only(
+            left: context.isPhone ? 10 : 15,
+            right: context.isPhone ? 10 : 15,
+          ),
           child: Column(
             children: [
               TabBar(

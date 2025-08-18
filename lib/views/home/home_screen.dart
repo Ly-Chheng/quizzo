@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
@@ -118,9 +119,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   }).toList(),
                 ),
               ),
-              _buildSectionTitle("Top Authors", onTap: (){
+              _buildSectionTitle("Top Authors", onTap: () {
                 Get.to(AuthorsDetailsScreen());
-                }),
+              }),
               SizedBox(
                 height: 120,
                 child: ListView.builder(
@@ -128,9 +129,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   itemCount: topAuthors.length,
                   itemBuilder: (context, index) {
                     final Authors = topAuthors[index];
-                    return topAuthor(
-                      name: Authors['name']!,
-                      profileUrl: Authors['profile']!,
+                    return AnimationConfiguration.staggeredList(
+                      position: index,
+                      child: FadeInAnimation(
+                        duration: const Duration(milliseconds: 600),
+                        child: topAuthor(
+                          name: Authors['name']!,
+                          profileUrl: Authors['profile']!,
+                        ),
+                      ),
                     );
                   },
                 ),
@@ -386,14 +393,14 @@ class QuizCard extends StatelessWidget {
         ),
         boxShadow: [
           // AppColor.defaultShadow,
-           BoxShadow(
-              color: Get.context!.isDarkMode
-                  ? Color(0xff272B36)
-                  : Color.fromARGB(2255, 229, 226, 226),
-              blurRadius: 0,
-              offset: Offset(0, 5),
-              spreadRadius: 0,
-            )
+          BoxShadow(
+            color: Get.context!.isDarkMode
+                ? Color(0xff272B36)
+                : Color.fromARGB(2255, 229, 226, 226),
+            blurRadius: 0,
+            offset: Offset(0, 5),
+            spreadRadius: 0,
+          )
         ],
       ),
       child: Column(

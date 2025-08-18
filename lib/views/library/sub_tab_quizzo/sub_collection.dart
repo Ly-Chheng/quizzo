@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:quizzo/controllers/library/collection_controller.dart';
 import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
+import 'package:quizzo/views/library/sub_tab_quizzo/create_collection.dart';
 import 'package:quizzo/widgets/custom_section_title.dart';
 
 class SubCollectionTab extends StatefulWidget {
@@ -22,7 +23,7 @@ class _SubCollectionTabState extends State<SubCollectionTab> {
         children: [
           SectionTitle(
             count: 7,
-            title: ' Collection'.tr,
+            title: ' Collections'.tr,
             icon: Icon(
               Icons.swap_vert,
               color: AppColor().primaryColor,
@@ -120,7 +121,38 @@ class _SubCollectionTabState extends State<SubCollectionTab> {
           ],
         ),
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+              ),
+              builder: (BuildContext context) {
+                return Padding(
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom,
+                  ),
+                  child: DraggableScrollableSheet(
+                    initialChildSize: 1,
+                    expand: false,
+                    builder: (context, scrollController) {
+                      return Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(24)),
+                        ),
+                        child: CreateCollection(
+                          scrollController: scrollController,
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
+            );
+          },
           elevation: 0,
           shape: const CircleBorder(),
           backgroundColor: AppColor().primaryColor,
