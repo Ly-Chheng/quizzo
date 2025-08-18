@@ -40,7 +40,7 @@ Future<void> main() async {
   // Read onboarding flag
   final storage = GetStorage();
   final hasSeenOnboarding = storage.read('hasSeenOnboarding') ?? false;
-if (Device.get().isTablet) {
+  if (Device.get().isTablet) {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.landscapeRight,
@@ -66,7 +66,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeService().lightTheme,
       darkTheme: ThemeService().darkTheme,
-      
       themeMode: ThemeService().getThemeMode(),
       initialRoute: hasSeenOnboarding ? '/SpleshGloble' : '/',
       getPages: appRoute,

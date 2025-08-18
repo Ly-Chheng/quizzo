@@ -71,7 +71,6 @@ class PopupDialog {
                         Navigator.pop(context);
                         await openSettingsAction();
                       } catch (err) {
-                        // ignore: use_build_context_synchronously
                         Navigator.pop(context);
                         log("Error opening settings: $err");
                       }

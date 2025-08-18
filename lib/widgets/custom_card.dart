@@ -90,6 +90,7 @@ Widget quizCard({
                       color: Colors.white,
                       fontSize: Get.context!.isPhone ? 12 : 1,
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'Nunito-Regular',
                     ),
                   ),
                 ),
@@ -120,7 +121,7 @@ Widget quizCard({
                     Text(
                       date,
                       style: TextStyle(
-                        fontFamily: AppFontStyle().fontBold,
+                        fontFamily: 'Nunito-Regular',
                         fontSize: AppFontSize(context).subNormalSize,
                         color: AppColor().secondaryText,
                       ),
@@ -137,7 +138,7 @@ Widget quizCard({
                     Text(
                       view ?? "",
                       style: TextStyle(
-                        fontFamily: AppFontStyle().fontBold,
+                        fontFamily: 'Nunito-Regular',
                         fontSize: AppFontSize(context).subNormalSize,
                         color: AppColor().secondaryText,
                       ),
@@ -157,7 +158,7 @@ Widget quizCard({
                         Text(
                           name,
                           style: TextStyle(
-                            fontFamily: AppFontStyle().fontRegular,
+                            fontFamily: 'Nunito-Regular',
                             fontSize: Get.context!.isPhone ? 12 : 14,
                             color: AppColor().secondaryText,
                           ),

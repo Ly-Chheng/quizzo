@@ -1,13 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
-import 'package:quizzo/views/friends/find_friends_screen.dart';
+import 'package:quizzo/views/home/component/top_collection_card'
+    show TopCollectionCard;
 import 'package:quizzo/views/home/discover/discover_list_screen.dart';
 import 'package:quizzo/views/top_anthors/authors_details_screen.dart';
-import 'package:quizzo/views/top_anthors/top_authors_list_screen.dart';
 import 'package:quizzo/views/top_conllections/top_conllections_screen.dart';
+import 'package:quizzo/widgets/animate_shimmerEffect.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -97,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // _buildBanner(),
+              _buildBanner(),
               SizedBox(
                 height: 4,
               ),
@@ -149,13 +151,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               SizedBox(
-                height: 120,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: quizData.length,
                   itemBuilder: (context, index) {
                     final quiz = quizData[index];
-                    return topCollections(
+                    return TopCollectionCard(
                       name: quiz['subject']!,
                       imageUrl: quiz['imagesb']!,
                     );
@@ -170,60 +171,54 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _buildBanner() {
+    final theme = AppTheme();
     return Center(
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        decoration: BoxDecoration(
-          image: const DecorationImage(
-            image: AssetImage('assets/images/home/banner.png'),
-            fit: BoxFit.cover,
-          ),
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: [
-            BoxShadow(
-              color: Get.context!.isDarkMode
-                  ? Color.fromARGB(255, 81, 57, 175)
-                  : Color.fromARGB(255, 81, 57, 175),
-              blurRadius: 0,
-              offset: Offset(0, 5),
-              spreadRadius: 0,
-            )
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Play quiz together with\n your friends now!",
-              style: TextStyle(
-                  fontFamily: AppFontStyle().fontebold,
-                  fontSize: AppFontSize(context).titleSize,
-                  color: Colors.white),
+      child: GestureDetector(
+        // onTap: () {
+        //   Get.to(FindFriendsScreen());
+        // },
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          decoration: BoxDecoration(
+            image: const DecorationImage(
+              image: AssetImage('assets/images/home/quick_play.png'),
+              fit: BoxFit.cover,
             ),
-            const SizedBox(height: 10),
-            GestureDetector(
-              onTap: () {
-                Get.to(FindFriendsScreen());
-              },
-              child: Container(
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [
+              BoxShadow(
+                color: Get.context!.isDarkMode
+                    ? Color.fromARGB(255, 57, 29, 167)
+                    : Color.fromARGB(255, 57, 29, 167),
+                blurRadius: 0,
+                offset: Offset(0, 5),
+                spreadRadius: 0,
+              )
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.play_arrow,
+                color: Colors.white,
+                size: 50,
+              ),
+              Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 7),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(30),
-                ),
                 child: Text(
-                  "Find Friends",
+                  "Quick Play",
                   style: TextStyle(
                     fontFamily: AppFontStyle().fontebold,
-                    fontSize: AppFontSize(context).normalTextSize,
-                    color: const Color(0xFFFFA63D),
+                    fontSize: AppFontSize(context).titleSize,
+                    color: Get.isDarkMode ? Colors.white : Colors.white,
                   ),
                 ),
               ),
-            )
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -295,67 +290,6 @@ class _MyHomePageState extends State<MyHomePage> {
             overflow: TextOverflow.ellipsis,
           ),
         ],
-      ),
-    );
-  }
-
-  Widget topCollections({required String name, required String imageUrl}) {
-    return Container(
-      width: 160,
-      margin: const EdgeInsets.symmetric(horizontal: 10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: const [
-          BoxShadow(
-            color: Color.fromRGBO(0, 0, 0, 0.1),
-            blurRadius: 3,
-            offset: Offset(0, 1),
-          ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(15),
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            Image.network(
-              imageUrl,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  color: Colors.grey[300],
-                  child: Icon(Icons.broken_image, size: 40, color: Colors.grey),
-                );
-              },
-            ),
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    Colors.black.withOpacity(0.5),
-                  ],
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 8,
-              left: 8,
-              child: SizedBox(
-                child: Text(
-                  name,
-                  style: TextStyle(
-                    fontFamily: AppFontStyle().fontebold,
-                    fontSize: AppFontSize(context).subTitleSize,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
@@ -433,7 +367,7 @@ class QuizCard extends StatelessWidget {
                     child: Text(
                       questionCount,
                       style: TextStyle(
-                          fontFamily: AppFontStyle().fontRegular,
+                          fontFamily: 'Nunito-Regular',
                           fontSize: AppFontSize(context).subNormalSize,
                           color: Colors.white),
                     ),
@@ -469,7 +403,7 @@ class QuizCard extends StatelessWidget {
                       Text(
                         name,
                         style: TextStyle(
-                          fontFamily: AppFontStyle().fontRegular,
+                          fontFamily: 'Nunito-Regular',
                           fontSize: AppFontSize(context).subNormalSize,
                         ),
                       ),

@@ -64,7 +64,9 @@ Widget quizCard({
                     image: DecorationImage(
                       image: NetworkImage(imageUrl),
                       fit: BoxFit.cover,
+                      
                     ),
+                    
                   ),
                 ),
                 Positioned(
