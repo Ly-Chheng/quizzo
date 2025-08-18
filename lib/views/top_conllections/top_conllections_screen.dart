@@ -37,7 +37,7 @@ class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
       "imagesb":
           "https://www.sacap.edu.za/wp-content/uploads/2023/10/unique-study-tips-sacap-768x512.jpg"
     },
-        {
+    {
       "image": "https://i.ytimg.com/vi/OQjkFQAIOck/maxresdefault.jpg",
       "title": "Boost Your Brainpower with Engaging Productivity Quizzes",
       "questions": "15 Qs",
@@ -48,7 +48,7 @@ class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
       "imagesb":
           "https://img.freepik.com/premium-vector/realistic-3d-mock-up-desktop-computer-blank-screen-monitor-mobile-phone-tablet_662181-111.jpg"
     },
-        {
+    {
       "image":
           "https://ahaslides.com/wp-content/uploads/2022/11/SEO1599thumb.png",
       "title":
@@ -58,8 +58,7 @@ class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
       "subject": "Entertaniment",
       "profile":
           "https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4866.jpg",
-      "imagesb":
-          "https://etimg.etb2bimg.com/photo/81478822.cms"
+      "imagesb": "https://etimg.etb2bimg.com/photo/81478822.cms"
     },
     {
       "image": "https://i.ytimg.com/vi/OQjkFQAIOck/maxresdefault.jpg",
@@ -72,7 +71,7 @@ class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
       "imagesb":
           "https://www.pictoclub.com/wp-content/uploads/2021/09/painting-brushes-scaled.jpg"
     },
-        {
+    {
       "image":
           "https://ahaslides.com/wp-content/uploads/2022/11/SEO1599thumb.png",
       "title":
@@ -96,7 +95,7 @@ class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
       "imagesb":
           "https://res.cloudinary.com/jerrick/image/upload/v1733571922/67543552269b66001d1c899e.jpg"
     },
-        {
+    {
       "image":
           "https://ahaslides.com/wp-content/uploads/2022/11/SEO1599thumb.png",
       "title":
@@ -106,8 +105,7 @@ class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
       "subject": "Food & Drink",
       "profile":
           "https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4866.jpg",
-      "imagesb":
-          "https://media.timeout.com/images/105183116/image.jpg"
+      "imagesb": "https://media.timeout.com/images/105183116/image.jpg"
     },
     {
       "image": "https://i.ytimg.com/vi/OQjkFQAIOck/maxresdefault.jpg",
@@ -117,10 +115,9 @@ class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
       "subject": "Health",
       "profile":
           "https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4869.jpg",
-      "imagesb":
-          "https://cms-api-in.myhealthcare.co/image/20220910103120.jpeg"
+      "imagesb": "https://cms-api-in.myhealthcare.co/image/20220910103120.jpeg"
     },
-        {
+    {
       "image": "https://i.ytimg.com/vi/OQjkFQAIOck/maxresdefault.jpg",
       "title": "Boost Your Brainpower with Engaging Productivity Quizzes",
       "questions": "15 Qs",
@@ -131,7 +128,7 @@ class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
       "imagesb":
           "https://img.freepik.com/premium-photo/flash-genius-happy-girl-hold-copybook-pointing-pen-up-child-genius-yellow-background-horizontal-isolated-poster-school-girl-student-banner-header-portrait-schoolgirl-copy-space_545934-40630.jpg"
     },
-        {
+    {
       "image": "https://i.ytimg.com/vi/OQjkFQAIOck/maxresdefault.jpg",
       "title": "Boost Your Brainpower with Engaging Productivity Quizzes",
       "questions": "15 Qs",
@@ -142,7 +139,7 @@ class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
       "imagesb":
           "https://media.istockphoto.com/id/1295248329/photo/beautiful-young-black-boy-training-on-the-football-pitch.jpg?s=612x612&w=0&k=20&c=ws4m_NoSF8fRZGNoq5kVlJSfNghREKihaxsOBXAHOw8="
     },
-        {
+    {
       "image": "https://i.ytimg.com/vi/OQjkFQAIOck/maxresdefault.jpg",
       "title": "Boost Your Brainpower with Engaging Productivity Quizzes",
       "questions": "15 Qs",
@@ -173,7 +170,7 @@ class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
           ),
         ),
         centerTitle: false,
-          iconTheme: IconThemeData(
+        iconTheme: IconThemeData(
           color: theme.iconTheme,
         ),
         actions: [
@@ -189,39 +186,22 @@ class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: ListView.builder(
-          itemCount: (quizData.length / 2).ceil(),
-          itemBuilder: (context, index) {
-            final firstIndex = index * 2;
-            final secondIndex = firstIndex + 1;
-            
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: topCollections(
-                      name: quizData[firstIndex]['subject']!,
-                      imageUrl: quizData[firstIndex]['imagesb']!,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  if (secondIndex < quizData.length)
-                    Expanded(
-                      child: topCollections(
-                        name: quizData[secondIndex]['subject']!,
-                        imageUrl: quizData[secondIndex]['imagesb']!,
-                      ),
-                    )
-                  else
-                    const Expanded(child: SizedBox()),
-                ],
-              ),
-            );
-          },
-        ),
-      ),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 15,
+              crossAxisSpacing: 12,
+              childAspectRatio: 1.4,
+            ),
+            itemCount: quizData.length,
+            itemBuilder: (context, index) {
+              return topCollections(
+                name: quizData[index]['subject']!,
+                imageUrl: quizData[index]['imagesb']!,
+              );
+            },
+          )),
     );
   }
 
@@ -281,13 +261,6 @@ class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
                     fontFamily: AppFontStyle().fontebold,
                     fontSize: AppFontSize(context).subTitleSize,
                     color: Colors.white,
-                    // shadows: const [
-                    //   Shadow(
-                    //     offset: Offset(1, 1),
-                    //     blurRadius: 2,
-                    //     color: Colors.black54,
-                    //   ),
-                    // ],
                   ),
                 ),
               ),

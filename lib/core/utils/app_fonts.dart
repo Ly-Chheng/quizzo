@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AppFonts {
-  // English Fonts "Roboto"
+  // English Fonts "Nunito"
   String fontEngRegular = 'Nunito-Regular';
   String fontEngMedium = 'Nunito-Medium';
   String fontEngBold = 'Nunito-Bold';

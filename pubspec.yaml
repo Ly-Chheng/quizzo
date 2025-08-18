@@ -57,6 +57,10 @@ dependencies:
 
   #Url
   url_launcher: ^6.3.2
+  share_plus: ^11.1.0
+  
+  #Icons
+  font_awesome_flutter: ^10.9.0
 
   intl: ^0.20.2
   shimmer: ^3.0.0
@@ -86,7 +90,6 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/images/home/
-    - assets/images/library/
     - assets/.env
     - assets/sound.wav
 
