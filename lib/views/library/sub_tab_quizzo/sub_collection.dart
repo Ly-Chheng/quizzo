@@ -1,10 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quizzo/controllers/library/collection_controller.dart';
 import 'package:quizzo/core/utils/app_color.dart';
-import 'package:quizzo/core/utils/app_fonts.dart';
-import 'package:quizzo/views/home/component/top_collection_card';
+import 'package:quizzo/views/home/component/top_collection_card.dart';
 import 'package:quizzo/views/library/sub_tab_quizzo/create_collection.dart';
 import 'package:quizzo/widgets/custom_section_title.dart';
 
@@ -36,14 +34,14 @@ class _SubCollectionTabState extends State<SubCollectionTab> {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 15,
-                crossAxisSpacing: 11,
+                crossAxisSpacing: 1,
                 childAspectRatio: 1.4,
               ),
               itemCount: colController.collectionData.length,
               itemBuilder: (context, index) {
                 return TopCollectionCard(
-                  name: colController.collectionData[index]['imagesb']!,
-                  imageUrl: colController.collectionData[index]['subject']!,
+                  name: colController.collectionData[index]['name']!,
+                  imageUrl: colController.collectionData[index]['imagesb']!,
                 );
               },
             ),
