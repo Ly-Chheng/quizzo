@@ -22,17 +22,30 @@ class LibraryPage extends StatelessWidget {
           child: Column(
             children: [
               TabBar(
+                overlayColor: MaterialStateProperty.all(Colors.transparent),
+                automaticIndicatorColorAdjustment: false,
+                padding: EdgeInsets.symmetric(vertical: 10),
+                labelPadding: EdgeInsets.symmetric(horizontal: 0),
+                physics: const BouncingScrollPhysics(),
                 indicatorColor: AppColor().primaryColor,
                 indicatorSize: TabBarIndicatorSize.tab,
                 indicatorWeight: 4,
+                indicatorAnimation: TabIndicatorAnimation.linear,
+                dividerColor: AppColor().greyText.withOpacity(0.3),
                 labelColor: AppColor().primaryColor,
                 indicatorPadding: EdgeInsets.zero,
-                unselectedLabelColor: Colors.grey,
+                unselectedLabelStyle: TextStyle(
+                  height: 1.5,
+                  color: AppColor().greyText,
+                  fontFamily: AppFonts().fontEngBold,
+                  fontSize: context.isPhone ? 16 : 16,
+                ),
+                unselectedLabelColor: AppColor().greyText,
                 labelStyle: TextStyle(
                   height: 1.5,
                   color: Theme.of(context).hoverColor,
                   fontFamily: AppFonts().fontEngBold,
-                  fontSize: context.isPhone ? 14 : 16,
+                  fontSize: context.isPhone ? 16 : 16,
                 ),
                 tabs: [
                   Tab(text: 'My Quizzo'.tr),

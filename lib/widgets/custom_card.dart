@@ -22,19 +22,9 @@ Widget quizCard({
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(10),
       color: AppTheme().cardTheme,
-      boxShadow: [
-        BoxShadow(
-          color: Get.context!.isDarkMode
-              ? AppColor().lightBorder.withOpacity(0.3)
-              : Color.fromRGBO(0, 0, 0, 0.08),
-          blurRadius: 0,
-          spreadRadius: 1,
-          offset: Offset(
-            0,
-            0,
-          ),
-        ),
-      ],
+      border: Border.all(
+        color: AppTheme().borderTheme,
+      ),
     ),
     child: Row(
       children: [

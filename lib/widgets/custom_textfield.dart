@@ -27,6 +27,8 @@ class CustomTextField extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
   final String? labelText;
   final ValueChanged<String>? onChanged;
+  final double? textSize; // New property to adjust text size
+  final Color? textColor;
 
   const CustomTextField({
     super.key,
@@ -51,6 +53,8 @@ class CustomTextField extends StatelessWidget {
     this.contentPadding,
     this.labelText,
     this.onChanged,
+    this.textSize,
+    this.textColor,
   });
 
   @override
@@ -125,6 +129,11 @@ class CustomTextField extends StatelessWidget {
         suffixIcon: suffixIcon,
       ),
       onChanged: onChanged,
+      style: TextStyle(
+        fontFamily: AppFontStyle().fontebold,
+        fontSize: textSize,
+        color: textColor,
+      ),
     );
   }
 }

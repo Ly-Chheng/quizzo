@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:path/path.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:quizzo/controllers/library/camara_controller.dart';
 import 'package:quizzo/core/utils/app_color.dart';
@@ -15,11 +14,10 @@ import 'package:quizzo/widgets/custom_textfield.dart';
 
 class CreateCollection extends StatefulWidget {
   final ScrollController scrollController;
+  final Function()? onDropDownClose;
 
-  const CreateCollection({
-    super.key,
-    required this.scrollController,
-  });
+  const CreateCollection(
+      {super.key, required this.scrollController, this.onDropDownClose});
 
   @override
   State<CreateCollection> createState() => _CreateCollectionState();
@@ -31,6 +29,7 @@ class _CreateCollectionState extends State<CreateCollection> {
   File? file;
   final theme = AppTheme();
   final camaraController = Get.put(CamaraController());
+  GlobalKey<CustomDropDownState> dropDownKey = GlobalKey<CustomDropDownState>();
 
   final List<CustDropdownMenuItem> dropdownItems = [
     CustDropdownMenuItem(
@@ -38,9 +37,8 @@ class _CreateCollectionState extends State<CreateCollection> {
       child: Text(
         'Only Me',
         style: TextStyle(
-          fontSize: Get.context!.isPhone ? 14 : 16,
           fontFamily: AppFontStyle().fontebold,
-          color: AppColor().greyText,
+          fontSize: Get.context!.isPhone ? 20 : 22,
         ),
       ),
     ),
@@ -49,16 +47,15 @@ class _CreateCollectionState extends State<CreateCollection> {
       child: Text(
         'Public',
         style: TextStyle(
-          fontSize: Get.context!.isPhone ? 14 : 16,
           fontFamily: AppFontStyle().fontebold,
-          color: AppColor().greyText,
+          fontSize: Get.context!.isPhone ? 20 : 22,
         ),
       ),
     ),
   ];
 
   void onItemChanged(value) {
-    print('Selected value: $value');
+    log('Selected value: $value');
   }
 
   @override
@@ -71,6 +68,7 @@ class _CreateCollectionState extends State<CreateCollection> {
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
+        dropDownKey.currentState?.removeOverlay();
       },
       child: Scaffold(
         body: SingleChildScrollView(
@@ -199,12 +197,13 @@ class _CreateCollectionState extends State<CreateCollection> {
                   readOnly: false,
                   maxLines: 1,
                   isRequired: true,
-                  contentPadding: EdgeInsets.only(
-                    top: 10,
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 10,
                   ),
                   onChanged: (value) {
                     log('Input value: $value');
                   },
+                  textSize: Get.context!.isPhone ? 20 : 22,
                 ),
                 SizedBox(
                   height: 20,
@@ -220,6 +219,7 @@ class _CreateCollectionState extends State<CreateCollection> {
                   height: 10,
                 ),
                 CustomDropDown<int>(
+                  key: dropDownKey,
                   items: dropdownItems,
                   onChanged: onItemChanged,
                   hintText: 'Select',

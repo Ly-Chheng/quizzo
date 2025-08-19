@@ -33,7 +33,7 @@ class AppColor {
   Color lightText = const Color(0xFF212121);
   Color lightBorder = const Color(0xFFF0F2F6);
   Color lightActive = const Color(0xFFF1F9FF);
-  Color greyText = const Color.fromARGB(255, 199, 197, 197);
+  Color greyText = Colors.grey.shade600;
 
   // Dark colors
   Color darkBackgroundColor = const Color(0xFF121212);

@@ -20,7 +20,6 @@ customNavigationBar({
         color: Theme.of(Get.context!).cardColor,
         width: 1,
       ),
-      // Conditional shadow based on tap index
       boxShadow: currentIndex == 0
           ? [
               BoxShadow(
@@ -29,7 +28,7 @@ customNavigationBar({
                 offset: Offset(2, 4),
               ),
             ]
-          : [], // No shadow when not selected
+          : [],
     ),
     child: BottomNavigationBar(
       items: items ??
