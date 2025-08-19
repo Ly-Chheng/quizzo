@@ -57,7 +57,7 @@ Widget quizCard({
                     fit: BoxFit.fill,
                     placeholder: (context, url) => ShimmerEffect(),
                     errorWidget: (context, url, error) => Image.asset(
-                      'assets/images/no_pic.png',
+                      'assets/images/no_picture.png',
                       height: double.infinity,
                       fit: BoxFit.fill,
                     ),

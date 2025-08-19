@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quizzo/controllers/home/top_collections_controller.dart';
 import 'package:quizzo/controllers/library/collection_controller.dart';
 import 'package:quizzo/controllers/library/quizzo_controller.dart';
 import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
+import 'package:quizzo/views/home/component/top_collection_card.dart';
 import 'package:quizzo/widgets/custome_card.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -80,7 +82,8 @@ class _SearchScreenState extends State<SearchScreen> {
     setState(() {
       final index = authors.indexWhere((a) => a['id'] == authorId);
       if (index != -1) {
-        authors[index]['isFollowing'] = !(authors[index]['isFollowing'] ?? false);
+        authors[index]['isFollowing'] =
+            !(authors[index]['isFollowing'] ?? false);
       }
     });
   }
@@ -104,7 +107,9 @@ class _SearchScreenState extends State<SearchScreen> {
 
     Color borderColor = _isFocused
         ? const Color(0xFFFFA63D)
-        : (Get.context!.isDarkMode ? const Color(0xff272B36) : const Color(0XFFFFFFFF));
+        : (Get.context!.isDarkMode
+            ? const Color(0xff272B36)
+            : const Color(0XFFFFFFFF));
 
     return Scaffold(
       appBar: AppBar(
@@ -162,27 +167,30 @@ class _SearchScreenState extends State<SearchScreen> {
           color: theme.iconTheme,
         ),
       ),
-      body: Column(
-        children: [
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildTabButton("Quizzo", 0),
-              const SizedBox(width: 10),
-              _buildTabButton("People", 1),
-              const SizedBox(width: 10),
-              _buildTabButton("Collections", 2),
-            ],
-          ),
-          const SizedBox(height: 20),
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
-              child: _buildTabContent(),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _buildTabButton("Quizzo", 0),
+                const SizedBox(width: 10),
+                _buildTabButton("People", 1),
+                const SizedBox(width: 10),
+                _buildTabButton("Collections", 2),
+              ],
             ),
-          ),
-        ],
+            const SizedBox(height: 20),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: _buildTabContent(),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -220,7 +228,6 @@ class _SearchScreenState extends State<SearchScreen> {
     final quizzoController = Get.put(QuizzoController());
     return Column(
       children: [
-      
         Column(
           children: List.generate(
             quizzoController.myQuizzodata.length,
@@ -236,7 +243,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   date: quiz['date'] ?? '',
                   name: quiz['name'] ?? '',
                   view: quiz['view'] ?? '',
-                  profileUrl: quiz['profileUrl'] ?? '',
+                  profileUrl: quiz['profile'] ?? '',
                 ),
               );
             },
@@ -247,93 +254,32 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   Widget _buildCollectionsContent() {
-    final colController = Get.put(CollectionController());
     return Column(
       children: [
-       
-        for (int i = 0; i < colController.collectionData.length; i += 2)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 15.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: _buildCollectionCard(colController.collectionData[i]),
-                ),
-                const SizedBox(width: 11),
-                Expanded(
-                  child: i + 1 < colController.collectionData.length
-                      ? _buildCollectionCard(
-                          colController.collectionData[i + 1],
-                        )
-                      : const SizedBox(),
-                ),
-              ],
-            ),
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 15,
+            crossAxisSpacing: 12,
+            childAspectRatio: 1.4,
           ),
-      ],
-    );
-  }
-
-  Widget _buildCollectionCard(Map<String, dynamic> collection) {
-    return Container(
-      height: 110,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: const [
-          BoxShadow(
-            color: Color.fromRGBO(0, 0, 0, 0.1),
-            blurRadius: 3,
-            offset: Offset(0, 1),
-          ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(15),
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            CachedNetworkImage(
-              imageUrl: collection['imagesb'] ?? '',
-              fit: BoxFit.cover,
-              placeholder: (context, url) => Container(
-                color: Colors.grey[300],
-              ),
-              errorWidget: (context, url, error) => Container(
-                color: Colors.grey[300],
-                child: const Icon(Icons.image_not_supported, color: Colors.grey),
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Colors.transparent, Colors.black.withOpacity(0.5)],
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 8,
-              left: 8,
-              child: Text(
-                collection['subject'] ?? 'Unknown',
-                style: TextStyle(
-                  fontFamily: AppFontStyle().fontebold,
-                  fontSize: AppFontSize(context).subTitleSize,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ],
+          itemCount: quizData.length,
+          itemBuilder: (context, index) {
+            return TopCollectionCard(
+              name: quizData[index]['subject']!,
+              imageUrl: quizData[index]['imagesb']!,
+            );
+          },
         ),
-      ),
+      ],
     );
   }
 
   Widget _buildPeopleContent() {
     return Column(
       children: [
-   
         Column(
           children: authors.map((author) => _buildAuthorCard(author)).toList(),
         ),
@@ -406,10 +352,13 @@ class _SearchScreenState extends State<SearchScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: isFollowing ? const Color(0xFFFFA63D) : Colors.transparent,
+                  color: isFollowing
+                      ? const Color(0xFFFFA63D)
+                      : Colors.transparent,
                   width: 1,
                 ),
-                color: isFollowing ? Colors.transparent : const Color(0xFFFFA63D),
+                color:
+                    isFollowing ? Colors.transparent : const Color(0xFFFFA63D),
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: isFollowing
                     ? []

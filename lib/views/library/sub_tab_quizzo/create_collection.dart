@@ -38,7 +38,7 @@ class _CreateCollectionState extends State<CreateCollection> {
         'Only Me',
         style: TextStyle(
           fontFamily: AppFontStyle().fontebold,
-          fontSize: Get.context!.isPhone ? 20 : 22,
+          fontSize: Get.context!.isPhone ? 18 : 20,
         ),
       ),
     ),
@@ -48,7 +48,7 @@ class _CreateCollectionState extends State<CreateCollection> {
         'Public',
         style: TextStyle(
           fontFamily: AppFontStyle().fontebold,
-          fontSize: Get.context!.isPhone ? 20 : 22,
+          fontSize: Get.context!.isPhone ? 18 : 20,
         ),
       ),
     ),
@@ -203,7 +203,7 @@ class _CreateCollectionState extends State<CreateCollection> {
                   onChanged: (value) {
                     log('Input value: $value');
                   },
-                  textSize: Get.context!.isPhone ? 20 : 22,
+                  textSize: Get.context!.isPhone ? 18 : 20,
                 ),
                 SizedBox(
                   height: 20,

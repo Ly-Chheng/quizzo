@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
-import 'package:quizzo/core/utils/popup_dialog.dart';
 import 'package:quizzo/widgets/animate_loading.dart';
 
 class CamaraController extends GetxController {

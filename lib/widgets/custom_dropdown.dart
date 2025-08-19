@@ -129,6 +129,7 @@ class CustomDropDownState extends State<CustomDropDown> {
                               ],
                       ),
                       child: Material(
+                        color: AppTheme().cardTheme,
                         borderRadius: BorderRadius.circular(8),
                         child: ListView(
                             clipBehavior: Clip.antiAlias,

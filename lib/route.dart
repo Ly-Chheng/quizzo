@@ -7,7 +7,6 @@ import 'package:quizzo/views/auth/new_password_screen.dart';
 import 'package:quizzo/views/auth/otp_verification_scree.dart';
 import 'package:quizzo/views/auth/sign_up.dart';
 import 'package:quizzo/views/friends/find_friends_screen.dart';
-import 'package:quizzo/views/library/sub_tab_quizzo/create_collection.dart';
 import 'package:quizzo/views/onboarding/onboarding_screen.dart';
 import 'package:quizzo/views/home/home_screen.dart';
 import 'package:quizzo/views/home/test.dart';

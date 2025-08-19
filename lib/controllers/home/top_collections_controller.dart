@@ -1,5 +1,6 @@
-  final List<Map<String, String>> quizData = [
+  final List<Map<String, dynamic>> quizData = [
     {
+       "id": 1,
       "image":
           "https://ahaslides.com/wp-content/uploads/2022/11/SEO1599thumb.png",
       "title":
@@ -13,6 +14,7 @@
           "https://www.cae.net/wp-content/uploads/2024/07/elearning-classroom.jpg"
     },
     {
+      "id": 2,
       "image": "https://i.ytimg.com/vi/OQjkFQAIOck/maxresdefault.jpg",
       "title": "Boost Your Brainpower with Engaging Productivity Quizzes",
       "questions": "15 Qs",
@@ -24,6 +26,7 @@
           "https://www.sacap.edu.za/wp-content/uploads/2023/10/unique-study-tips-sacap-768x512.jpg"
     },
     {
+      "id": 3,
       "image": "https://i.ytimg.com/vi/OQjkFQAIOck/maxresdefault.jpg",
       "title": "Boost Your Brainpower with Engaging Productivity Quizzes",
       "questions": "15 Qs",
@@ -35,6 +38,7 @@
           "https://img.freepik.com/premium-vector/realistic-3d-mock-up-desktop-computer-blank-screen-monitor-mobile-phone-tablet_662181-111.jpg"
     },
     {
+      "id": 4,
       "image":
           "https://ahaslides.com/wp-content/uploads/2022/11/SEO1599thumb.png",
       "title":
@@ -47,6 +51,7 @@
       "imagesb": "https://etimg.etb2bimg.com/photo/81478822.cms"
     },
     {
+      "id": 5,
       "image": "https://i.ytimg.com/vi/OQjkFQAIOck/maxresdefault.jpg",
       "title": "Boost Your Brainpower with Engaging Productivity Quizzes",
       "questions": "15 Qs",
@@ -58,6 +63,7 @@
           "https://www.pictoclub.com/wp-content/uploads/2021/09/painting-brushes-scaled.jpg"
     },
     {
+      "id": 6,
       "image":
           "https://ahaslides.com/wp-content/uploads/2022/11/SEO1599thumb.png",
       "title":
@@ -71,6 +77,7 @@
           "https://img.freepik.com/premium-vector/world-earth-day-concept-with-plant-growing-earth_1639-47898.jpg"
     },
     {
+      "id": 7,
       "image": "https://i.ytimg.com/vi/OQjkFQAIOck/maxresdefault.jpg",
       "title": "Boost Your Brainpower with Engaging Productivity Quizzes",
       "questions": "15 Qs",
@@ -82,6 +89,7 @@
           "https://res.cloudinary.com/jerrick/image/upload/v1733571922/67543552269b66001d1c899e.jpg"
     },
     {
+      "id": 8,
       "image":
           "https://ahaslides.com/wp-content/uploads/2022/11/SEO1599thumb.png",
       "title":
@@ -94,6 +102,7 @@
       "imagesb": "https://media.timeout.com/images/105183116/image.jpg"
     },
     {
+      "id": 9,
       "image": "https://i.ytimg.com/vi/OQjkFQAIOck/maxresdefault.jpg",
       "title": "Boost Your Brainpower with Engaging Productivity Quizzes",
       "questions": "15 Qs",
@@ -104,6 +113,7 @@
       "imagesb": "https://cms-api-in.myhealthcare.co/image/20220910103120.jpeg"
     },
     {
+      "id":10,
       "image": "https://i.ytimg.com/vi/OQjkFQAIOck/maxresdefault.jpg",
       "title": "Boost Your Brainpower with Engaging Productivity Quizzes",
       "questions": "15 Qs",
@@ -115,6 +125,7 @@
           "https://img.freepik.com/premium-photo/flash-genius-happy-girl-hold-copybook-pointing-pen-up-child-genius-yellow-background-horizontal-isolated-poster-school-girl-student-banner-header-portrait-schoolgirl-copy-space_545934-40630.jpg"
     },
     {
+      "id": 12,
       "image": "https://i.ytimg.com/vi/OQjkFQAIOck/maxresdefault.jpg",
       "title": "Boost Your Brainpower with Engaging Productivity Quizzes",
       "questions": "15 Qs",
@@ -126,6 +137,7 @@
           "https://media.istockphoto.com/id/1295248329/photo/beautiful-young-black-boy-training-on-the-football-pitch.jpg?s=612x612&w=0&k=20&c=ws4m_NoSF8fRZGNoq5kVlJSfNghREKihaxsOBXAHOw8="
     },
     {
+      "id": 13,
       "image": "https://i.ytimg.com/vi/OQjkFQAIOck/maxresdefault.jpg",
       "title": "Boost Your Brainpower with Engaging Productivity Quizzes",
       "questions": "15 Qs",

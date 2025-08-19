@@ -34,7 +34,7 @@ class _SubCollectionTabState extends State<SubCollectionTab> {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 15,
-                crossAxisSpacing: 1,
+                crossAxisSpacing: 12,
                 childAspectRatio: 1.4,
               ),
               itemCount: colController.collectionData.length,

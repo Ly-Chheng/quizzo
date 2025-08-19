@@ -138,7 +138,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
                   if (controller.selectedIndex != 1 &&
                       controller.selectedIndex != 2)
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {  Get.to(SearchScreen());},
                       icon: Image.asset(
                         'assets/icons/search.png',
                         width: 28,
@@ -148,7 +148,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
                     ),
                   IconButton(
                     onPressed: () {
-                      Get.to(SearchScreen());
+                    
                     },
                     icon: Image.asset(
                       'assets/icons/notification.png',

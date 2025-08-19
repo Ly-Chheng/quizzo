@@ -17,7 +17,6 @@ class TopCollectionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 160,
-      margin: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         boxShadow: const [
