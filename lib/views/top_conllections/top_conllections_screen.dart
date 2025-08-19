@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:quizzo/controllers/home/top_collections_controller.dart';
 import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
-import 'package:quizzo/views/home/component/top_collection_card';
+import 'package:quizzo/views/home/component/top_collection_card.dart';
 import 'package:quizzo/views/top_conllections/top_collection_detail_screen.dart';
 import 'package:quizzo/widgets/animate_shimmerEffect.dart';
 
