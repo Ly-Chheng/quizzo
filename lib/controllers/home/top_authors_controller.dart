@@ -1,3 +1,6 @@
+import 'package:get/get.dart';
+
+class TopAuthorsController extends GetxController {
 final List<Map<String, dynamic>> authorsData = [
     {
       'id': '1',
@@ -72,3 +75,5 @@ final List<Map<String, dynamic>> authorsData = [
       'isFollowing': false,
     },
   ];
+}
+

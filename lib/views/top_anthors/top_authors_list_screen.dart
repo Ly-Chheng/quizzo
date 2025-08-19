@@ -25,26 +25,22 @@ class _TopAuthorsListScreenState extends State<TopAuthorsListScreen> {
   }
 
   Future<void> _loadAuthors() async {
-    // Simulate the delay in loading data
-    await Future.delayed(const Duration(seconds: 2));
-
+    await Future.delayed(const Duration(seconds: 1)); // simulate fetch delay
     setState(() {
-      _authors =
-          authorsData.map((data) => Map<String, dynamic>.from(data)).toList();
+      _authors = TopAuthorsController()
+          .authorsData
+          .map((data) => Map<String, dynamic>.from(data))
+          .toList();
       _isLoading = false;
     });
   }
 
   void _toggleFollow(String authorId) {
-    setState(() {
-      final index = _authors.indexWhere((author) => author['id'] == authorId);
-      if (index != -1) {
-        _authors[index]['isFollowing'] = !_authors[index]['isFollowing'];
-        // You can update followers count here if needed
-        // if (_authors[index]['isFollowing']) _authors[index]['followers']++;
-        // else _authors[index]['followers']--;
-      }
-    });
+    final index = _authors.indexWhere((author) => author['id'] == authorId);
+    if (index != -1) {
+      _authors[index]['isFollowing'] = !_authors[index]['isFollowing'];
+      setState(() {}); // refresh UI
+    }
   }
 
   void _onAuthorTap(Map<String, dynamic> author) {
@@ -113,32 +109,32 @@ class _TopAuthorsListScreenState extends State<TopAuthorsListScreen> {
         centerTitle: false,
         iconTheme: IconThemeData(color: theme.iconTheme),
       ),
-      // body: _isLoading
-      //     ? const Center(child: RotatingDotsLoader())
-      //     : _authors.isEmpty
-      //         ? const Center(
-      //             child: Text('No authors found',
-      //                 style: TextStyle(fontSize: 16, color: Colors.grey)),
-      //           )
-      //         : RefreshIndicator(
-      //             onRefresh: _loadAuthors,
-      //             child: ListView.builder(
-      //               padding: const EdgeInsets.symmetric(
-      //                   horizontal: 15, vertical: 20),
-      //               itemCount: _authors.length,
-      //               itemBuilder: (context, index) =>
-      //                   _buildAuthorCard(_authors[index], isDarkMode),
-      //             ),
-      //           ),
-      body: RefreshIndicator(
-        onRefresh: _refreshContent,
-        child: ListView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-          itemCount: _authors.length,
-          itemBuilder: (context, index) =>
-              _buildAuthorCard(_authors[index], isDarkMode),
-        ),
-      ),
+
+      // body: RefreshIndicator(
+      //   onRefresh: _refreshContent,
+      //   child: ListView.builder(
+      //     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+      //     itemCount: _authors.length,
+      //     itemBuilder: (context, index) =>
+      //         _buildAuthorCard(_authors[index], isDarkMode),
+      //   ),
+      // ),
+      body: _isLoading
+          ? ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+              itemCount: _authors.isNotEmpty ? _authors.length : 30,
+              itemBuilder: (context, index) => _buildShimmerAuthorCard(),
+            )
+          : RefreshIndicator(
+              onRefresh: _loadAuthors,
+              child: ListView.builder(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                itemCount: _authors.length,
+                itemBuilder: (context, index) =>
+                    _buildAuthorCard(_authors[index], isDarkMode),
+              ),
+            ),
     );
   }
 
@@ -251,6 +247,60 @@ class _TopAuthorsListScreenState extends State<TopAuthorsListScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildShimmerAuthorCard() {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: Colors.grey[300], // base shimmer color
+      ),
+      child: Row(
+        children: [
+          // Circle avatar shimmer
+          Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              color: Colors.grey[400],
+              shape: BoxShape.circle,
+            ),
+          ),
+          const SizedBox(width: 15),
+          // Text lines shimmer
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 14,
+                  color: Colors.grey[400],
+                ),
+                const SizedBox(height: 8),
+                Container(
+                  width: 100,
+                  height: 14,
+                  color: Colors.grey[400],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 15),
+          // Follow button shimmer
+          Container(
+            width: 80,
+            height: 30,
+            decoration: BoxDecoration(
+              color: Colors.grey[400],
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+        ],
       ),
     );
   }

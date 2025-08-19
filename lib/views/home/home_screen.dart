@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
               _buildSectionTitle("Top Authors", onTap: () {
-                Get.to(TopAuthorsListScreen());
+              Get.to(()=> TopAuthorsListScreen());
               }),
               SizedBox(
                 height: 120,

@@ -1,14 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:quizzo/controllers/home/top_collections_controller.dart';
-import 'package:quizzo/controllers/library/collection_controller.dart';
 import 'package:quizzo/controllers/library/quizzo_controller.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/views/home/component/top_collection_card.dart';
-import 'package:quizzo/widgets/animate_shimmerEffect.dart';
 import 'package:quizzo/widgets/custom_section_title.dart';
 import 'package:quizzo/widgets/custome_card.dart';
 import 'package:share_plus/share_plus.dart';
@@ -244,7 +241,6 @@ class _AuthorsDetailsScreenState extends State<AuthorsDetailsScreen> {
   }
 
 Widget _buildCollectionsContent() {
-  final colController = Get.put(CollectionController());
   return Column(
     children: [
       SectionTitle(
@@ -293,22 +289,24 @@ Widget _buildCollectionsContent() {
             height: 1.5,
           ),
         ),
-        const SizedBox(height: 25),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: const [
-            FaIcon(FontAwesomeIcons.globe, color: Color(0xFFFFA63D)),
-            SizedBox(width: 20),
-            FaIcon(FontAwesomeIcons.instagram, color: Color(0xFFFFA63D)),
-            SizedBox(width: 20),
-            FaIcon(FontAwesomeIcons.twitter, color: Color(0xFFFFA63D)),
-            SizedBox(width: 20),
-            FaIcon(FontAwesomeIcons.facebook, color: Color(0xFFFFA63D)),
-            SizedBox(width: 20),
-            FaIcon(FontAwesomeIcons.discord, color: Color(0xFFFFA63D)),
-            SizedBox(width: 20),
-            FaIcon(FontAwesomeIcons.reddit, color: Color(0xFFFFA63D)),
-          ],
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 30),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: const [
+              FaIcon(FontAwesomeIcons.globe, color: Color(0xFFFFA63D)),
+              SizedBox(width: 20),
+              FaIcon(FontAwesomeIcons.instagram, color: Color(0xFFFFA63D)),
+              SizedBox(width: 20),
+              FaIcon(FontAwesomeIcons.twitter, color: Color(0xFFFFA63D)),
+              SizedBox(width: 20),
+              FaIcon(FontAwesomeIcons.facebook, color: Color(0xFFFFA63D)),
+              SizedBox(width: 20),
+              FaIcon(FontAwesomeIcons.discord, color: Color(0xFFFFA63D)),
+              SizedBox(width: 20),
+              FaIcon(FontAwesomeIcons.reddit, color: Color(0xFFFFA63D)),
+            ],
+          ),
         ),
       ],
     );
@@ -413,21 +411,34 @@ Widget _buildCollectionsContent() {
   }
 
   Widget _buildStatRow(List<Map<String, dynamic>> data) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: List.generate(data.length * 2 - 1, (index) {
-        if (index.isOdd) {
-          // Add a vertical divider between items
-          return Container(
-              width: 1,
-              height: 60,
-              color: Get.context!.isDarkMode
-                  ? const Color.fromARGB(255, 122, 121, 121)
-                  : Color.fromARGB(255, 211, 209, 209));
-        }
-        final item = data[index ~/ 2];
-        return Column(
+  return GridView.builder(
+    shrinkWrap: true,
+    physics: const NeverScrollableScrollPhysics(),
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: data.length,
+      childAspectRatio: 1,
+      mainAxisSpacing: 0,
+      crossAxisSpacing: 0,
+    ),
+    itemCount: data.length,
+    itemBuilder: (context, index) {
+      final item = data[index];
+      return Container(
+        decoration: BoxDecoration(
+          border: Border(
+            right: index != data.length - 1 
+                ? BorderSide(
+                    width: 1,
+                    color: Get.context!.isDarkMode
+                        ? const Color.fromARGB(255, 122, 121, 121)
+                        : const Color.fromARGB(255, 211, 209, 209),
+                  )
+                : BorderSide.none,
+          ),
+        ),
+        child: Column(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               item['value'],
@@ -446,10 +457,12 @@ Widget _buildCollectionsContent() {
               ),
             ),
           ],
-        );
-      }),
-    );
-  }
+        ),
+      );
+    },
+  );
+}
+
 
   Widget _buildTabButton(String title, int index) {
     final isSelected = selectedTabIndex == index;
@@ -519,7 +532,7 @@ Widget _buildCollectionsContent() {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -549,11 +562,8 @@ Widget _buildCollectionsContent() {
                       ? const Color.fromARGB(255, 122, 121, 121)
                       : Color.fromARGB(255, 211, 209, 209)),
 
-              // Stats rows
-              const SizedBox(height: 8),
               _buildStatRow(statsTopRow),
               const Divider(thickness: 1),
-              const SizedBox(height: 8),
               _buildStatRow(statsBottomRow),
               Divider(
                   thickness: 1,

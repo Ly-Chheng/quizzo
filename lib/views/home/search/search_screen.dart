@@ -1,8 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quizzo/controllers/home/top_collections_controller.dart';
-import 'package:quizzo/controllers/library/collection_controller.dart';
+import 'package:quizzo/controllers/home/home_controller.dart';
 import 'package:quizzo/controllers/library/quizzo_controller.dart';
 import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
@@ -23,36 +21,18 @@ class _SearchScreenState extends State<SearchScreen> {
   bool _isFocused = false;
   int selectedTabIndex = 0;
 
-  /// Dummy authors list for People tab
-  List<Map<String, dynamic>> authors = [
-    {
-      'id': 1,
-      'name': 'John Doe',
-      'username': 'johndoe',
-      'profileImageUrl': null,
-      'isFollowing': false,
-    },
-    {
-      'id': 2,
-      'name': 'Jane Smith',
-      'username': 'janesmith',
-      'profileImageUrl': 'https://via.placeholder.com/150',
-      'isFollowing': true,
-    },
-  ];
+
 
   @override
   void initState() {
     super.initState();
 
-    // Listen to text changes
     _searchController.addListener(() {
       setState(() {
         _showCloseIcon = _searchController.text.isNotEmpty;
       });
     });
 
-    // Listen to focus changes
     _focusNode.addListener(() {
       setState(() {
         _isFocused = _focusNode.hasFocus;
@@ -80,10 +60,10 @@ class _SearchScreenState extends State<SearchScreen> {
 
   void _toggleFollow(int authorId) {
     setState(() {
-      final index = authors.indexWhere((a) => a['id'] == authorId);
+      final index = topAuthors.indexWhere((a) => a['id'] == authorId);
       if (index != -1) {
-        authors[index]['isFollowing'] =
-            !(authors[index]['isFollowing'] ?? false);
+        topAuthors[index]['isFollowing'] =
+            !(topAuthors[index]['isFollowing'] ?? false);
       }
     });
   }
@@ -184,10 +164,7 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             const SizedBox(height: 20),
             Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(16),
-                child: _buildTabContent(),
-              ),
+              child: _buildTabContent(),
             ),
           ],
         ),
@@ -233,18 +210,15 @@ class _SearchScreenState extends State<SearchScreen> {
             quizzoController.myQuizzodata.length,
             (index) {
               final quiz = quizzoController.myQuizzodata[index];
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: quizCard(
-                  context: context,
-                  imageUrl: quiz['image'] ?? '',
-                  title: quiz['title'] ?? '',
-                  questionCount: quiz['questions'] ?? '0',
-                  date: quiz['date'] ?? '',
-                  name: quiz['name'] ?? '',
-                  view: quiz['view'] ?? '',
-                  profileUrl: quiz['profile'] ?? '',
-                ),
+              return quizCard(
+                context: context,
+                imageUrl: quiz['image'] ?? '',
+                title: quiz['title'] ?? '',
+                questionCount: quiz['questions'] ?? '0',
+                date: quiz['date'] ?? '',
+                name: quiz['name'] ?? '',
+                view: quiz['view'] ?? '',
+                profileUrl: quiz['profile'] ?? '',
               );
             },
           ),
@@ -281,7 +255,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Column(
       children: [
         Column(
-          children: authors.map((author) => _buildAuthorCard(author)).toList(),
+          children: topAuthors.map((author) => _buildAuthorCard(author)).toList(),
         ),
       ],
     );
