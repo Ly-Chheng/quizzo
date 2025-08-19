@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quizzo/controllers/library/quizzo_controller.dart';
 import 'package:quizzo/core/utils/app_color.dart';
-import 'package:quizzo/core/utils/app_fonts.dart'
-    show AppFontStyle, AppFontSize;
+import 'package:quizzo/core/utils/app_fonts.dart';
+
 import 'package:quizzo/widgets/custom_card.dart';
 import 'package:quizzo/widgets/custom_section_title.dart';
 

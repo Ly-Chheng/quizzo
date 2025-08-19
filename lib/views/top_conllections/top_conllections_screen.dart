@@ -1,12 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:quizzo/controllers/home/top_collections_controller.dart';
 import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/views/home/component/top_collection_card.dart';
-import 'package:quizzo/views/top_conllections/top_collection_detail_screen.dart';
-import 'package:quizzo/widgets/animate_shimmerEffect.dart';
 
 class TopCollectionsScreen extends StatefulWidget {
   const TopCollectionsScreen({super.key});
@@ -50,22 +46,23 @@ class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
         ],
       ),
       body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 15,
-              crossAxisSpacing: 12,
-              childAspectRatio: 1.4,
-            ),
-            itemCount: quizData.length,
-            itemBuilder: (context, index) {
-              return TopCollectionCard(
-                name: quizData[index]['subject']!,
-                imageUrl: quizData[index]['imagesb']!,
-              );
-            },
-          )),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 15,
+            crossAxisSpacing: 12,
+            childAspectRatio: 1.4,
+          ),
+          itemCount: quizData.length,
+          itemBuilder: (context, index) {
+            return TopCollectionCard(
+              name: quizData[index]['subject']!,
+              imageUrl: quizData[index]['imagesb']!,
+            );
+          },
+        ),
+      ),
     );
   }
 }

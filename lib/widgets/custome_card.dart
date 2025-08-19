@@ -15,11 +15,10 @@ Widget quizCard({
 }) {
   final theme = AppTheme();
   return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 5),
+    padding: const EdgeInsets.symmetric(vertical: 10),
     child: Container(
       height: 115,
       width: MediaQuery.of(context).size.width,
-      margin: const EdgeInsets.all(5),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: theme.cardTheme,
@@ -64,9 +63,7 @@ Widget quizCard({
                     image: DecorationImage(
                       image: NetworkImage(imageUrl),
                       fit: BoxFit.cover,
-                      
                     ),
-                    
                   ),
                 ),
                 Positioned(
@@ -120,15 +117,12 @@ Widget quizCard({
                             color: Colors.grey),
                       ),
                       const SizedBox(width: 3),
-                     Icon(
-                        Icons.circle,  
-                      
+                      Icon(
+                        Icons.circle,
                         size: 5,
-                        color: Get.context!.isDarkMode
-                            ? Colors.grey
-                            : Colors.grey,
+                        color:
+                            Get.context!.isDarkMode ? Colors.grey : Colors.grey,
                       ),
-
                       const SizedBox(width: 3),
                       Text(
                         view ?? "",

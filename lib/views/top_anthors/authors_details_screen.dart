@@ -2,10 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:quizzo/controllers/home/top_collections_controller.dart';
 import 'package:quizzo/controllers/library/collection_controller.dart';
 import 'package:quizzo/controllers/library/quizzo_controller.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/core/utils/app_color.dart';
+import 'package:quizzo/views/home/component/top_collection_card.dart';
 import 'package:quizzo/widgets/animate_shimmerEffect.dart';
 import 'package:quizzo/widgets/custom_section_title.dart';
 import 'package:quizzo/widgets/custome_card.dart';
@@ -231,7 +233,7 @@ class _AuthorsDetailsScreenState extends State<AuthorsDetailsScreen> {
                   date: quiz['date'] ?? '',
                   name: quiz['name'] ?? '',
                   view: quiz['view'] ?? '',
-                  profileUrl: quiz['profileUrl'] ?? '',
+                  profileUrl: quiz['profile'] ?? '',
                 ),
               );
             },
@@ -241,96 +243,41 @@ class _AuthorsDetailsScreenState extends State<AuthorsDetailsScreen> {
     );
   }
 
-  Widget _buildCollectionsContent() {
-    final colController = Get.put(CollectionController());
-    return Column(
-      children: [
-        SectionTitle(
-          count: 28,
-          title: ' Collections'.tr,
-          subtitle: 'Newest',
-          icon: Icon(
-            Icons.swap_vert,
-            color: AppColor().primaryColor,
-          ),
-          onTap: () {},
+Widget _buildCollectionsContent() {
+  final colController = Get.put(CollectionController());
+  return Column(
+    children: [
+      SectionTitle(
+        count: 28,
+        title: ' Collections'.tr,
+        subtitle: 'Newest',
+        icon: Icon(
+          Icons.swap_vert,
+          color: AppColor().primaryColor,
         ),
-        for (int i = 0; i < colController.collectionData.length; i += 2)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 15.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: _buildCollectionCard(colController.collectionData[i]),
-                ),
-                const SizedBox(width: 11),
-                Expanded(
-                  child: i + 1 < colController.collectionData.length
-                      ? _buildCollectionCard(
-                          colController.collectionData[i + 1])
-                      : const SizedBox(),
-                ),
-              ],
-            ),
-          ),
-      ],
-    );
-  }
+        onTap: () {},
+      ),
+      GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 15,
+          crossAxisSpacing: 12,
+          childAspectRatio: 1.4,
+        ),
+        itemCount: quizData.length,
+        itemBuilder: (context, index) {
+          return TopCollectionCard(
+            name: quizData[index]['subject']!,
+            imageUrl: quizData[index]['imagesb']!,
+          );
+        },
+      ),
+    ],
+  );
+}
 
-  Widget _buildCollectionCard(Map<String, dynamic> collection) {
-    return Container(
-      height: 110,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: const [
-          BoxShadow(
-            color: Color.fromRGBO(0, 0, 0, 0.1),
-            blurRadius: 3,
-            offset: Offset(0, 1),
-          ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(15),
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            CachedNetworkImage(
-              imageUrl: collection['imagesb'] ?? '',
-              fit: BoxFit.cover,
-              
-              placeholder: (context, url) => ShimmerEffect(),
-              errorWidget: (context, url, error) => Container(
-                color: Colors.grey[300],
-                child:const Icon(Icons.image_not_supported, color: Colors.grey),
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Colors.transparent, Colors.black.withOpacity(0.5)],
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 8,
-              left: 8,
-              child: Text(
-                collection['subject'] ?? 'Unknown',
-                style: TextStyle(
-                  fontFamily: AppFontStyle().fontebold,
-                  fontSize: AppFontSize(context).subTitleSize,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
   Widget _buildAboutContent() {
     return Column(
@@ -576,7 +523,6 @@ class _AuthorsDetailsScreenState extends State<AuthorsDetailsScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Banner
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
                 child: Container(
