@@ -1,10 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quizzo/controllers/home/home_controller.dart';
+import 'package:quizzo/controllers/home/top_authors_controller.dart';
+import 'package:quizzo/controllers/home/top_collections_controller.dart';
 import 'package:quizzo/controllers/library/quizzo_controller.dart';
 import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/views/home/component/top_collection_card.dart';
+import 'package:quizzo/widgets/animate_shimmerEffect.dart';
 import 'package:quizzo/widgets/custome_card.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -20,8 +23,6 @@ class _SearchScreenState extends State<SearchScreen> {
   bool _showCloseIcon = false;
   bool _isFocused = false;
   int selectedTabIndex = 0;
-
-
 
   @override
   void initState() {
@@ -58,15 +59,11 @@ class _SearchScreenState extends State<SearchScreen> {
     });
   }
 
-  void _toggleFollow(int authorId) {
-    setState(() {
-      final index = topAuthors.indexWhere((a) => a['id'] == authorId);
-      if (index != -1) {
-        topAuthors[index]['isFollowing'] =
-            !(topAuthors[index]['isFollowing'] ?? false);
-      }
-    });
-  }
+void _toggleFollow(Map<String, dynamic> author) {
+  setState(() {
+    author['isFollowing'] = !(author['isFollowing'] ?? false);
+  });
+}
 
   Widget _buildTabContent() {
     switch (selectedTabIndex) {
@@ -89,14 +86,12 @@ class _SearchScreenState extends State<SearchScreen> {
         ? const Color(0xFFFFA63D)
         : (Get.context!.isDarkMode
             ? const Color(0xff272B36)
-            : const Color(0XFFFFFFFF));
+            : Colors.white);
 
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        scrolledUnderElevation: 0,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        foregroundColor: Colors.black,
         title: TextFormField(
           controller: _searchController,
           focusNode: _focusNode,
@@ -115,15 +110,10 @@ class _SearchScreenState extends State<SearchScreen> {
                     onTap: _clearSearch,
                     child: const Padding(
                       padding: EdgeInsets.all(12.0),
-                      child: Icon(
-                        Icons.close,
-                        color: Colors.black,
-                        size: 20,
-                      ),
+                      child: Icon(Icons.close, color: Colors.black, size: 20),
                     ),
                   )
                 : null,
-            contentPadding: const EdgeInsets.all(15),
             filled: true,
             fillColor: theme.fillColor,
             hintText: 'Search quiz, people, or collections',
@@ -143,9 +133,7 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ),
         centerTitle: false,
-        iconTheme: IconThemeData(
-          color: theme.iconTheme,
-        ),
+        iconTheme: IconThemeData(color: theme.iconTheme),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -156,15 +144,13 @@ class _SearchScreenState extends State<SearchScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _buildTabButton("Quizzo", 0),
-                const SizedBox(width: 10),
                 _buildTabButton("People", 1),
-                const SizedBox(width: 10),
                 _buildTabButton("Collections", 2),
               ],
             ),
             const SizedBox(height: 20),
             Expanded(
-              child: _buildTabContent(),
+              child: SingleChildScrollView(child: _buildTabContent()),
             ),
           ],
         ),
@@ -204,157 +190,168 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget _buildQuizzoContent() {
     final quizzoController = Get.put(QuizzoController());
     return Column(
-      children: [
-        Column(
-          children: List.generate(
-            quizzoController.myQuizzodata.length,
-            (index) {
-              final quiz = quizzoController.myQuizzodata[index];
-              return quizCard(
-                context: context,
-                imageUrl: quiz['image'] ?? '',
-                title: quiz['title'] ?? '',
-                questionCount: quiz['questions'] ?? '0',
-                date: quiz['date'] ?? '',
-                name: quiz['name'] ?? '',
-                view: quiz['view'] ?? '',
-                profileUrl: quiz['profile'] ?? '',
-              );
-            },
-          ),
-        ),
-      ],
+      children: quizzoController.myQuizzodata.map((quiz) {
+        return quizCard(
+          context: context,
+          imageUrl: quiz['image'] ?? '',
+          title: quiz['title'] ?? '',
+          questionCount: quiz['questions'] ?? '0',
+          date: quiz['date'] ?? '',
+          name: quiz['name'] ?? '',
+          view: quiz['view'] ?? '',
+          profileUrl: quiz['profile'] ?? '',
+        );
+      }).toList(),
     );
   }
 
   Widget _buildCollectionsContent() {
-    return Column(
-      children: [
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 15,
-            crossAxisSpacing: 12,
-            childAspectRatio: 1.4,
-          ),
-          itemCount: quizData.length,
-          itemBuilder: (context, index) {
-            return TopCollectionCard(
-              name: quizData[index]['subject']!,
-              imageUrl: quizData[index]['imagesb']!,
-            );
-          },
-        ),
-      ],
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 15,
+        crossAxisSpacing: 12,
+        childAspectRatio: 1.4,
+      ),
+      itemCount: topCollectionsData.length,
+      itemBuilder: (context, index) {
+        final item = topCollectionsData[index];
+        return TopCollectionCard(
+          name: item['subject'] ?? '',
+          imageUrl: item['imagesb'] ?? '',
+        );
+      },
     );
   }
 
-  Widget _buildPeopleContent() {
-    return Column(
-      children: [
-        Column(
-          children: topAuthors.map((author) => _buildAuthorCard(author)).toList(),
-        ),
-      ],
-    );
+Widget _buildPeopleContent() {
+  final topAuthorsController = Get.put(TopAuthorsController());
+  final authors = topAuthorsController.authorsData;
+
+  if (authors.isEmpty) {
+    return const Center(child: Text("No authors found"));
   }
 
-  Widget _buildAuthorCard(Map<String, dynamic> author) {
-    final bool isFollowing = author['isFollowing'] ?? false;
+  return ListView.builder(
+    shrinkWrap: true,
+    physics: const NeverScrollableScrollPhysics(),
+    itemCount: authors.length,
+    itemBuilder: (context, index) {
+      final author = authors[index];
+      return _buildAuthorCard(author, Get.context!.isDarkMode);
+    },
+  );
+}
 
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 30,
-            backgroundColor: Theme.of(context).brightness == Brightness.dark
-                ? Colors.grey[700]
-                : Colors.grey[300],
-            backgroundImage: author['profileImageUrl'] != null
-                ? NetworkImage(author['profileImageUrl'])
-                : null,
-            child: author['profileImageUrl'] == null
-                ? Text(
-                    author['name'][0].toUpperCase(),
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                          : Colors.black,
-                    ),
-                  )
-                : null,
-          ),
-          const SizedBox(width: 15),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      author['name'],
-                      style: TextStyle(
-                        fontFamily: AppFontStyle().fontebold,
-                        fontSize: AppFontSize(context).descriptionLargeSize,
-                        color: Theme.of(context).colorScheme.onBackground,
+
+
+
+
+  Widget _buildAuthorCard(Map<String, dynamic> author, bool isDarkMode) {
+    return GestureDetector(
+      onTap: () {}, // implement author tap
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 16),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: Colors.transparent,
+        ),
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 30,
+              backgroundColor: Colors.grey[200],
+              child: author['profileImageUrl'] != null
+                  ? ClipOval(
+                      child: CachedNetworkImage(
+                        imageUrl: author['profileImageUrl'],
+                        width: 60,
+                        height: 60,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => ShimmerEffect(),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.person, size: 30, color: Colors.grey),
                       ),
+                    )
+                  : Text(
+                      (author['name']?.isNotEmpty ?? false)
+                          ? author['name'][0].toUpperCase()
+                          : '',
+                      style: const TextStyle(
+                          fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
                     ),
-                    const SizedBox(width: 10),
-                    const Icon(Icons.verified, size: 15, color: Colors.blue),
-                  ],
+            ),
+            const SizedBox(width: 15),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        author['name'] ?? '',
+                        style: TextStyle(
+                          fontFamily: AppFontStyle().fontebold,
+                          fontSize: AppFontSize(context).descriptionLargeSize,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      const Icon(Icons.verified, size: 15, color: Colors.blue),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    '@${author['username'] ?? ''}',
+                    style: TextStyle(
+                      fontFamily: AppFontStyle().fontebold,
+                      fontSize: AppFontSize(context).descriptionLargeSize,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            GestureDetector(
+              onTap: () => _toggleFollow(author),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: author['isFollowing'] == true
+                        ? const Color(0xFFFFA63D)
+                        : Colors.transparent,
+                    width: 1,
+                  ),
+                  color: author['isFollowing'] == true
+                      ? Colors.white
+                      : const Color(0xFFFFA63D),
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: author['isFollowing'] == true
+                      ? null
+                      : [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              offset: const Offset(0, 2),
+                              blurRadius: 4),
+                        ],
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  '@${author['username']}',
+                child: Text(
+                  author['isFollowing'] == true ? 'Following' : 'Follow',
                   style: TextStyle(
+                    color: author['isFollowing'] == true
+                        ? const Color(0xFFFFA63D)
+                        : Colors.white,
                     fontFamily: AppFontStyle().fontebold,
-                    fontSize: AppFontSize(context).descriptionLargeSize,
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    fontSize: AppFontSize(context).subNormalSize,
                   ),
                 ),
-              ],
-            ),
-          ),
-          GestureDetector(
-            onTap: () => _toggleFollow(author['id']),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: isFollowing
-                      ? const Color(0xFFFFA63D)
-                      : Colors.transparent,
-                  width: 1,
-                ),
-                color:
-                    isFollowing ? Colors.transparent : const Color(0xFFFFA63D),
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: isFollowing
-                    ? []
-                    : [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
-                          offset: const Offset(0, 2),
-                          blurRadius: 4,
-                        ),
-                      ],
-              ),
-              child: Text(
-                isFollowing ? 'Following' : 'Follow',
-                style: TextStyle(
-                  color: isFollowing ? const Color(0xFFFFA63D) : Colors.white,
-                  fontFamily: AppFontStyle().fontebold,
-                  fontSize: AppFontSize(context).subNormalSize,
-                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

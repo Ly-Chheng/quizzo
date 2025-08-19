@@ -73,134 +73,6 @@ class _AuthorsDetailsScreenState extends State<AuthorsDetailsScreen> {
     }
   }
 
-  // void _shareAuthor() {
-  //   final author = authors.first; // Get the first author
-  //   String message = "Check out ${author['name']} (@${author['username']}) on Quizzo! 🚀\n"
-  //       "Quizzes: ${author['quizzes']}\n"
-  //       "Followers: ${author['followers']}\n\n"
-  //       "Download Quizzo now!";
-
-  //   Share.share(
-  //     message,
-  //     subject: "Check out this amazing Quizzo author!",
-  //   );
-  // }
-
-  // Optional: Keep the platform-specific share method for future use
-  // void _shareContent(String platform) {
-  //   final author = authors.first;
-  //   // String message = "Check out ${author['name']} (@${author['username']}) on Quizzo! 🚀";
-  //   String message = "Share";
-
-  //   switch (platform) {
-  //     case "WhatsApp":
-  //       Share.share(message, subject: "Shared via WhatsApp");
-  //       break;
-  //     case "Twitter":
-  //       Share.share("$message #Quizzo #Quiz", subject: "Shared via Twitter");
-  //       break;
-  //     case "Facebook":
-  //       Share.share(message, subject: "Shared via Facebook");
-  //       break;
-  //     case "Instagram":
-  //       Share.share(message, subject: "Shared via Instagram");
-  //       break;
-  //     case "Yahoo":
-  //       Share.share(message, subject: "Shared via Yahoo");
-  //       break;
-  //     case "Tiktok":
-  //       Share.share(message, subject: "Shared via TikTok");
-  //       break;
-  //     case "Chat":
-  //       Share.share(message, subject: "Shared via Chat");
-  //       break;
-  //     case "WeChat":
-  //       Share.share(message, subject: "Shared via WeChat");
-  //       break;
-  //     default:
-  //       Share.share(message);
-  //   }
-  // }
-
-  // Show share options bottom sheet
-  // void _showShareOptions() {
-  //   showModalBottomSheet(
-  //     context: context,
-  //     shape: const RoundedRectangleBorder(
-  //       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-  //     ),
-  //     builder: (BuildContext context) {
-  //       return Container(
-  //         padding: const EdgeInsets.all(20),
-  //         child: Column(
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: [
-  //             Text(
-  //               'Share Author Profile',
-  //               style: TextStyle(
-  //                 fontSize: 18,
-  //                 fontWeight: FontWeight.bold,
-  //                 fontFamily: AppFontStyle().fontebold,
-  //               ),
-  //             ),
-  //             const SizedBox(height: 20),
-  //             Wrap(
-  //               spacing: 20,
-  //               runSpacing: 20,
-  //               children: [
-  //                 _buildShareOption('WhatsApp', FontAwesomeIcons.whatsapp, Colors.green),
-  //                 _buildShareOption('Twitter', FontAwesomeIcons.twitter, Colors.blue),
-  //                 _buildShareOption('Facebook', FontAwesomeIcons.facebook, Colors.blue[800]!),
-  //                 _buildShareOption('Instagram', FontAwesomeIcons.instagram, Colors.pink),
-  //                 _buildShareOption('More', Icons.more_horiz, Colors.grey),
-  //               ],
-  //             ),
-  //             const SizedBox(height: 20),
-  //           ],
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
-
-  //  Widget _buildShareOption(String platform, dynamic icon, Color color) {
-  //   return GestureDetector(
-  //     onTap: () {
-  //       Navigator.pop(context);
-  //       if (platform == 'More') {
-  //         _shareAuthor(); // Use simple share for "More" option
-  //       } else {
-  //         _shareContent(platform);
-  //       }
-  //     },
-  //     child: Column(
-  //       children: [
-  //         Container(
-  //           width: 50,
-  //           height: 50,
-  //           decoration: BoxDecoration(
-  //             color: color.withOpacity(0.1),
-  //             borderRadius: BorderRadius.circular(25),
-  //           ),
-  //           child: Icon(
-  //             icon,
-  //             color: color,
-  //             size: 24,
-  //           ),
-  //         ),
-  //         const SizedBox(height: 8),
-  //         Text(
-  //           platform,
-  //           style: TextStyle(
-  //             fontSize: 12,
-  //             fontFamily: AppFontStyle().fontebold,
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   Widget _buildQuizzoContent() {
     final quizzoController = Get.put(QuizzoController());
     return Column(
@@ -262,11 +134,11 @@ Widget _buildCollectionsContent() {
           crossAxisSpacing: 12,
           childAspectRatio: 1.4,
         ),
-        itemCount: quizData.length,
+        itemCount: topCollectionsData.length,
         itemBuilder: (context, index) {
           return TopCollectionCard(
-            name: quizData[index]['subject']!,
-            imageUrl: quizData[index]['imagesb']!,
+            name: topCollectionsData[index]['subject']!,
+            imageUrl: topCollectionsData[index]['imagesb']!,
           );
         },
       ),
@@ -439,6 +311,7 @@ Widget _buildCollectionsContent() {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               item['value'],

@@ -1,4 +1,4 @@
-  final List<Map<String, dynamic>> quizData = [
+  final List<Map<String, dynamic>> topCollectionsData = [
     {
        "id": 1,
       "image":

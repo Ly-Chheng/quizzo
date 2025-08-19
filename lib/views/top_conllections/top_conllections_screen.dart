@@ -56,15 +56,15 @@ class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
             crossAxisSpacing: 12,
             childAspectRatio: 1.4,
           ),
-          itemCount: quizData.length,
+          itemCount: topCollectionsData.length,
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
                 Get.to(TopCollectionDetailScreen());
               },
               child: TopCollectionCard(
-                name: quizData[index]['subject']!,
-                imageUrl: quizData[index]['imagesb']!,
+                name: topCollectionsData[index]['subject']!,
+                imageUrl: topCollectionsData[index]['imagesb']!,
               ),
             );
           },
