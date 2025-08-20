@@ -13,8 +13,6 @@ class TopCollectionDetailScreen extends StatefulWidget {
 }
 
 class _TopCollectionDetailScreenState extends State<TopCollectionDetailScreen> {
-
-
   Future<void> _refreshContent() async {
     await Future.delayed(const Duration(seconds: 1));
   }
@@ -63,8 +61,8 @@ class _TopCollectionDetailScreenState extends State<TopCollectionDetailScreen> {
               Container(
                 height: 200,
                 width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20)),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(20)),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Image.network(
@@ -73,7 +71,8 @@ class _TopCollectionDetailScreenState extends State<TopCollectionDetailScreen> {
                     errorBuilder: (context, error, stackTrace) {
                       return Container(
                         color: Colors.grey[300],
-                        child: Icon(Icons.broken_image, size: 40, color: Colors.grey),
+                        child: Icon(Icons.broken_image,
+                            size: 40, color: Colors.grey),
                       );
                     },
                   ),

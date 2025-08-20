@@ -71,7 +71,8 @@ class Style {
   static TextStyle subHeaderTextStyleBold20_22(BuildContext context) {
     return TextStyle(
       fontFamily: AppFontStyle().fontebold,
-      fontSize: Get.context!.isPhone ? 20 : 22,
+      fontSize: AppFontSize(context).titleSize,
+      color: AppTheme().iconTheme,
     );
   }
 
