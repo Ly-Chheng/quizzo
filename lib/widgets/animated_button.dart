@@ -56,7 +56,7 @@ class _AnimatedButtonState extends State<AnimatedButton> {
               ? constraints.maxWidth
               : widget.width;
 
-          return Container(
+          return SizedBox(
             width: actualWidth,
             height: _height + _shadowHeight,
             child: Stack(

@@ -6,6 +6,7 @@ import 'package:quizzo/controllers/library/quizzo_controller.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/views/home/component/top_collection_card.dart';
+import 'package:quizzo/views/library/components/stats_card.dart';
 import 'package:quizzo/widgets/custom_section_title.dart';
 import 'package:quizzo/widgets/custome_card.dart';
 import 'package:share_plus/share_plus.dart';
@@ -29,18 +30,6 @@ class _AuthorsDetailsScreenState extends State<AuthorsDetailsScreen> {
       'quizzes': 45,
       'isFollowing': false,
     },
-  ];
-
-  final List<Map<String, dynamic>> statsTopRow = [
-    {'title': 'Quizzo', 'value': '265'},
-    {'title': 'Plays', 'value': '32M'},
-    {'title': 'Players', 'value': '274M'},
-  ];
-
-  final List<Map<String, dynamic>> statsBottomRow = [
-    {'title': 'Collections', 'value': '49'},
-    {'title': 'Followers', 'value': '927.3K'},
-    {'title': 'Following', 'value': '128'},
   ];
 
   int selectedTabIndex = 0;
@@ -73,6 +62,177 @@ class _AuthorsDetailsScreenState extends State<AuthorsDetailsScreen> {
     }
   }
 
+  @override
+  Widget build(BuildContext context) {
+    final theme = AppTheme();
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        foregroundColor: Colors.black,
+        centerTitle: false,
+        iconTheme: IconThemeData(
+          color: theme.iconTheme,
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Share.share(
+                  'Share',
+                );
+              },
+              icon: Image.network(
+                'https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/phosphor-light/telegram-logo-light-81nvt6to578dvjiggf7hw6.png/telegram-logo-light-1qpz5f7i4zngpne9mrbjsw.png?_a=DATAg1AAZAA0',
+                height: 25,
+                color: theme.iconTheme,
+              )),
+          IconButton(
+              onPressed: () {},
+              icon: Image.network(
+                'https://cdn-icons-png.flaticon.com/512/570/570223.png',
+                height: 25,
+                color: theme.iconTheme,
+              ))
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Container(
+                  height: 110,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image.network(
+                      'https://images.assetsdelivery.com/compings_v2/thares2020/thares20202101/thares2020210100545.jpg',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+
+              // Authors list
+              ...authors.map(_buildAuthorCard),
+
+              // Column(
+              //   children: [
+              //     Divider(
+              //       color: AppTheme().borderTheme,
+              //       thickness: 1.3,
+              //     ),
+              //     Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //       children: [
+              //         StatItem(number: '26', label: 'Quizzo'),
+              //         Container(
+              //           width: 1.3,
+              //           height: 50,
+              //           color: AppTheme().borderTheme,
+              //         ),
+              //         StatItem(number: '8', label: 'Playes'),
+              //         Container(
+              //           width: 1.3,
+              //           height: 50,
+              //           color: AppTheme().borderTheme,
+              //         ),
+              //         StatItem(number: '51', label: 'Favourited'),
+              //       ],
+              //     ),
+              //     Divider(
+              //       color: AppTheme().borderTheme,
+              //       thickness: 1.3,
+              //     ),
+              //     Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //       children: [
+              //         StatItem(number: '26', label: 'Collection'),
+              //         Container(
+              //           width: 1.3,
+              //           height: 50,
+              //           color: AppTheme().borderTheme,
+              //         ),
+              //         StatItem(number: '8', label: 'Played'),
+              //         Container(
+              //           width: 1.3,
+              //           height: 50,
+              //           color: AppTheme().borderTheme,
+              //         ),
+              //         StatItem(number: '51', label: 'Favouring'),
+              //       ],
+              //     ),
+              //     Divider(
+              //       color: AppTheme().borderTheme,
+              //       thickness: 1.3,
+              //     ),
+              //   ],
+              // ),
+              Column(
+                children: [
+                  Divider(
+                    color: AppTheme().borderTheme,
+                    thickness: 1.3,
+                  ),
+                  Table(
+                    border: TableBorder.symmetric(
+                      inside:
+                          BorderSide(color: AppTheme().borderTheme, width: 1.3),
+                    ),
+                    children: [
+                      TableRow(
+                        children: const [
+                          StatItem(number: '26', label: 'Quizzo'),
+                          StatItem(number: '8', label: 'Players'),
+                          StatItem(number: '51', label: 'Favourited'),
+                        ],
+                      ),
+                      TableRow(
+                        children: const [
+                          StatItem(number: '26', label: 'Collection'),
+                          StatItem(number: '8', label: 'Played'),
+                          StatItem(number: '51', label: 'Favouring'),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Divider(
+                    color: AppTheme().borderTheme,
+                    thickness: 1.3,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildTabButton("Quizzo", 0),
+                  _buildTabButton("Collections", 1),
+                  _buildTabButton("About", 2),
+                ],
+              ),
+              const SizedBox(height: 10),
+              _buildTabContent(),
+            ],
+          ),
+        ),
+      ),
+      // floatingActionButton: selectedTabIndex == 1
+      //     ? FloatingActionButton(
+      //         onPressed: () {},
+      //         backgroundColor: AppColor().primaryColor,
+      //         child: const Icon(Icons.add),
+      //       )
+      //     : null,
+    );
+  }
+
   Widget _buildQuizzoContent() {
     final quizzoController = Get.put(QuizzoController());
     return Column(
@@ -87,65 +247,61 @@ class _AuthorsDetailsScreenState extends State<AuthorsDetailsScreen> {
           ),
           onTap: () {},
         ),
-        Column(
-          children: List.generate(
-            quizzoController.myQuizzodata.length,
-            (index) {
-              final quiz = quizzoController.myQuizzodata[index];
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: quizCard(
-                  context: context,
-                  imageUrl: quiz['image'] ?? '',
-                  title: quiz['title'] ?? '',
-                  questionCount: quiz['questions'] ?? '0',
-                  date: quiz['date'] ?? '',
-                  name: quiz['name'] ?? '',
-                  view: quiz['view'] ?? '',
-                  profileUrl: quiz['profile'] ?? '',
-                ),
-              );
-            },
-          ),
-        ),
+        ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: quizzoController.myQuizzodata.length,
+          itemBuilder: (context, index) {
+            final quiz = quizzoController.myQuizzodata[index];
+            return quizCard(
+              context: context,
+              imageUrl: quiz['image'] ?? '',
+              title: quiz['title'] ?? '',
+              questionCount: quiz['questions'] ?? '0',
+              date: quiz['date'] ?? '',
+              name: quiz['name'] ?? '',
+              view: quiz['view'] ?? '',
+              profileUrl: quiz['profile'] ?? '',
+            );
+          },
+        )
       ],
     );
   }
 
-Widget _buildCollectionsContent() {
-  return Column(
-    children: [
-      SectionTitle(
-        count: 28,
-        title: ' Collections'.tr,
-        subtitle: 'Newest',
-        icon: Icon(
-          Icons.swap_vert,
-          color: AppColor().primaryColor,
+  Widget _buildCollectionsContent() {
+    return Column(
+      children: [
+        SectionTitle(
+          count: 28,
+          title: ' Collections'.tr,
+          subtitle: 'Newest',
+          icon: Icon(
+            Icons.swap_vert,
+            color: AppColor().primaryColor,
+          ),
+          onTap: () {},
         ),
-        onTap: () {},
-      ),
-      GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 15,
-          crossAxisSpacing: 12,
-          childAspectRatio: 1.4,
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 15,
+            crossAxisSpacing: 12,
+            childAspectRatio: 1.4,
+          ),
+          itemCount: topCollectionsData.length,
+          itemBuilder: (context, index) {
+            return TopCollectionCard(
+              name: topCollectionsData[index]['subject']!,
+              imageUrl: topCollectionsData[index]['imagesb']!,
+            );
+          },
         ),
-        itemCount: topCollectionsData.length,
-        itemBuilder: (context, index) {
-          return TopCollectionCard(
-            name: topCollectionsData[index]['subject']!,
-            imageUrl: topCollectionsData[index]['imagesb']!,
-          );
-        },
-      ),
-    ],
-  );
-}
-
+      ],
+    );
+  }
 
   Widget _buildAboutContent() {
     return Column(
@@ -282,61 +438,6 @@ Widget _buildCollectionsContent() {
     );
   }
 
-  Widget _buildStatRow(List<Map<String, dynamic>> data) {
-  return GridView.builder(
-    shrinkWrap: true,
-    physics: const NeverScrollableScrollPhysics(),
-    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: data.length,
-      childAspectRatio: 1,
-      mainAxisSpacing: 0,
-      crossAxisSpacing: 0,
-    ),
-    itemCount: data.length,
-    itemBuilder: (context, index) {
-      final item = data[index];
-      return Container(
-        decoration: BoxDecoration(
-          border: Border(
-            right: index != data.length - 1 
-                ? BorderSide(
-                    width: 1,
-                    color: Get.context!.isDarkMode
-                        ? const Color.fromARGB(255, 122, 121, 121)
-                        : const Color.fromARGB(255, 211, 209, 209),
-                  )
-                : BorderSide.none,
-          ),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              item['value'],
-              style: TextStyle(
-                fontFamily: AppFontStyle().fontebold,
-                fontSize: AppFontSize(context).titleSize,
-              ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              item['title'],
-              style: TextStyle(
-                fontFamily: AppFontStyle().fontebold,
-                fontSize: AppFontSize(context).descriptionLargeSize,
-                color: Get.context!.isDarkMode ? Colors.grey : Colors.grey,
-              ),
-            ),
-          ],
-        ),
-      );
-    },
-  );
-}
-
-
   Widget _buildTabButton(String title, int index) {
     final isSelected = selectedTabIndex == index;
 
@@ -368,103 +469,6 @@ Widget _buildCollectionsContent() {
           ),
         ),
       ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = AppTheme();
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        scrolledUnderElevation: 0,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        foregroundColor: Colors.black,
-        centerTitle: false,
-        iconTheme: IconThemeData(
-          color: theme.iconTheme,
-        ),
-        actions: [
-          IconButton(
-              onPressed: () {
-                // _shareAuthor();
-                 Share.share('Share',);
-              },
-              icon: Image.network(
-                'https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/phosphor-light/telegram-logo-light-81nvt6to578dvjiggf7hw6.png/telegram-logo-light-1qpz5f7i4zngpne9mrbjsw.png?_a=DATAg1AAZAA0',
-                height: 25,
-                color: theme.iconTheme,
-              )),
-          IconButton(
-              onPressed: () {},
-              icon: Image.network(
-                'https://cdn-icons-png.flaticon.com/512/570/570223.png',
-                height: 25,
-                color: theme.iconTheme,
-              ))
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Container(
-                  height: 110,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: Image.network(
-                      'https://images.assetsdelivery.com/compings_v2/thares2020/thares20202101/thares2020210100545.jpg',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
-
-              // Authors list
-              ...authors.map(_buildAuthorCard),
-              Divider(
-                  thickness: 1,
-                  color: Get.context!.isDarkMode
-                      ? const Color.fromARGB(255, 122, 121, 121)
-                      : Color.fromARGB(255, 211, 209, 209)),
-
-              _buildStatRow(statsTopRow),
-              const Divider(thickness: 1),
-              _buildStatRow(statsBottomRow),
-              Divider(
-                  thickness: 1,
-                  color: Get.context!.isDarkMode
-                      ? const Color.fromARGB(255, 122, 121, 121)
-                      : Color.fromARGB(255, 211, 209, 209)),
-              const SizedBox(height: 15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _buildTabButton("Quizzo", 0),
-                  _buildTabButton("Collections", 1),
-                  _buildTabButton("About", 2),
-                ],
-              ),
-              const SizedBox(height: 10),
-              _buildTabContent(),
-            ],
-          ),
-        ),
-      ),
-      // floatingActionButton: selectedTabIndex == 1
-      //     ? FloatingActionButton(
-      //         onPressed: () {},
-      //         backgroundColor: AppColor().primaryColor,
-      //         child: const Icon(Icons.add),
-      //       )
-      //     : null,
     );
   }
 }
