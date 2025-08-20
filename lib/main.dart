@@ -10,7 +10,6 @@ import 'package:quizzo/core/services/firebase_services.dart';
 import 'package:quizzo/core/services/themes_services.dart';
 import 'package:quizzo/core/utils/app_language.dart';
 import 'package:quizzo/core/functions/local_storage.dart';
-import 'package:quizzo/firebase_options.dart';
 import 'package:quizzo/route.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -28,7 +27,7 @@ Future<void> main() async {
 
   // Initialize Firebase
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+    // options: DefaultFirebaseOptions.currentPlatform,
   );
 
   // Init services
