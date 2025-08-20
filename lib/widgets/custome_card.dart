@@ -24,7 +24,6 @@ Widget quizCard({
           color: theme.cardTheme,
           boxShadow: [
             BoxShadow(
-              // color: Color.fromRGBO(0, 0, 0, 0.05),
               color: Get.context!.isDarkMode
                   ? Color.fromRGBO(0, 0, 0, 0.05)
                   : Color.fromARGB(2255, 229, 226, 226),

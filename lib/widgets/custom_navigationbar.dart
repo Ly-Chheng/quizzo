@@ -32,11 +32,11 @@ customNavigationBar({
     ),
     child: BottomNavigationBar(
       items: items ??
-          const <BottomNavigationBarItem>[
+          <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home_outlined),
               activeIcon: Icon(Icons.home),
-              label: 'Home',
+              label: 'home'.tr,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.widgets_outlined),

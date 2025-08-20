@@ -13,6 +13,7 @@ class AppColor {
   // main color
 
   Color primaryColor = const Color(0xFFFFA63D);
+  Color secondaryprimaryColor = const Color.fromARGB(255, 245, 204, 158);
   Color secondaryColor = const Color(0xFF04A68B);
   Color errorColor = const Color(0xFFFF0000);
   // Light
@@ -33,7 +34,7 @@ class AppColor {
   Color lightText = const Color(0xFF212121);
   Color lightBorder = const Color(0xFFF0F2F6);
   Color lightActive = const Color(0xFFF1F9FF);
-  Color greyText = Colors.grey.shade600;
+  Color greyText = const Color(0xFF9E9E9E);
 
   // Dark colors
   Color darkBackgroundColor = const Color(0xFF121212);

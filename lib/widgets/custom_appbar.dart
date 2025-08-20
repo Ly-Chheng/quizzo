@@ -25,10 +25,7 @@ customAppBar({
       alignment: Alignment.topLeft,
       child: Text(
         title!,
-        style: TextStyle(
-          fontFamily: AppFontStyle().fontebold,
-          fontSize: Get.context!.isPhone ? 22 : 24,
-        ),
+        style: Style.subHeaderBold(context),
       ),
     ),
     automaticallyImplyLeading: false,

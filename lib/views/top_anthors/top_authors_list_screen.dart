@@ -25,6 +25,7 @@ class _TopAuthorsListScreenState extends State<TopAuthorsListScreen> {
   }
 
   Future<void> _loadAuthors() async {
+    //await Future.delayed(const Duration(seconds: 1)); // simulate fetch delay
     // await Future.delayed(const Duration(seconds: 1)); 
     setState(() {
       _authors = TopAuthorsController()
@@ -106,7 +107,6 @@ class _TopAuthorsListScreenState extends State<TopAuthorsListScreen> {
         centerTitle: false,
         iconTheme: IconThemeData(color: theme.iconTheme),
       ),
-
       body: RefreshIndicator(
         onRefresh: _refreshContent,
         child: ListView.builder(
