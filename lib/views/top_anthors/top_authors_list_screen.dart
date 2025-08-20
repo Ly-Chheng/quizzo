@@ -25,7 +25,7 @@ class _TopAuthorsListScreenState extends State<TopAuthorsListScreen> {
   }
 
   Future<void> _loadAuthors() async {
-    await Future.delayed(const Duration(seconds: 1)); // simulate fetch delay
+    // await Future.delayed(const Duration(seconds: 1)); // simulate fetch delay
     setState(() {
       _authors = TopAuthorsController()
           .authorsData
@@ -110,31 +110,31 @@ class _TopAuthorsListScreenState extends State<TopAuthorsListScreen> {
         iconTheme: IconThemeData(color: theme.iconTheme),
       ),
 
-      // body: RefreshIndicator(
-      //   onRefresh: _refreshContent,
-      //   child: ListView.builder(
-      //     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-      //     itemCount: _authors.length,
-      //     itemBuilder: (context, index) =>
-      //         _buildAuthorCard(_authors[index], isDarkMode),
-      //   ),
-      // ),
-      body: _isLoading
-          ? ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-              itemCount: _authors.isNotEmpty ? _authors.length : 30,
-              itemBuilder: (context, index) => _buildShimmerAuthorCard(),
-            )
-          : RefreshIndicator(
-              onRefresh: _loadAuthors,
-              child: ListView.builder(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-                itemCount: _authors.length,
-                itemBuilder: (context, index) =>
-                    _buildAuthorCard(_authors[index], isDarkMode),
-              ),
-            ),
+      body: RefreshIndicator(
+        onRefresh: _refreshContent,
+        child: ListView.builder(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+          itemCount: _authors.length,
+          itemBuilder: (context, index) =>
+              _buildAuthorCard(_authors[index], isDarkMode),
+        ),
+      ),
+      // body: _isLoading
+      //     ? ListView.builder(
+      //         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+      //         itemCount: _authors.isNotEmpty ? _authors.length : 30,
+      //         itemBuilder: (context, index) => _buildShimmerAuthorCard(),
+      //       )
+      //     : RefreshIndicator(
+      //         onRefresh: _loadAuthors,
+      //         child: ListView.builder(
+      //           padding:
+      //               const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+      //           itemCount: _authors.length,
+      //           itemBuilder: (context, index) =>
+      //               _buildAuthorCard(_authors[index], isDarkMode),
+      //         ),
+      //       ),
     );
   }
 
