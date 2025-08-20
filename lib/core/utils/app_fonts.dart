@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quizzo/core/utils/app_color.dart';
 
 class AppFonts {
   // English Fonts "Nunito"
@@ -57,3 +58,104 @@ class AppFontSize {
     smallSize = Get.context!.isPhone ? 8 : 10;
   }
 }
+
+class Style {
+  // Header TextStyle
+  static TextStyle header22_24(BuildContext context) {
+    return TextStyle(
+      fontFamily: AppFontStyle().fontebold,
+      fontSize: Get.context!.isPhone ? 22 : 24,
+    );
+  }
+
+  static TextStyle sub_header20_22(BuildContext context) {
+    return TextStyle(
+      fontFamily: AppFontStyle().fontebold,
+      fontSize: Get.context!.isPhone ? 20 : 22,
+    );
+  }
+
+  static TextStyle sub_header20_22_Gray(BuildContext context) {
+    return TextStyle(
+      fontFamily: AppFontStyle().fontMedium,
+      color: AppColor().greyText,
+    );
+  }
+
+  // SubHeader TextStyle
+  static TextStyle subHeaderMedim(BuildContext context) {
+    return TextStyle(
+      fontFamily: AppFontStyle().fontMedium,
+      fontSize: AppFontSize(context).subTitleSize,
+      fontWeight: FontWeight.w600,
+    );
+  }
+
+  static TextStyle subHeaderBold(BuildContext context) {
+    return TextStyle(
+      fontFamily: AppFontStyle().fontebold,
+      fontSize: AppFontSize(context).subTitleSize,
+      fontWeight: FontWeight.w600,
+    );
+  }
+
+  // body TextStyle
+
+  static TextStyle bodyText16_18(BuildContext context) {
+    return TextStyle(
+      fontFamily: AppFontStyle().fontRegular,
+      fontSize: AppFontSize(context).subTitleSize,
+    );
+  }
+
+  static TextStyle bodyText14_16(BuildContext context) {
+    return TextStyle(
+      fontFamily: AppFontStyle().fontRegular,
+      fontSize: AppFontSize(context).descriptionLargeSize,
+    );
+  }
+
+  // Small Text (caption, footnotes, etc.)
+  static TextStyle small(BuildContext context) {
+    return TextStyle(
+      fontFamily: AppFontStyle().fontRegular,
+      fontSize: AppFontSize(context).smallSize,
+      color: Colors.grey[600],
+    );
+  }
+
+  // Button TextStyle
+  static TextStyle button(BuildContext context) {
+    return TextStyle(
+      fontFamily: AppFontStyle().boldFont,
+      fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    );
+  }
+}
+
+// Text(
+//   "Hello World",
+//   style: Style.header(context),
+// ),
+
+// Text(
+//   "This is subtitle",
+//   style: Style.subHeader(context),
+// ),
+
+// Text(
+//   "This is body text",
+//   style: Style.body(context),
+// ),
+
+// Text(
+//   "small text",
+//   style: Style.small(context),
+// ),
+
+// ElevatedButton(
+//   onPressed: () {},
+//   child: Text("Click Me", style: Style.button(context)),
+// ),

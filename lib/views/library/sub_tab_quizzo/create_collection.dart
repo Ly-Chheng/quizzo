@@ -72,16 +72,16 @@ class _CreateCollectionState extends State<CreateCollection> {
       },
       child: Scaffold(
         body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 40,
-                ),
-                Row(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 50,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     IconButton(
@@ -109,131 +109,141 @@ class _CreateCollectionState extends State<CreateCollection> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                GestureDetector(
-                  onTap: () async {
-                    if (file == null || !file!.existsSync()) {
-                      cupertinoUpdateModal(context);
-                    } else {}
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    height: Get.height * 0.26,
-                    decoration: BoxDecoration(
-                      color: file == null || !file!.existsSync()
-                          ? Theme.of(context).scaffoldBackgroundColor
-                          : null,
-                      borderRadius: BorderRadius.circular(20),
-                      border: file == null || !file!.existsSync()
-                          ? Border.all(color: AppColor().primaryColor, width: 1)
-                          : null,
-                      image: file != null && file!.existsSync()
-                          ? DecorationImage(
-                              image: FileImage(file!) as ImageProvider,
-                              fit: BoxFit.cover,
-                            )
-                          : null,
-                    ),
-                    child: file == null || !file!.existsSync()
-                        ? Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.perm_media_outlined,
-                                size: 40,
-                                color: AppColor().primaryColor,
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                'Add Cover Photo',
-                                style: TextStyle(
-                                  fontFamily: AppFontStyle().fontebold,
-                                  fontSize: Get.context!.isPhone ? 16 : 18,
-                                  color: AppColor().primaryColor,
-                                ),
-                              ),
-                            ],
-                          )
-                        : Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Positioned(
-                                bottom: 10,
-                                right: 10,
-                                child: IconButton(
-                                  icon: Icon(
-                                    Icons.drive_file_rename_outline_sharp,
-                                    color: Colors.white,
-                                    size: 30,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    GestureDetector(
+                      onTap: () async {
+                        if (file == null || !file!.existsSync()) {
+                          cupertinoUpdateModal(context);
+                        } else {}
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        height: Get.height * 0.26,
+                        decoration: BoxDecoration(
+                          color: file == null || !file!.existsSync()
+                              ? Theme.of(context).scaffoldBackgroundColor
+                              : null,
+                          borderRadius: BorderRadius.circular(20),
+                          border: file == null || !file!.existsSync()
+                              ? Border.all(
+                                  color: AppColor().primaryColor, width: 1)
+                              : null,
+                          image: file != null && file!.existsSync()
+                              ? DecorationImage(
+                                  image: FileImage(file!) as ImageProvider,
+                                  fit: BoxFit.cover,
+                                )
+                              : null,
+                        ),
+                        child: file == null || !file!.existsSync()
+                            ? Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.perm_media_outlined,
+                                    size: 40,
+                                    color: AppColor().primaryColor,
                                   ),
-                                  onPressed: () {
-                                    cupertinoUpdateModal(context);
-                                  },
-                                ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    'Add Cover Photo',
+                                    style: TextStyle(
+                                      fontFamily: AppFontStyle().fontebold,
+                                      fontSize: Get.context!.isPhone ? 16 : 18,
+                                      color: AppColor().primaryColor,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Positioned(
+                                    bottom: 10,
+                                    right: 10,
+                                    child: IconButton(
+                                      icon: Icon(
+                                        Icons.drive_file_rename_outline_sharp,
+                                        color: Colors.white,
+                                        size: 30,
+                                      ),
+                                      onPressed: () {
+                                        cupertinoUpdateModal(context);
+                                      },
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                  ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      'Title'.tr,
+                      style: TextStyle(
+                        fontFamily: AppFontStyle().fontebold,
+                        fontSize: Get.context!.isPhone ? 16 : 18,
+                      ),
+                    ),
+                    CustomTextField(
+                      controller: titleController,
+                      hintText: 'Enter a Collection Title',
+                      keyboardType: TextInputType.text,
+                      obscureText: false,
+                      readOnly: false,
+                      maxLines: 1,
+                      isRequired: true,
+                      contentPadding: EdgeInsets.symmetric(
+                        vertical: 10,
+                      ),
+                      onChanged: (value) {
+                        log('Input value: $value');
+                      },
+                      textSize: Get.context!.isPhone ? 18 : 20,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      'Visible to'.tr,
+                      style: TextStyle(
+                        fontFamily: AppFontStyle().fontebold,
+                        fontSize: Get.context!.isPhone ? 16 : 18,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    CustomDropDown<int>(
+                      key: dropDownKey,
+                      items: dropdownItems,
+                      onChanged: onItemChanged,
+                      hintText: 'Select',
+                      hintStyle: TextStyle(
+                        fontSize: context.isPhone ? 16 : 18,
+                        fontFamily: AppFontStyle().fontebold,
+                        color: AppColor().greyText,
+                      ),
+                      maxListHeight: 250,
+                      defaultSelectedIndex: 0,
+                      isBorderDropMenu: true,
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  'Title'.tr,
-                  style: TextStyle(
-                    fontFamily: AppFontStyle().fontebold,
-                    fontSize: Get.context!.isPhone ? 16 : 18,
-                  ),
-                ),
-                CustomTextField(
-                  controller: titleController,
-                  hintText: 'Enter a Collection Title',
-                  keyboardType: TextInputType.text,
-                  obscureText: false,
-                  readOnly: false,
-                  maxLines: 1,
-                  isRequired: true,
-                  contentPadding: EdgeInsets.symmetric(
-                    vertical: 10,
-                  ),
-                  onChanged: (value) {
-                    log('Input value: $value');
-                  },
-                  textSize: Get.context!.isPhone ? 18 : 20,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  'Visible to'.tr,
-                  style: TextStyle(
-                    fontFamily: AppFontStyle().fontebold,
-                    fontSize: Get.context!.isPhone ? 16 : 18,
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                CustomDropDown<int>(
-                  key: dropDownKey,
-                  items: dropdownItems,
-                  onChanged: onItemChanged,
-                  hintText: 'Select',
-                  hintStyle: TextStyle(
-                    fontSize: context.isPhone ? 16 : 18,
-                    fontFamily: AppFontStyle().fontebold,
-                    color: AppColor().greyText,
-                  ),
-                  maxListHeight: 250,
-                  defaultSelectedIndex: 0,
-                  isBorderDropMenu: true,
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
         bottomNavigationBar: Column(
@@ -256,12 +266,7 @@ class _CreateCollectionState extends State<CreateCollection> {
                 onPressed: () {},
                 child: Text(
                   'Create'.tr,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Roboto',
-                  ),
+                  style: Style.button(context),
                 ),
               ),
             ),

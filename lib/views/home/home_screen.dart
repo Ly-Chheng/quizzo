@@ -6,8 +6,10 @@ import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/views/home/component/quizz_card.dart';
 import 'package:quizzo/views/home/component/top_collection_card.dart';
 import 'package:quizzo/views/home/discover/discover_list_screen.dart';
+import 'package:quizzo/views/library/custom_image_view.dart' show customImage;
 import 'package:quizzo/views/top_anthors/top_authors_list_screen.dart';
 import 'package:quizzo/views/top_conllections/top_conllections_screen.dart';
+import 'package:quizzo/widgets/section_reusable.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -17,8 +19,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
-
   Future<void> _refreshContent() async {
     await Future.delayed(const Duration(seconds: 2));
   }
@@ -37,31 +37,36 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(
                 height: 4,
               ),
-              _buildSectionTitle("Discover", onTap: () {
-                Get.to(DiscoverListScreen());
-              }),
-             SizedBox(
-              height: 220,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: quizData.length,
-                itemBuilder: (context, index) {
-                  final quiz = quizData[index];
-                  return QuizCard(
-                    imageUrl: quiz['image']!,
-                    title: quiz['title']!,
-                    questionCount: quiz['questions']!,
-                    name: quiz['name']!,
-                    profileUrl: quiz['profile']!,
-                  );
+              ReusableSectionTitle(
+                title: 'Featured Items',
+                onTap: () {
+                  Get.to(DiscoverListScreen());
                 },
               ),
-            ),
-
-              _buildSectionTitle("Top Authors", onTap: () {
-                Get.to(TopAuthorsListScreen());
-              }),
+              SizedBox(
+                height: 220,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: quizData.length,
+                  itemBuilder: (context, index) {
+                    final quiz = quizData[index];
+                    return QuizCard(
+                      imageUrl: quiz['image']!,
+                      title: quiz['title']!,
+                      questionCount: quiz['questions']!,
+                      name: quiz['name']!,
+                      profileUrl: quiz['profile']!,
+                    );
+                  },
+                ),
+              ),
+              ReusableSectionTitle(
+                title: 'Featured Items',
+                onTap: () {
+                  Get.to(TopAuthorsListScreen());
+                },
+              ),
               SizedBox(
                 height: 120,
                 child: ListView.builder(
@@ -73,22 +78,24 @@ class _MyHomePageState extends State<MyHomePage> {
                       position: index,
                       child: FadeInAnimation(
                         duration: const Duration(milliseconds: 600),
-                        child: topAuthor(
-                          name: Authors['name']!,
-                          profileUrl: Authors['profile']!,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 15),
+                          child: topAuthor(
+                            name: Authors['name']!,
+                            profileUrl: Authors['profile']!,
+                          ),
                         ),
                       ),
                     );
                   },
                 ),
               ),
-              _buildSectionTitle(
-                "Top Collections",
+              ReusableSectionTitle(
+                title: 'Featured Items',
                 onTap: () {
                   Get.to(TopCollectionsScreen());
                 },
               ),
-              
               SizedBox(
                 height: 120,
                 child: ListView.builder(
@@ -166,73 +173,29 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _buildSectionTitle(String title, {VoidCallback? onTap}) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20),
-        child: SizedBox(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                  fontFamily: AppFontStyle().fontebold,
-                  fontSize: Get.context!.isPhone ? 14 : 16,
-                ),
-              ),
-              Row(
-                children: [
-                  Text(
-                    "View all",
-                    style: TextStyle(
-                      fontFamily: AppFontStyle().fontebold,
-                      fontSize: Get.context!.isPhone ? 14 : 16,
-                      color: Color(0xFFFFA63D),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Image.asset(
-                    'assets/icons/next.png',
-                    width: 20,
-                    height: 20,
-                    color: Color(0xFFFFA63D),
-                  )
-                ],
-              ),
-            ],
+  Widget topAuthor({required String name, required String profileUrl}) {
+    return Column(
+      children: [
+        CircleAvatar(
+          radius: context.isPhone ? 35 : 50,
+          backgroundColor: Colors.white,
+          child: customImage(
+            imageUrl: profileUrl,
+            width: context.isPhone ? Get.height * 0.09 : Get.height * 0.1,
+            height: context.isPhone ? Get.height * 0.09 : Get.height * 0.1,
+            isProfile: true,
           ),
         ),
-      ),
-    );
-  }
-
-  Widget topAuthor({required String name, required String profileUrl}) {
-    return Container(
-      width: 75,
-      margin: const EdgeInsets.symmetric(
-        horizontal: 10,
-      ),
-      child: Column(
-        children: [
-          CircleAvatar(
-            radius: 40,
-            backgroundImage: NetworkImage(profileUrl),
+        const SizedBox(height: 8),
+        Text(
+          name,
+          style: TextStyle(
+            fontFamily: AppFontStyle().fontebold,
+            fontSize: AppFontSize(context).descriptionLargeSize,
           ),
-          const SizedBox(height: 8),
-          Text(
-            name,
-            style: TextStyle(
-              fontFamily: AppFontStyle().fontebold,
-              fontSize: AppFontSize(context).descriptionLargeSize,
-            ),
-            overflow: TextOverflow.ellipsis,
-          ),
-        ],
-      ),
+          overflow: TextOverflow.ellipsis,
+        ),
+      ],
     );
   }
 }

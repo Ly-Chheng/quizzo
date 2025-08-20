@@ -64,23 +64,13 @@ class _SubCollectionTabState extends State<SubCollectionTab> {
             showModalBottomSheet(
               context: context,
               isScrollControlled: true,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-              ),
               builder: (BuildContext context) {
                 return DraggableScrollableSheet(
                   initialChildSize: 1,
                   expand: false,
                   builder: (context, scrollController) {
-                    return Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(24)),
-                      ),
-                      child: CreateCollection(
-                        scrollController: scrollController,
-                      ),
+                    return CreateCollection(
+                      scrollController: scrollController,
                     );
                   },
                 );

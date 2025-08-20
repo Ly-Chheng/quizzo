@@ -81,4 +81,27 @@ class QuizzoController extends GetxController {
       "type": "Public",
     },
   ];
+
+  // 10 Quize Question
+
+  final List<Map<String, String>> questionquizeData_10 = [
+    {
+      "image":
+          "https://media.istockphoto.com/id/1408621743/photo/stack-of-books-and-paper-on-pink-background-3d-render.jpg?s=612x612&w=0&k=20&c=6j88Ay3aSBHOVJSOZ6nA9XPiKFnESTE_81hMMqeY1Oo=",
+      "title": "1 - Quiz",
+      "sub": "....do you get to school by bus?"
+    },
+    {
+      "image":
+          "https://img.freepik.com/premium-photo/colorful-books-orange-background_747074-12.jpg",
+      "title": "2 - True or False",
+      "sub": "This is a book? True or False"
+    },
+    {
+      "image":
+          "https://static8.depositphotos.com/1029756/963/i/450/depositphotos_9634768-stock-photo-true-and-false-symbol.jpg",
+      "title": "3 - Pluzzle",
+      "sub": "Order the flowing simple word"
+    },
+  ];
 }
