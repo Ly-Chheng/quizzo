@@ -111,7 +111,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
       }),
       child: Scaffold(
           key: controller.scaffoldKey,
-          appBar: customAppBar(
+          appBar: CustomAppBar(
             isLeading: false,
             title: controller.listTitle.elementAt(controller.selectedIndex),
             context: context,
@@ -138,7 +138,9 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
                   if (controller.selectedIndex != 1 &&
                       controller.selectedIndex != 2)
                     IconButton(
-                      onPressed: () {  Get.to(SearchScreen());},
+                      onPressed: () {
+                        Get.to(SearchScreen());
+                      },
                       icon: Image.asset(
                         'assets/icons/search.png',
                         width: 28,
@@ -147,9 +149,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
                       ),
                     ),
                   IconButton(
-                    onPressed: () {
-                    
-                    },
+                    onPressed: () {},
                     icon: Image.asset(
                       'assets/icons/notification.png',
                       width: 24,

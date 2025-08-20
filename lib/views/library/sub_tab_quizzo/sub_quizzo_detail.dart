@@ -14,6 +14,7 @@ import 'package:quizzo/core/utils/popup_dialog.dart';
 import 'package:quizzo/views/library/components/stats_card.dart';
 import 'package:quizzo/views/library/components/view_quize_card.dart';
 import 'package:quizzo/views/library/custom_image_view.dart';
+import 'package:quizzo/views/library/sub_tab_quizzo/generate_qr_pin.dart';
 import 'package:quizzo/widgets/animate_shimmerEffect.dart';
 import 'package:quizzo/widgets/animated_button.dart';
 import 'package:quizzo/widgets/custom_dropdown.dart';
@@ -116,23 +117,52 @@ class _SubQuizzoDetailState extends State<SubQuizzoDetail> {
                         IconButton(
                             onPressed: () {},
                             icon: Icon(Icons.star_border_outlined)),
-                        IconButton(
-                          onPressed: () {
-                            final text = 'Check out this awesome quiz!';
-                            final link = 'https://www.example.com/quiz-detail';
-                            shareController.share(text, link);
+                        PopupMenuButton<String>(
+                          onSelected: (value) {
+                            if (value == 'share') {
+                              final text = 'Check out this awesome quiz!';
+                              final link =
+                                  'https://www.example.com/quiz-detail';
+                              shareController.share(
+                                  text, link); 
+                            } else if (value == 'generate_pin') {
+                              Get.to(() => GenerateQRPinCode());
+                            }
                           },
-                          icon: Container(
+                          itemBuilder: (BuildContext context) => [
+                            PopupMenuItem<String>(
+                              value: 'share',
+                              child: Row(
+                                children: [
+                                  Icon(Icons.share),
+                                  SizedBox(width: 8),
+                                  Text('Share'),
+                                ],
+                              ),
+                            ),
+                            PopupMenuItem<String>(
+                              value: 'generate_pin',
+                              child: Row(
+                                children: [
+                                  Icon(Icons.qr_code),
+                                  SizedBox(width: 8),
+                                  Text('Generate PIN & QR Code'),
+                                ],
+                              ),
+                            ),
+                          ],
+                          child: Container(
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(
-                                color: AppTheme().iconTheme,
+                                color: Colors
+                                    .grey, // Adjust the color to your theme
                                 width: 1,
                               ),
                             ),
                             child: Icon(Icons.more_horiz_outlined),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ],
