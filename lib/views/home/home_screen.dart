@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 4,
               ),
               ReusableSectionTitle(
-                title: 'Featured Items',
+                title: 'Discover',
                 onTap: () {
                   Get.to(DiscoverListScreen());
                 },
@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               ReusableSectionTitle(
-                title: 'Featured Items',
+                title: 'Top Authors',
                 onTap: () {
                   Get.to(TopAuthorsListScreen());
                 },
@@ -91,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               ReusableSectionTitle(
-                title: 'Featured Items',
+                title: 'Top Collections',
                 onTap: () {
                   Get.to(TopCollectionsScreen());
                 },

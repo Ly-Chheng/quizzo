@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:quizzo/controllers/home/top_collections_controller.dart';
 import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/views/home/component/top_collection_card.dart';
+import 'package:quizzo/views/top_conllections/top_collection_detail_screen.dart';
 
 class TopCollectionsScreen extends StatefulWidget {
   const TopCollectionsScreen({super.key});
@@ -54,11 +56,16 @@ class _TopCollectionsScreenState extends State<TopCollectionsScreen> {
             crossAxisSpacing: 12,
             childAspectRatio: 1.4,
           ),
-          itemCount: quizData.length,
+          itemCount: topCollectionsData.length,
           itemBuilder: (context, index) {
-            return TopCollectionCard(
-              name: quizData[index]['subject']!,
-              imageUrl: quizData[index]['imagesb']!,
+            return GestureDetector(
+              onTap: () {
+                Get.to(TopCollectionDetailScreen());
+              },
+              child: TopCollectionCard(
+                name: topCollectionsData[index]['subject']!,
+                imageUrl: topCollectionsData[index]['imagesb']!,
+              ),
             );
           },
         ),

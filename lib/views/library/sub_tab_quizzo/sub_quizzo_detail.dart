@@ -169,7 +169,7 @@ class _SubQuizzoDetailState extends State<SubQuizzoDetail> {
                       height: 20,
                     ),
                     Text('Get Smarter And Better'.tr,
-                        style: Style.sub_header20_22(context)),
+                        style: Style.headerTextStyleBold22_24(context)),
                     SizedBox(
                       height: 10,
                     ),

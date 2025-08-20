@@ -23,13 +23,7 @@ class ReusableSectionTitle extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                title,
-                style: TextStyle(
-                  fontFamily: AppFontStyle().fontebold,
-                  fontSize: Get.context!.isPhone ? 20 : 22,
-                ),
-              ),
+              Text(title, style: Style.subHeaderTextStyleBold20_22(context)),
               Row(
                 children: [
                   Text(

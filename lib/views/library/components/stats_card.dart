@@ -26,7 +26,7 @@ class StatItem extends StatelessWidget {
               fontSize: AppFontSize(context).titleSize,
             ),
           ),
-          Text(label.tr, style: Style.sub_header20_22_Gray(context)),
+          Text(label.tr, style: Style.subHeaderTextStyleGray22_24(context)),
         ],
       ),
     );

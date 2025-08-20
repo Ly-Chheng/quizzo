@@ -25,7 +25,7 @@ customAppBar({
       alignment: Alignment.topLeft,
       child: Text(
         title!,
-        style: Style.header22_24(context),
+        style: Style.subHeaderBold(context),
       ),
     ),
     automaticallyImplyLeading: false,

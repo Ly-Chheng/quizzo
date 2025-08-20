@@ -25,7 +25,7 @@ class QuizCard extends StatelessWidget {
     return Container(
       width: 160,
       height: 200,
-      margin: EdgeInsets.symmetric(horizontal: 8),
+      margin: EdgeInsets.symmetric(horizontal: 8,vertical: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: theme.cardTheme,

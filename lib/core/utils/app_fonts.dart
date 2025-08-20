@@ -61,21 +61,21 @@ class AppFontSize {
 
 class Style {
   // Header TextStyle
-  static TextStyle header22_24(BuildContext context) {
+  static TextStyle headerTextStyleBold22_24(BuildContext context) {
     return TextStyle(
       fontFamily: AppFontStyle().fontebold,
       fontSize: Get.context!.isPhone ? 22 : 24,
     );
   }
 
-  static TextStyle sub_header20_22(BuildContext context) {
+  static TextStyle subHeaderTextStyleBold20_22(BuildContext context) {
     return TextStyle(
       fontFamily: AppFontStyle().fontebold,
       fontSize: Get.context!.isPhone ? 20 : 22,
     );
   }
 
-  static TextStyle sub_header20_22_Gray(BuildContext context) {
+  static TextStyle subHeaderTextStyleGray22_24(BuildContext context) {
     return TextStyle(
       fontFamily: AppFontStyle().fontMedium,
       color: AppColor().greyText,
