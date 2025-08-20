@@ -48,3 +48,4 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 /lib/test_code
+/lib/firebase_options.dart
