@@ -25,7 +25,7 @@ class _TopAuthorsListScreenState extends State<TopAuthorsListScreen> {
   }
 
   Future<void> _loadAuthors() async {
-    // await Future.delayed(const Duration(seconds: 1)); // simulate fetch delay
+    // await Future.delayed(const Duration(seconds: 1)); 
     setState(() {
       _authors = TopAuthorsController()
           .authorsData
@@ -44,9 +44,6 @@ class _TopAuthorsListScreenState extends State<TopAuthorsListScreen> {
   }
 
   void _onAuthorTap(Map<String, dynamic> author) {
-    // _showAuthorDetails(author);
-    // You can uncomment and customize navigation logic as needed
-    // Get.toNamed('/author-profile', arguments: author);
     Get.to(() => AuthorsDetailsScreen());
   }
 
@@ -221,7 +218,7 @@ class _TopAuthorsListScreenState extends State<TopAuthorsListScreen> {
                     width: 1,
                   ),
                   color: author['isFollowing']
-                      ? (isDarkMode ? Colors.white : Colors.white)
+                      ? (isDarkMode ? Colors.transparent : Colors.white)
                       : const Color(0xFFFFA63D),
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: author['isFollowing']
