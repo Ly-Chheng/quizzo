@@ -122,7 +122,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   width: double.infinity,
                   height: (Get.context?.isPhone ?? true) ? 50 : 60,
                   color: isFormValid ? const Color(0xFFFFA63D) : Colors.grey,
-                  borderRadius: 16,
+                  borderRadius: 25,
                   shadowDegree: ShadowDegree.dark,
                   duration: 100,
                   enabled: isFormValid,

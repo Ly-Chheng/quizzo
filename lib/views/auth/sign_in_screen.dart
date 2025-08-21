@@ -1,19 +1,21 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/widgets/animated_button.dart';
 import 'package:quizzo/widgets/custom_auth.dart';
 
-class HaveAccountScreen extends StatefulWidget {
-  const HaveAccountScreen({super.key});
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
 
   @override
-  State<HaveAccountScreen> createState() => _HaveAccountScreenState();
+  State<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _HaveAccountScreenState extends State<HaveAccountScreen> {
-  final TextEditingController emailController = TextEditingController();
+class _SignInScreenState extends State<SignInScreen> {
+
+    final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   bool rememberMe = true;

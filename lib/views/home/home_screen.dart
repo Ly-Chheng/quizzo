@@ -105,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   itemBuilder: (context, index) {
                     final quiz = quizData[index];
                     return Container(
-                      margin: const EdgeInsets.only( right: 15),
+                      margin: const EdgeInsets.only(right: 15),
                       child: TopCollectionCard(
                         name: quiz['name']!,
                         imageUrl: quiz['imagesb']!,
@@ -123,53 +123,146 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildBanner() {
     return Center(
-      child: GestureDetector(
-        // onTap: () {
-        //   Get.to(FindFriendsScreen());
-        // },
-        child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-          decoration: BoxDecoration(
-            image: const DecorationImage(
-              image: AssetImage('assets/images/home/quick_play.png'),
-              fit: BoxFit.cover,
-            ),
-            borderRadius: BorderRadius.circular(15),
-            boxShadow: [
-              BoxShadow(
-                color: Get.context!.isDarkMode
-                    ? Color.fromARGB(255, 57, 29, 167)
-                    : Color.fromARGB(255, 57, 29, 167),
-                blurRadius: 0,
-                offset: Offset(0, 5),
-                spreadRadius: 0,
-              )
-            ],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.play_arrow,
-                color: Colors.white,
-                size: 50,
+      child: Column(
+        children: [
+         
+          GestureDetector(
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                image: const DecorationImage(
+                  image: AssetImage('assets/images/home/quick_play.png'),
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Get.context!.isDarkMode
+                        ? Color.fromARGB(255, 106, 77, 224)
+                        : Color.fromARGB(255, 106, 77, 224),
+                    blurRadius: 0,
+                    offset: Offset(0, 5),
+                    spreadRadius: 0,
+                  )
+                ],
               ),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 7),
-                child: Text(
-                  "Quick Play",
-                  style: TextStyle(
-                    fontFamily: AppFontStyle().fontebold,
-                    fontSize: AppFontSize(context).titleSize,
-                    color: Get.isDarkMode ? Colors.white : Colors.white,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.play_arrow,
+                      color: Colors.white,
+                      size: 40,
+                    ),
+                    SizedBox(width: 10,),
+                    Text(
+                      "Quick Play",
+                      style: TextStyle(
+                        fontFamily: AppFontStyle().fontebold,
+                        fontSize: AppFontSize(context).subTitleSize,
+                        color: Get.isDarkMode ? Colors.white : Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+            SizedBox(
+            height: 20,
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      15,
+                    ),
+                    color: Color(0xFFFFA63D),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Get.context!.isDarkMode
+                            ? Color.fromARGB(255, 215, 200, 154)
+                            : Color.fromARGB(255, 215, 200, 154),
+                        blurRadius: 0,
+                        offset: Offset(0, 5),
+                        spreadRadius: 0,
+                      )
+                    ],
+                  ),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Image.network(
+                          'https://cdn-icons-png.flaticon.com/512/2313/2313147.png',
+                          height: 25,
+                          color: Color(0XFFFFFFFF),
+                        ),
+                        Text(
+                          "Join Game",
+                          style: TextStyle(
+                            fontFamily: AppFontStyle().fontebold,
+                            fontSize: AppFontSize(context).subTitleSize,
+                            color: Get.isDarkMode ? Colors.white : Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
+              SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.blue,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Get.context!.isDarkMode
+                            ? const Color.fromARGB(255, 121, 181, 231)
+                            : const Color.fromARGB(255, 121, 181, 231),
+                        blurRadius: 0,
+                        offset: Offset(0, 5),
+                        spreadRadius: 0,
+                      )
+                    ],
+                  ),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Image.network(
+                            'https://cdn-icons-png.flaticon.com/512/8582/8582578.png',
+                            height: 25,
+                            color: Color(0XFFFFFFFF)),
+                        Text(
+                          "Create Quiz",
+                          style: TextStyle(
+                            fontFamily: AppFontStyle().fontebold,
+                            fontSize: AppFontSize(context).subTitleSize,
+                            color: Get.isDarkMode ? Colors.white : Colors.white,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
-        ),
+         
+        ],
       ),
     );
   }

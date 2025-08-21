@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:quizzo/views/library/library_page.dart';
 import 'package:quizzo/views/create/create_screen.dart';
 import 'package:quizzo/views/home/home_screen.dart';
-import 'package:quizzo/views/more/join_game_screen.dart';
-import 'package:quizzo/views/profile/profile_screen.dart';
+import 'package:quizzo/views/join_game/join_game_screen.dart';
+import 'package:quizzo/views/profile/more.dart';
 
 class BottomNavigationBarController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -21,6 +21,6 @@ class BottomNavigationBarController extends GetxController {
     const LibraryPage(),
     const JoinGameScreen(),
     const CreateScreen(),
-    const ProfileScreen(),
+    const MoreScreen(),
   ];
 }

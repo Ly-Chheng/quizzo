@@ -146,7 +146,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                   width: double.infinity,
                   height: isPhone ? 50 : 60,
                   color: _isFormValid ? const Color(0xFFFFA63D) : Colors.grey.shade400,
-                  borderRadius: 16,
+                  borderRadius: 25,
                   shadowDegree: ShadowDegree.dark,
                   duration: 100,
                   enabled: _isFormValid,

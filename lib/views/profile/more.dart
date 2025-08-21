@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quizzo/models/more/theme_view_model.dart';
-import 'package:quizzo/views/more/widgets/change_language.dart';
-import 'package:quizzo/views/more/widgets/dark_mode.dart';
+import 'package:quizzo/views/profile/widgets/change_language.dart';
+import 'package:quizzo/views/profile/widgets/dark_mode.dart';
 
 class MoreScreen extends StatefulWidget {
   const MoreScreen({

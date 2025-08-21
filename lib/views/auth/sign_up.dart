@@ -174,7 +174,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   width: double.infinity,
                   height: (Get.context?.isPhone ?? true) ? 50 : 60,
                   color: const Color(0xFFFFA63D),
-                  borderRadius: 16,
+                  borderRadius: 25,
                   shadowDegree: ShadowDegree.dark,
                   duration: 100,
                   enabled: true,
@@ -219,7 +219,7 @@ class _SignUpPageState extends State<SignUpPage> {
           (Get.context?.isPhone ?? true) ? 50 : 60,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(25),
         ),
       ),
       icon: Image.asset(icon, height: (Get.context?.isPhone ?? true) ? 24 : 35, width: (Get.context?.isPhone ?? true) ? 24 : 35,),

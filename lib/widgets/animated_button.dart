@@ -1,7 +1,6 @@
 library animated_button;
 
 import 'package:flutter/material.dart';
-import 'package:quizzo/core/utils/app_color.dart';
 
 class AnimatedButton extends StatefulWidget {
   final Color color;
@@ -28,7 +27,9 @@ class AnimatedButton extends StatefulWidget {
     this.color = Colors.blue,
     this.disabledColor = Colors.white70,
     this.shadowDegree = ShadowDegree.light,
-    this.shadowColor = Colors.grey,
+    //this.shadowColor = const Color(0xFFEEEEEE)
+    this.shadowColor = const Color.fromARGB(255, 217, 217, 217)
+
   });
 
   @override

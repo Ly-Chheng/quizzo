@@ -106,13 +106,13 @@ final List<OnboardingPage> _pages = [
 
   Widget _buildPage(OnboardingPage page) {
     return Padding(
-      padding: const EdgeInsets.all(40),
+      padding: const EdgeInsets.only(top: 40,left: 15,right: 15),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
           padding: const EdgeInsets.all(30),
-          child: Container(
+          child: SizedBox(
             height: 300,
             width: double.infinity,
             child: Image.network(

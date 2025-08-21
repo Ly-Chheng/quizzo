@@ -95,7 +95,7 @@ class _TypeAccountScreenState extends State<TypeAccountScreen> {
                   width: double.infinity,
                   height: (Get.context?.isPhone ?? true) ? 50 : 60,
                   color: Color(0xFFFFA63D),
-                  borderRadius: 16,
+                  borderRadius: 25,
                   shadowDegree: ShadowDegree.dark,
                   duration: 100,
                   enabled: true,
@@ -152,7 +152,7 @@ class _TypeAccountScreenState extends State<TypeAccountScreen> {
                 child: Icon(
                   icon,
                   color: Colors.white,
-                  size: 70,
+                  size: 60,
                 ),
               ),
             ),

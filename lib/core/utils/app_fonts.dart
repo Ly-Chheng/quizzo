@@ -77,7 +77,7 @@ class Style {
 
   static TextStyle subHeaderTextStyleGray22_24(BuildContext context) {
     return TextStyle(
-      fontFamily: AppFontStyle().fontMedium,
+      fontFamily: AppFontStyle().fontebold,
       color: AppColor().greyText,
     );
   }
@@ -125,9 +125,9 @@ class Style {
   // Button TextStyle
   static TextStyle button(BuildContext context) {
     return TextStyle(
-      fontFamily: AppFontStyle().boldFont,
+      fontFamily: AppFontStyle().fontBold,
       fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
-      color: Colors.white,
+      color: Colors.black,
     );
   }
 }
