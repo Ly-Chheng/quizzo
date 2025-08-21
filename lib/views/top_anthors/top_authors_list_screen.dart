@@ -16,7 +16,6 @@ class TopAuthorsListScreen extends StatefulWidget {
 
 class _TopAuthorsListScreenState extends State<TopAuthorsListScreen> {
   List<Map<String, dynamic>> _authors = [];
-  bool _isLoading = true;
 
   @override
   void initState() {
@@ -25,13 +24,11 @@ class _TopAuthorsListScreenState extends State<TopAuthorsListScreen> {
   }
 
   Future<void> _loadAuthors() async {
-    //await Future.delayed(const Duration(seconds: 1)); // simulate fetch delay
     setState(() {
       _authors = TopAuthorsController()
           .authorsData
           .map((data) => Map<String, dynamic>.from(data))
           .toList();
-      _isLoading = false;
     });
   }
 
@@ -44,9 +41,6 @@ class _TopAuthorsListScreenState extends State<TopAuthorsListScreen> {
   }
 
   void _onAuthorTap(Map<String, dynamic> author) {
-    // _showAuthorDetails(author);
-    // You can uncomment and customize navigation logic as needed
-    // Get.toNamed('/author-profile', arguments: author);
     Get.to(() => AuthorsDetailsScreen());
   }
 
@@ -109,7 +103,6 @@ class _TopAuthorsListScreenState extends State<TopAuthorsListScreen> {
         centerTitle: false,
         iconTheme: IconThemeData(color: theme.iconTheme),
       ),
-
       body: RefreshIndicator(
         onRefresh: _refreshContent,
         child: ListView.builder(
@@ -119,22 +112,6 @@ class _TopAuthorsListScreenState extends State<TopAuthorsListScreen> {
               _buildAuthorCard(_authors[index], isDarkMode),
         ),
       ),
-      // body: _isLoading
-      //     ? ListView.builder(
-      //         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-      //         itemCount: _authors.isNotEmpty ? _authors.length : 30,
-      //         itemBuilder: (context, index) => _buildShimmerAuthorCard(),
-      //       )
-      //     : RefreshIndicator(
-      //         onRefresh: _loadAuthors,
-      //         child: ListView.builder(
-      //           padding:
-      //               const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-      //           itemCount: _authors.length,
-      //           itemBuilder: (context, index) =>
-      //               _buildAuthorCard(_authors[index], isDarkMode),
-      //         ),
-      //       ),
     );
   }
 
@@ -221,7 +198,7 @@ class _TopAuthorsListScreenState extends State<TopAuthorsListScreen> {
                     width: 1,
                   ),
                   color: author['isFollowing']
-                      ? (isDarkMode ? Colors.white : Colors.white)
+                      ? (isDarkMode ? Colors.transparent : Colors.white)
                       : const Color(0xFFFFA63D),
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: author['isFollowing']
@@ -247,60 +224,6 @@ class _TopAuthorsListScreenState extends State<TopAuthorsListScreen> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildShimmerAuthorCard() {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: Colors.grey[300], // base shimmer color
-      ),
-      child: Row(
-        children: [
-          // Circle avatar shimmer
-          Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              color: Colors.grey[400],
-              shape: BoxShape.circle,
-            ),
-          ),
-          const SizedBox(width: 15),
-          // Text lines shimmer
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: 14,
-                  color: Colors.grey[400],
-                ),
-                const SizedBox(height: 8),
-                Container(
-                  width: 100,
-                  height: 14,
-                  color: Colors.grey[400],
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 15),
-          // Follow button shimmer
-          Container(
-            width: 80,
-            height: 30,
-            decoration: BoxDecoration(
-              color: Colors.grey[400],
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
-        ],
       ),
     );
   }

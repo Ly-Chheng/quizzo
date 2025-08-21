@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/views/BottomNavigationBar/navigationbar.dart';
 import 'package:quizzo/widgets/animated_button.dart';
 
@@ -15,20 +16,13 @@ class _TypeAccountScreenState extends State<TypeAccountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      // AppBar with back button and progress bar
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        // leading: IconButton(
-        //   icon: const Icon(Icons.arrow_back, color: Colors.black),
-        //   onPressed: () {
-        //     Get.toNamed('/onboarding');
-        //   },
-        // ),
         title: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: LinearProgressIndicator(
-           value: 0.5,
+            value: 0.5,
             minHeight: (Get.context?.isPhone ?? true) ? 10 : 12,
             backgroundColor: Colors.grey.shade300,
             valueColor: const AlwaysStoppedAnimation<Color>(
@@ -44,17 +38,15 @@ class _TypeAccountScreenState extends State<TypeAccountScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-                SizedBox(height: (Get.context?.isPhone ?? true) ? 30 : 60,),
+              SizedBox(
+                height: (Get.context?.isPhone ?? true) ? 30 : 60,
+              ),
 
               // Title
               Center(
-                child: const Text(
+                child: Text(
                   "What type of account do\nyou like to create? 🧑",
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    
-                  ),
+                  style: Style.headerTextStyleBold22_24(context),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -64,40 +56,43 @@ class _TypeAccountScreenState extends State<TypeAccountScreen> {
               Center(
                 child: Text(
                   "You can skip it if you're not sure.",
-                  style: TextStyle(
-                    fontSize:  (Get.context?.isPhone ?? true) ? 16 : 18,
-                    color: Colors.grey.shade600,
-                  ),
+                  style: Style.bodyText14_16(context),
                 ),
               ),
-               SizedBox(height: (Get.context?.isPhone ?? true) ? 30 : 50,),
+              SizedBox(
+                height: (Get.context?.isPhone ?? true) ? 30 : 50,
+              ),
 
               // Account Type Buttons
               _buildAccountOption(
                 icon: Icons.person,
                 title: "Personal",
                 color: Colors.blue,
-                onTap: () { Get.toNamed('/SignUpPage');},
+                onTap: () {
+                  Get.toNamed('/SignUpPage');
+                },
               ),
               _buildAccountOption(
                 icon: Icons.person_outline,
                 title: "Teacher",
                 color: Colors.orange,
-                onTap: () { Get.toNamed('/SignUpPage');},
+                onTap: () {
+                  Get.toNamed('/SignUpPage');
+                },
               ),
               _buildAccountOption(
                 icon: Icons.people,
                 title: "Student",
                 color: Colors.green,
-                onTap: () { Get.toNamed('/SignUpPage');},
+                onTap: () {
+                  Get.toNamed('/SignUpPage');
+                },
               ),
 
               const Spacer(),
-
-              // Skip Button
               Center(
                 child: AnimatedButton(
-                 width: double.infinity,
+                  width: double.infinity,
                   height: (Get.context?.isPhone ?? true) ? 50 : 60,
                   color: Color(0xFFFFA63D),
                   borderRadius: 16,
@@ -105,17 +100,21 @@ class _TypeAccountScreenState extends State<TypeAccountScreen> {
                   duration: 100,
                   enabled: true,
                   onPressed: () {
-                   Get.off(
+                    Get.off(
                       const BottomNavigationBarScreen(),
                     );
                   },
                   child: Text(
                     "Skip",
-                    style: TextStyle(color: Colors.white, fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,fontWeight: FontWeight.w700, fontFamily: 'Roboto',),
+                    style: TextStyle(
+                     fontFamily: AppFonts().fontExBold
+                    ),
                   ),
                 ),
               ),
-                SizedBox(height: (Get.context?.isPhone ?? true) ? 20 : 30,),
+              SizedBox(
+                height: (Get.context?.isPhone ?? true) ? 20 : 30,
+              ),
             ],
           ),
         ),
@@ -132,8 +131,10 @@ class _TypeAccountScreenState extends State<TypeAccountScreen> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin:   EdgeInsets.only(bottom: (Get.context?.isPhone ?? true) ? 15 : 20,),
-        padding:   EdgeInsets.all((Get.context?.isPhone ?? true) ? 15 : 30,),
+        margin: EdgeInsets.only(
+          bottom: (Get.context?.isPhone ?? true) ? 15 : 20,
+        ),
+     
         decoration: BoxDecoration(
           color: color.withOpacity(0.1),
           borderRadius: BorderRadius.circular(12),
@@ -141,17 +142,26 @@ class _TypeAccountScreenState extends State<TypeAccountScreen> {
         ),
         child: Row(
           children: [
-            CircleAvatar(
-              backgroundColor: color,
-              child: Icon(icon, color: Colors.white,),
+            Container(
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(10),bottomLeft: Radius.circular(10))
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  icon,
+                  color: Colors.white,
+                  size: 70,
+                ),
+              ),
             ),
-            SizedBox(width: (Get.context?.isPhone ?? true) ? 15 : 30,),
+            SizedBox(
+              width: (Get.context?.isPhone ?? true) ? 15 : 30,
+            ),
             Text(
               title,
-              style:  TextStyle(
-                fontSize: (Get.context?.isPhone ?? true) ? 18 : 20,
-                fontWeight: FontWeight.w500,
-              ),
+              style: Style.subHeaderTextStyleBold20_22(context),
             )
           ],
         ),

@@ -119,6 +119,15 @@ flutter:
   - family: Nunito-ExtraBold
     fonts:
       - asset: assets/fonts/Nunito-ExtraBold.ttf
+  - family: KantumruyPro-Regular
+    fonts:
+      - asset: assets/fonts/Nunito-Regular.ttf
+  - family: KantumruyPro-Medium
+    fonts:
+      - asset: assets/fonts/Nunito-Medium.ttf
+  - family: KantumruyPro-Bold
+    fonts:
+      - asset: assets/fonts/Nunito-Bold.ttf
 
 
 

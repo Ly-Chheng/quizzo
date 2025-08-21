@@ -91,7 +91,13 @@ void _toggleFollow(Map<String, dynamic> author) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        scrolledUnderElevation: 0,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        foregroundColor: Colors.black,
+        centerTitle: false,
+        iconTheme: IconThemeData(
+          color: theme.iconTheme,
+        ),
         title: TextFormField(
           controller: _searchController,
           focusNode: _focusNode,
@@ -132,8 +138,6 @@ void _toggleFollow(Map<String, dynamic> author) {
             ),
           ),
         ),
-        centerTitle: false,
-        iconTheme: IconThemeData(color: theme.iconTheme),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -251,7 +255,7 @@ Widget _buildPeopleContent() {
 
   Widget _buildAuthorCard(Map<String, dynamic> author, bool isDarkMode) {
     return GestureDetector(
-      onTap: () {}, // implement author tap
+      onTap: () {},  
       child: Container(
         margin: const EdgeInsets.only(bottom: 16),
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),

@@ -32,6 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               _buildBanner(),
               SizedBox(
@@ -104,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   itemBuilder: (context, index) {
                     final quiz = quizData[index];
                     return Container(
-                      margin: const EdgeInsets.only(left: 15),
+                      margin: const EdgeInsets.only( right: 15),
                       child: TopCollectionCard(
                         name: quiz['name']!,
                         imageUrl: quiz['imagesb']!,

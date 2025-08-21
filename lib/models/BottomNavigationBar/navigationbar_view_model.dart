@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:quizzo/views/library/library_page.dart';
 import 'package:quizzo/views/create/create_screen.dart';
 import 'package:quizzo/views/home/home_screen.dart';
-import 'package:quizzo/views/more/more.dart';
+import 'package:quizzo/views/more/join_game_screen.dart';
 import 'package:quizzo/views/profile/profile_screen.dart';
 
 class BottomNavigationBarController extends GetxController {
@@ -19,7 +19,7 @@ class BottomNavigationBarController extends GetxController {
   List screenWidget = [
     const MyHomePage(),
     const LibraryPage(),
-    const MoreScreen(),
+    const JoinGameScreen(),
     const CreateScreen(),
     const ProfileScreen(),
   ];
