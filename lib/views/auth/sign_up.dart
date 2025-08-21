@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/widgets/animated_button.dart';
 import 'package:quizzo/widgets/custom_dialog.dart';
 import 'package:quizzo/widgets/custom_auth.dart';
@@ -86,10 +87,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           child: Text(
                             "Please enter your username, email address and password. "
                             "If you forget it, then you have to do forgot password.",
-                            style: TextStyle(
-                                fontSize:
-                                    (Get.context?.isPhone ?? true) ? 15 : 18,
-                                color: Colors.grey),
+                             style: Style.bodyText16_18(context),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -103,8 +101,6 @@ class _SignUpPageState extends State<SignUpPage> {
                           controller: TextEditingController(),
                           labelText: "Username",
                           isRequired: true,
-                          // suffixIcon: Icons.check,
-                          // iconColor: Colors.orange,
                         ),
                         SizedBox(
                           height: 20,
@@ -114,8 +110,6 @@ class _SignUpPageState extends State<SignUpPage> {
                           controller: emailController,
                           labelText: "Email",
                           isRequired: true,
-                          // suffixIcon: Icons.check,
-                          // iconColor: Colors.orange,
                         ),
                        
                        SizedBox(

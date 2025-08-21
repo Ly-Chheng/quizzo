@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/widgets/animated_button.dart';
 import 'package:quizzo/widgets/custom_auth.dart';
 
@@ -78,10 +79,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         // Title
                         Text(
                           "Forgot Password",
-                          style: TextStyle(
-                              fontSize:
-                                  (Get.context?.isPhone ?? true) ? 22 : 25,
-                              fontWeight: FontWeight.bold),
+                          style: Style.headerTextStyleBold22_24(context),
                         ),
                         SizedBox(
                           height: (Get.context?.isPhone ?? true) ? 8 : 10,

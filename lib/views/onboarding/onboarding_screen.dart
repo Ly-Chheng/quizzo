@@ -14,23 +14,24 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  final List<OnboardingPage> _pages = [
-    OnboardingPage(
-      description: "Create, share and play quizzes whenever and wherever you want.",
-      image: Icons.quiz,
-      color: const Color(0xFFFFA63D),
-    ),
-    OnboardingPage(
-      description: "Find fun and interesting quizzes to boost your knowledge.",
-      image: Icons.school,
-      color: const Color(0xFFFFA63D),
-    ),
-    OnboardingPage(
-      description: "Play and take quiz challenges together with your friends.",
-      image: Icons.groups,
-      color: const Color(0xFFFFA63D),
-    ),
-  ];
+final List<OnboardingPage> _pages = [
+  OnboardingPage(
+    description: "Create, share and play quizzes whenever and wherever you want.",
+    image: "https://miro.medium.com/v2/resize:fit:1400/1*fx2GTxsjhkzpJFGtZwuGIA.png",
+    color: const Color(0xFFFFA63D),
+  ),
+  OnboardingPage(
+    description: "Find fun and interesting quizzes to boost your knowledge.",
+    image: "https://img.freepik.com/vecteurs-premium/concept-illustration-demarrage-personnages-lancement-fusee_269730-114.jpg",
+    color: const Color(0xFFFFA63D),
+  ),
+  OnboardingPage(
+    description: "Play and take quiz challenges together with your friends.",
+    image: "https://confluence.vc/wp-content/uploads/2023/07/undraw_coffee_with_friends_3cbj.png",
+    color: const Color(0xFFFFA63D),
+  ),
+];
+
 
   void _onPageChanged(int page) {
     setState(() {
@@ -109,25 +110,29 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            width: (Get.context?.isPhone ?? true) ? 200 : 300,
-            height: (Get.context?.isPhone ?? true) ? 200 : 300,
-            decoration: BoxDecoration(
-              color: page.color.withOpacity(0.1),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
+          Padding(
+          padding: const EdgeInsets.all(30),
+          child: Container(
+            height: 300,
+            width: double.infinity,
+            child: Image.network(
               page.image,
-              size: 150,
-              color: page.color,
+              fit: BoxFit.contain,
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) return child;
+                return const Center(child: CircularProgressIndicator());
+              },
+              errorBuilder: (context, error, stackTrace) =>
+                  const Icon(Icons.error, size: 50, color: Colors.red),
             ),
           ),
+                    ),
           SizedBox(height: (Get.context?.isPhone ?? true) ? 20 : 30),
           Text(
             page.description,
             style: TextStyle(
               fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
-              fontWeight: FontWeight.w500,
+              fontFamily: 'Nunito-Bold',
               color: Colors.grey[600],
               height: 1.5,
             ),
@@ -153,7 +158,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           width: double.infinity,
           height: (Get.context?.isPhone ?? true) ? 50 : 60,
           color: _pages[_currentPage].color,
-          borderRadius: 16,
+          borderRadius: 25,
           shadowDegree: ShadowDegree.dark,
           duration: 100,
           enabled: true,
@@ -163,8 +168,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             style: TextStyle(
               color: Colors.white,
               fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Roboto',
+              fontFamily: 'Nunito-Bold'
             ),
           ),
         ),
@@ -174,7 +178,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             width: double.infinity,
             height: (Get.context?.isPhone ?? true) ? 50 : 60,
             color: const Color(0XFF04A68B),
-            borderRadius: 16,
+            borderRadius: 25,
             shadowDegree: ShadowDegree.dark,
             duration: 100,
             enabled: true,
@@ -188,8 +192,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               style: TextStyle(
                 color: Colors.white,
                 fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Roboto',
+                // fontWeight: FontWeight.bold,
+                 fontFamily: 'Nunito-Bold'
               ),
             ),
           ),
@@ -216,12 +220,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
 class OnboardingPage {
   final String description;
-  final IconData image;
+   final String image;
   final Color color;
 
   OnboardingPage({
     required this.description,
-    required this.image,
+   required this.image,
     required this.color,
   });
 }

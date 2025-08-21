@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/widgets/animated_button.dart';
 import 'package:quizzo/widgets/custom_auth.dart';
 
@@ -51,23 +52,6 @@ class _HaveAccountScreenState extends State<HaveAccountScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        // leading: IconButton(
-        //   icon: const Icon(Icons.arrow_back, color: Colors.black),
-        //   onPressed: () {
-        //     Get.toNamed('/onboarding');
-        //   },
-        // ),
-        // title: ClipRRect(
-        //   borderRadius: BorderRadius.circular(10),
-        //   child: LinearProgressIndicator(
-        //     value: 0.5,
-        //     minHeight: (Get.context?.isPhone ?? true) ? 10 : 12,
-        //     backgroundColor: Colors.grey.shade300,
-        //     valueColor: const AlwaysStoppedAnimation<Color>(
-        //       Color(0xFFFFA63D),
-        //     ),
-        //   ),
-        // ),
         centerTitle: true,
       ),
       body: GestureDetector(
@@ -86,10 +70,7 @@ class _HaveAccountScreenState extends State<HaveAccountScreen> {
                         // Title
                         Text(
                           "Hello there ✏️",
-                          style: TextStyle(
-                            fontSize: (Get.context?.isPhone ?? true) ? 22 : 25,
-                            fontWeight: FontWeight.bold,
-                          ),
+                           style: Style.headerTextStyleBold22_24(context),
                         ),
                         SizedBox(
                           height: (Get.context?.isPhone ?? true) ? 30 : 60,
@@ -113,14 +94,6 @@ class _HaveAccountScreenState extends State<HaveAccountScreen> {
                           height: (Get.context?.isPhone ?? true) ? 30 : 40,
                         ),
 
-                        // // Divider
-                        // Row(
-                        //   children: [
-                        //     Expanded(child: Divider(color: Colors.grey.shade400)),
-                        //   ],
-                        // ),
-                       
-
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -142,13 +115,7 @@ class _HaveAccountScreenState extends State<HaveAccountScreen> {
                               },
                               child: Text(
                                 "Forgot Password?",
-                                style: TextStyle(
-                                  fontSize: (Get.context?.isPhone ?? true)
-                                      ? 16
-                                      : 18,
-                                  color: const Color(0xFFFFA63D),
-                                  fontWeight: FontWeight.w600,
-                                ),
+                                 style: Style.bodyText16_18(context),
                               ),
                             ),
                           ],
@@ -162,13 +129,7 @@ class _HaveAccountScreenState extends State<HaveAccountScreen> {
                             Text("Dont't have an account ?"),
                             TextButton(onPressed: (){
                               Get.offAllNamed('/accountType');
-                            }, child: Text("Sing Up", style: TextStyle(
-                                  fontSize: (Get.context?.isPhone ?? true)
-                                      ? 16
-                                      : 18,
-                                  color: const Color(0xFFFFA63D),
-                                  fontWeight: FontWeight.w600,
-                                ),),)
+                            }, child: Text("Sing Up",  style: Style.bodyText16_18(context),),)
                           ],
                         )
                       ],
@@ -197,13 +158,14 @@ class _HaveAccountScreenState extends State<HaveAccountScreen> {
                   },
                   child: Text(
                     "Sign In",
-                    style: TextStyle(
-                      fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
-                      color: isFormValid
-                          ? const Color(0xFFFFFFFF)
-                          : Colors.grey[400],
-                      fontWeight: FontWeight.w600,
-                    ),
+                    // style: TextStyle(
+                    //   fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
+                    //   color: isFormValid
+                    //       ? const Color(0xFFFFFFFF)
+                    //       : Colors.grey[400],
+                    //   fontWeight: FontWeight.w600,
+                    // ),
+                     style: Style.bodyText16_18(context),
                   ),
                 ),
               ),

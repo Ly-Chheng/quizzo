@@ -1,16 +1,13 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quizzo/controllers/library/camara_controller.dart';
-import 'package:quizzo/controllers/library/favorite_controller.dart';
 import 'package:quizzo/controllers/library/quizzo_controller.dart';
 import 'package:quizzo/controllers/more/share_controller.dart';
 import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
-import 'package:quizzo/core/utils/popup_dialog.dart';
 import 'package:quizzo/views/library/components/stats_card.dart';
 import 'package:quizzo/views/library/components/view_quize_card.dart';
 import 'package:quizzo/views/library/custom_image_view.dart';
@@ -18,8 +15,6 @@ import 'package:quizzo/views/library/sub_tab_quizzo/generate_qr_pin.dart';
 import 'package:quizzo/widgets/animate_shimmerEffect.dart';
 import 'package:quizzo/widgets/animated_button.dart';
 import 'package:quizzo/widgets/custom_dropdown.dart';
-import 'package:quizzo/widgets/custom_textfield.dart';
-import 'package:quizzo/widgets/custome_card.dart';
 import 'package:quizzo/widgets/section_reusable.dart';
 
 class SubQuizzoDetail extends StatefulWidget {

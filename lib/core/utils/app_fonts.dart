@@ -49,7 +49,6 @@ class AppFontSize {
   late double smallSize;
 
   AppFontSize(BuildContext context) {
-    // iphone
     titleSize = Get.context!.isPhone ? 20 : 22;
     subTitleSize = Get.context!.isPhone ? 16 : 18;
     descriptionLargeSize = Get.context!.isPhone ? 14 : 16;
@@ -88,7 +87,6 @@ class Style {
     return TextStyle(
       fontFamily: AppFontStyle().fontMedium,
       fontSize: AppFontSize(context).subTitleSize,
-      fontWeight: FontWeight.w600,
     );
   }
 
@@ -96,7 +94,6 @@ class Style {
     return TextStyle(
       fontFamily: AppFontStyle().fontebold,
       fontSize: AppFontSize(context).subTitleSize,
-      fontWeight: FontWeight.w600,
     );
   }
 
@@ -130,33 +127,9 @@ class Style {
     return TextStyle(
       fontFamily: AppFontStyle().boldFont,
       fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
-      fontWeight: FontWeight.bold,
       color: Colors.white,
     );
   }
 }
 
-// Text(
-//   "Hello World",
-//   style: Style.header(context),
-// ),
 
-// Text(
-//   "This is subtitle",
-//   style: Style.subHeader(context),
-// ),
-
-// Text(
-//   "This is body text",
-//   style: Style.body(context),
-// ),
-
-// Text(
-//   "small text",
-//   style: Style.small(context),
-// ),
-
-// ElevatedButton(
-//   onPressed: () {},
-//   child: Text("Click Me", style: Style.button(context)),
-// ),

@@ -5,6 +5,7 @@ import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
 import 'package:quizzo/models/BottomNavigationBar/navigationbar_view_model.dart';
 import 'package:quizzo/views/home/search/search_screen.dart';
+import 'package:quizzo/views/more/join_game_screen.dart';
 import 'package:quizzo/widgets/custom_appbar.dart';
 import 'package:quizzo/widgets/custom_navigationbar.dart';
 
@@ -19,10 +20,21 @@ class BottomNavigationBarScreen extends StatefulWidget {
 class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   final controller = Get.put(BottomNavigationBarController());
 
+  // void _onItemTapped(int index) {
+  //   setState(() {
+  //     controller.selectedIndex = index;
+  //   });
+  // }
+
   void _onItemTapped(int index) {
-    setState(() {
-      controller.selectedIndex = index;
-    });
+    // Example: if index 2 is JoinGame tab
+    if (index == 2) {
+      Get.to(() => const JoinGameScreen());
+    } else {
+      setState(() {
+        controller.selectedIndex = index;
+      });
+    }
   }
 
   @override
