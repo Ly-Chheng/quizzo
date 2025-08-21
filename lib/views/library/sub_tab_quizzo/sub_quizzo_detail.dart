@@ -1,18 +1,14 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:quizzo/controllers/library/camara_controller.dart';
-import 'package:quizzo/controllers/library/favorite_controller.dart';
+import 'package:quizzo/controllers/library/genarate_pincode_qr_controller.dart';
 import 'package:quizzo/controllers/library/quizzo_controller.dart';
 import 'package:quizzo/controllers/more/share_controller.dart';
 import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
-import 'package:quizzo/core/utils/popup_dialog.dart';
 import 'package:quizzo/views/library/components/stats_card.dart';
 import 'package:quizzo/views/library/components/view_quize_card.dart';
 import 'package:quizzo/views/library/custom_image_view.dart';
@@ -20,8 +16,6 @@ import 'package:quizzo/views/library/sub_tab_quizzo/generate_qr_pin.dart';
 import 'package:quizzo/widgets/animate_shimmerEffect.dart';
 import 'package:quizzo/widgets/animated_button.dart';
 import 'package:quizzo/widgets/custom_dropdown.dart';
-import 'package:quizzo/widgets/custom_textfield.dart';
-import 'package:quizzo/widgets/custome_card.dart';
 import 'package:quizzo/widgets/section_reusable.dart';
 
 class SubQuizzoDetail extends StatefulWidget {
@@ -125,10 +119,17 @@ class _SubQuizzoDetailState extends State<SubQuizzoDetail> {
                               final text = 'Check out this awesome quiz!';
                               final link =
                                   'https://www.example.com/quiz-detail';
-                              shareController.share(
-                                  text, link); 
+                              shareController.share(text, link);
                             } else if (value == 'generate_pin') {
-                              Get.to(() => GenerateQRPinCode());
+                              // Generate PIN using PinCodeController
+                              final pinCodeController =
+                                  Get.put(PinCodeQRController());
+                              pinCodeController
+                                  .generatePinCode(); // Generate the PIN
+
+                              // Navigate to GenerateQRPinCode screen and pass the generated PIN
+                              Get.to(() => GenerateQRPinCode(
+                                  pinCode: pinCodeController.pinCode.value));
                             }
                           },
                           itemBuilder: (BuildContext context) => [
@@ -314,7 +315,8 @@ class _SubQuizzoDetailState extends State<SubQuizzoDetail> {
               thickness: 1,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+              padding: const EdgeInsets.only(
+                  left: 15, right: 15, top: 10, bottom: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -323,13 +325,14 @@ class _SubQuizzoDetailState extends State<SubQuizzoDetail> {
                       height: (Get.context?.isPhone ?? true) ? 50 : 60,
                       color: AppColor().secondaryprimaryColor,
                       borderRadius: 25,
-                      shadowDegree: ShadowDegree.light,
+                      shadowColor: Color.fromARGB(255, 211, 174, 129),
                       duration: 100,
                       enabled: true,
                       onPressed: () {},
                       child: Text(
                         'Play Solo'.tr,
-                        style: Style.button(context),
+                        style: Style.button(context)
+                            .copyWith(color: AppColor().primaryColor),
                       ),
                     ),
                   ),
@@ -341,7 +344,7 @@ class _SubQuizzoDetailState extends State<SubQuizzoDetail> {
                       height: (Get.context?.isPhone ?? true) ? 50 : 60,
                       color: AppColor().primaryColor,
                       borderRadius: 25,
-                      shadowDegree: ShadowDegree.dark,
+                      shadowColor: Color.fromARGB(255, 232, 139, 32),
                       duration: 100,
                       enabled: true,
                       onPressed: () {},

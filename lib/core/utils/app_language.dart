@@ -10,10 +10,12 @@ class AppTranslations extends Translations {
         'en_US': {
           'locale': 'en',
           'home': 'HomeScreen',
+          'save_to_gallery': 'QR code saved to gallery!',
         },
         'km_KM': {
           'locale': 'km',
           'home': 'ទំព័រដើម',
+          'save_to_gallery': 'QR code ត្រូវបានរក្សាទុកនៅក្នុងរូបថត!',
         },
       };
 }

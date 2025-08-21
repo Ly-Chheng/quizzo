@@ -1,11 +1,8 @@
 library animated_button;
 
 import 'package:flutter/material.dart';
+import 'package:quizzo/core/utils/app_color.dart';
 
-/// Using [ShadowDegree] with values [ShadowDegree.dark] or [ShadowDegree.light]
-/// to get a darker version of the used color.
-/// [duration] in milliseconds
-///
 class AnimatedButton extends StatefulWidget {
   final Color color;
   final Widget child;
@@ -17,6 +14,7 @@ class AnimatedButton extends StatefulWidget {
   final double borderRadius;
   final VoidCallback onPressed;
   final ShadowDegree shadowDegree;
+  final Color shadowColor;
 
   const AnimatedButton({
     super.key,
@@ -30,6 +28,7 @@ class AnimatedButton extends StatefulWidget {
     this.color = Colors.blue,
     this.disabledColor = Colors.white70,
     this.shadowDegree = ShadowDegree.light,
+    this.shadowColor = Colors.grey,
   });
 
   @override
@@ -56,7 +55,7 @@ class _AnimatedButtonState extends State<AnimatedButton> {
               ? constraints.maxWidth
               : widget.width;
 
-          return Container(
+          return SizedBox(
             width: actualWidth,
             height: _height + _shadowHeight,
             child: Stack(
@@ -67,9 +66,7 @@ class _AnimatedButtonState extends State<AnimatedButton> {
                     height: _height,
                     width: actualWidth,
                     decoration: BoxDecoration(
-                      color: widget.enabled
-                          ? darken(widget.color, widget.shadowDegree)
-                          : darken(widget.disabledColor, widget.shadowDegree),
+                      color: widget.shadowColor,
                       borderRadius: _getBorderRadius(),
                     ),
                   ),

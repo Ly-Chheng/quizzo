@@ -57,7 +57,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       },
                   child: Icon(
                     Icons.arrow_back,
-                    color: leadingColor ?? theme.iconTheme,
+                    color: theme.iconTheme,
                   ),
                 )
               : GestureDetector(
@@ -67,7 +67,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       },
                   child: Icon(
                     Icons.arrow_back_ios,
-                    color: leadingColor ?? Colors.white,
+                    color: theme.iconTheme,
                   ),
                 )
           : leading,
