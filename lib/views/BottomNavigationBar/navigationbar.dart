@@ -77,7 +77,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 10),
                               child: Text(
-                                "Yes".tr,
+                                "No".tr,
                                 style: TextStyle(
                                   fontFamily: AppFontStyle().fontRegular,
                                   fontSize: AppFontSize(context).normalTextSize,

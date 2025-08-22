@@ -64,6 +64,7 @@ class Style {
     return TextStyle(
       fontFamily: AppFontStyle().fontebold,
       fontSize: Get.context!.isPhone ? 22 : 24,
+      color: Colors.white
     );
   }
 
@@ -127,7 +128,7 @@ class Style {
     return TextStyle(
       fontFamily: AppFontStyle().fontBold,
       fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
-      color: Colors.black,
+      color: Color(0xFFFFA63D),
     );
   }
 }

@@ -9,12 +9,13 @@ class AppTranslations extends Translations {
   Map<String, Map<String, String>> get keys => {
         'en_US': {
           'locale': 'en',
-          'home': 'HomeScreen',
+          'home': 'Home',
           'save_to_gallery': 'QR code saved to gallery!',
         },
         'km_KM': {
           'locale': 'km',
-          'home': 'ទំព័រដើម',
+          // 'home': 'ទំព័រដើម',
+          'home': 'Home',
           'save_to_gallery': 'QR code ត្រូវបានរក្សាទុកនៅក្នុងរូបថត!',
         },
       };

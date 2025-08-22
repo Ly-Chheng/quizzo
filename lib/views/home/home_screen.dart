@@ -122,24 +122,20 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _buildBanner() {
-    return Center(
-      child: Column(
+    return SizedBox(
+      height: 130,
+      child: Row(
         children: [
-         
-          GestureDetector(
+          Expanded(
             child: Container(
-              width: double.infinity,
               decoration: BoxDecoration(
-                image: const DecorationImage(
-                  image: AssetImage('assets/images/home/quick_play.png'),
-                  fit: BoxFit.cover,
-                ),
+                color: Color.fromARGB(255, 8, 200, 39),
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: [
                   BoxShadow(
                     color: Get.context!.isDarkMode
-                        ? Color.fromARGB(255, 106, 77, 224)
-                        : Color.fromARGB(255, 106, 77, 224),
+                        ? Color.fromARGB(255, 2, 165, 17)
+                        : Color.fromARGB(255, 2, 165, 17),
                     blurRadius: 0,
                     offset: Offset(0, 5),
                     spreadRadius: 0,
@@ -147,16 +143,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-                child: Row(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      Icons.play_arrow,
-                      color: Colors.white,
-                      size: 40,
+                    Image.network(
+                        'https://cdn-icons-png.freepik.com/512/14265/14265913.png',
+                        height: 40,
+                        color: Color(0XFFFFFFFF)),
+                    SizedBox(
+                      height: 15,
                     ),
-                    SizedBox(width: 10,),
                     Text(
                       "Quick Play",
                       style: TextStyle(
@@ -170,39 +167,41 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-            SizedBox(
-            height: 20,
+          SizedBox(
+            width: 10,
           ),
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      15,
+          Expanded(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        15,
+                      ),
+                      color: Color.fromARGB(255, 255, 188, 3),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Get.context!.isDarkMode
+                              ? Color.fromARGB(255, 174, 126, 1)
+                              :Color.fromARGB(255, 174, 126, 1),
+                          blurRadius: 0,
+                          offset: Offset(0, 5),
+                          spreadRadius: 0,
+                        )
+                      ],
                     ),
-                    color: Color(0xFFFFA63D),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Get.context!.isDarkMode
-                            ? Color.fromARGB(255, 215, 200, 154)
-                            : Color.fromARGB(255, 215, 200, 154),
-                        blurRadius: 0,
-                        offset: Offset(0, 5),
-                        spreadRadius: 0,
-                      )
-                    ],
-                  ),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.network(
-                          'https://cdn-icons-png.flaticon.com/512/2313/2313147.png',
-                          height: 25,
+                          'https://cdn-icons-png.freepik.com/512/5404/5404386.png',
+                          height: 40,
                           color: Color(0XFFFFFFFF),
+                        ),
+                        SizedBox(
+                          width: 15,
                         ),
                         Text(
                           "Join Game",
@@ -216,36 +215,36 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.blue,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Get.context!.isDarkMode
-                            ? const Color.fromARGB(255, 121, 181, 231)
-                            : const Color.fromARGB(255, 121, 181, 231),
-                        blurRadius: 0,
-                        offset: Offset(0, 5),
-                        spreadRadius: 0,
-                      )
-                    ],
-                  ),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
+                SizedBox(
+                  height: 10,
+                ),
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Color(0XFF6848FE),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Get.context!.isDarkMode
+                              ? const Color.fromARGB(255, 46, 28, 156)
+                              : const Color.fromARGB(255, 46, 28, 156),
+                          blurRadius: 0,
+                          offset: Offset(0, 5),
+                          spreadRadius: 0,
+                        )
+                      ],
+                    ),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.network(
-                            'https://cdn-icons-png.flaticon.com/512/8582/8582578.png',
-                            height: 25,
+                            'https://cdn-icons-png.freepik.com/512/7376/7376017.png',
+                            height: 30,
                             color: Color(0XFFFFFFFF)),
+                        SizedBox(
+                          width: 15,
+                        ),
                         Text(
                           "Create Quiz",
                           style: TextStyle(
@@ -258,10 +257,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-              )
-            ],
+              ],
+            ),
           ),
-         
         ],
       ),
     );
