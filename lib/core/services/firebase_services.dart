@@ -4,7 +4,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:quizzo/main.dart';
-import 'package:quizzo/views/home/test.dart';
 
 class FirebaseServices {
   final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
@@ -67,11 +66,11 @@ class FirebaseServices {
         debugPrint("-----Active Click-----");
         if (notificationResponse.payload != null) {
           try {
-            navigatorKey.currentState?.push(
-              MaterialPageRoute(
-                builder: (context) => const TestScreen(),
-              ),
-            );
+            // navigatorKey.currentState?.push(
+            //   MaterialPageRoute(
+            //     // builder: (context) => const TestScreen(),
+            //   ),
+            // );
           } catch (error) {
             debugPrint('-----Notification payload error: $error');
           }
@@ -95,11 +94,11 @@ class FirebaseServices {
 
       debugPrint('-----onMessageOpenedApp: $data');
       if (message.notification != null) {
-        navigatorKey.currentState?.push(
-          MaterialPageRoute(
-            builder: (context) => const TestScreen(),
-          ),
-        );
+        // navigatorKey.currentState?.push(
+        //   MaterialPageRoute(
+        //     builder: (context) => const TestScreen(),
+        //   ),
+        // );
       }
     });
   }

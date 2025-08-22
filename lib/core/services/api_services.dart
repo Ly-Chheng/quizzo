@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:get/get_connect.dart';
-import 'package:quizzo/core/utils/constants.dart';
+import 'package:quizzo/core/constants/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ErrorModel {
@@ -17,7 +17,7 @@ enum METHODE {
 }
 
 class ApiBaseHelper extends GetConnect {
-  final String baseurl = Constants.apiBaseUrl;
+  final String baseurl = AppConstants.apiBaseUrl;
   Future<dynamic> onNetworkRequesting({
     required String url,
     Map<String, String>? header,

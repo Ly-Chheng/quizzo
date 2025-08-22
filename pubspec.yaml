@@ -99,11 +99,7 @@ flutter:
     - assets/fonts/
     - assets/icons/
     - assets/images/
-    - assets/images/home/
     - assets/.env
-    - assets/sound.wav
-
-
 
   fonts:
   - family: Nunito-regular

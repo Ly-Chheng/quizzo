@@ -7,10 +7,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:quizzo/core/services/firebase_services.dart';
-import 'package:quizzo/core/services/themes_services.dart';
-import 'package:quizzo/core/utils/app_language.dart';
+import 'package:quizzo/core/theme/app_colors.dart';
+import 'package:quizzo/core/theme/app_theme.dart';
+import 'package:quizzo/core/theme/app_language.dart';
 import 'package:quizzo/core/functions/local_storage.dart';
-import 'package:quizzo/route.dart';
+import 'package:quizzo/presentation/routes/app_pages.dart';
+import 'package:quizzo/presentation/routes/app_routes.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -27,8 +29,8 @@ Future<void> main() async {
 
   // Initialize Firebase
   await Firebase.initializeApp(
-    // options: DefaultFirebaseOptions.currentPlatform,
-  );
+      // options: DefaultFirebaseOptions.currentPlatform,
+      );
 
   // Init services
   await FirebaseServices().getInstance();
@@ -63,16 +65,15 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
-      theme: ThemeService().lightTheme,
-      darkTheme: ThemeService().darkTheme,
-      themeMode: ThemeService().getThemeMode(),
-      initialRoute: hasSeenOnboarding ? '/SpleshGloble' : '/',
-      getPages: appRoute,
+      theme: ThemeColor().lightTheme,
+      darkTheme: ThemeColor().darkTheme,
+      themeMode: AppTheme().getThemeMode(),
+      initialRoute: AppRoutes.splash,
+      // hasSeenOnboarding ? '/SpleshGloble' : '/',
+      getPages: AppPages.routes,
       translations: AppTranslations(),
       fallbackLocale: AppTranslations().fallbackLocale,
-      locale: storage.read('langCode') != null
-          ? Locale(storage.read('langCode'), storage.read('countryCode'))
-          : const Locale('km', 'KM'),
+      locale: storage.read('langCode') != null ? Locale(storage.read('langCode'), storage.read('countryCode')) : const Locale('km', 'KM'),
     );
   }
 }
