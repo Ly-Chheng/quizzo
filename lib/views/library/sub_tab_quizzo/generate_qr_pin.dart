@@ -6,6 +6,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:quizzo/controllers/library/genarate_pincode_qr_controller.dart';
 import 'package:quizzo/core/utils/app_color.dart';
 import 'package:quizzo/core/utils/app_fonts.dart';
+import 'package:quizzo/views/library/sub_tab_quizzo/invite_firends_screen.dart';
 import 'package:quizzo/widgets/animated_button.dart';
 import 'package:quizzo/widgets/custom_appbar.dart';
 
@@ -159,7 +160,8 @@ class GenerateQRPinCode extends StatelessWidget {
                         duration: 100,
                         enabled: true,
                         onPressed: () {
-                          controller.shareQrCodeImage(context);
+                          // controller.shareQrCodeImage(context);
+                          Get.to(InviteFirendsScreen());
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -171,7 +173,7 @@ class GenerateQRPinCode extends StatelessWidget {
                             SizedBox(width: 5),
                             Text(
                               'Share'.tr,
-                              style: Style.button(context),
+                              style: Style.button(context,color: Colors.white),
                             ),
                           ],
                         ),

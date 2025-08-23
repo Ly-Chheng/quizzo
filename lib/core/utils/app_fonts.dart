@@ -58,49 +58,67 @@ class AppFontSize {
   }
 }
 
+// Custom font all for use
 class Style {
   // Header TextStyle
-  static TextStyle headerTextStyleBold22_24(BuildContext context) {
+  static TextStyle headerTextStyleBold22_24(
+      BuildContext context, {
+        Color? color,
+      }) {
     return TextStyle(
       fontFamily: AppFontStyle().fontebold,
-      fontSize: Get.context!.isPhone ? 22 : 24,
-      color: Colors.white
+      fontSize: context.isPhone ? 22 : 24,
+      color: color,
     );
   }
 
-  static TextStyle subHeaderTextStyleBold20_22(BuildContext context) {
+  static TextStyle subHeaderTextStyleBold20_22(
+      BuildContext context, {
+        Color? color,
+      }) {
     return TextStyle(
       fontFamily: AppFontStyle().fontebold,
       fontSize: AppFontSize(context).titleSize,
-      color: AppTheme().iconTheme,
+      color: color ?? AppTheme().iconTheme,
     );
   }
 
-  static TextStyle subHeaderTextStyleGray22_24(BuildContext context) {
+  static TextStyle subHeaderTextStyleGray22_24(
+      BuildContext context, {
+        Color? color ,
+      }) {
     return TextStyle(
       fontFamily: AppFontStyle().fontebold,
-      color: AppColor().greyText,
+      color: color ?? AppTheme().iconTheme,
     );
   }
 
-  // SubHeader TextStyle
-  static TextStyle subHeaderMedim(BuildContext context) {
+  static TextStyle subHeaderMedim(
+      BuildContext context, {
+        Color? color,
+      }) {
     return TextStyle(
       fontFamily: AppFontStyle().fontMedium,
       fontSize: AppFontSize(context).subTitleSize,
+      color: color ?? AppTheme().iconTheme,
     );
   }
 
-  static TextStyle subHeaderBold(BuildContext context) {
+  static TextStyle subHeaderBold(
+      BuildContext context, {
+        Color? color,
+      }) {
     return TextStyle(
       fontFamily: AppFontStyle().fontebold,
       fontSize: AppFontSize(context).subTitleSize,
+      color: color ?? AppTheme().iconTheme,
     );
   }
 
-  // body TextStyle
-
-  static TextStyle bodyText16_18(BuildContext context) {
+  static TextStyle bodyText16_18(
+      BuildContext context, {
+        Color? color,
+      }) {
     return TextStyle(
       fontFamily: AppFontStyle().fontRegular,
       fontSize: AppFontSize(context).subTitleSize,
@@ -114,8 +132,10 @@ class Style {
     );
   }
 
-  // Small Text (caption, footnotes, etc.)
-  static TextStyle small(BuildContext context) {
+  static TextStyle small(
+      BuildContext context, {
+        Color? color,
+      }) {
     return TextStyle(
       fontFamily: AppFontStyle().fontRegular,
       fontSize: AppFontSize(context).smallSize,
@@ -123,12 +143,14 @@ class Style {
     );
   }
 
-  // Button TextStyle
-  static TextStyle button(BuildContext context) {
+  static TextStyle button(
+      BuildContext context, {
+        Color? color,
+      }) {
     return TextStyle(
       fontFamily: AppFontStyle().fontBold,
       fontSize: (Get.context?.isPhone ?? true) ? 16 : 18,
-      color: Color(0xFFFFA63D),
+      color: color,
     );
   }
 }
