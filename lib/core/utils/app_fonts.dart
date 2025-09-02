@@ -68,8 +68,9 @@ class Style {
   }
 
   static TextStyle subHeaderTextStyleBold20_22(BuildContext context) {
+    String languageCode = Get.locale?.languageCode ?? 'en';
     return TextStyle(
-      fontFamily: AppFontStyle().fontebold,
+      fontFamily: languageCode == 'km' ? 'KantumruyPro-Medium' : 'Nunito-Bold',
       fontSize: AppFontSize(context).titleSize,
       color: AppTheme().iconTheme,
     );
@@ -131,5 +132,3 @@ class Style {
     );
   }
 }
-
-

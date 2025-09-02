@@ -119,15 +119,19 @@ flutter:
   - family: Nunito-ExtraBold
     fonts:
       - asset: assets/fonts/Nunito-ExtraBold.ttf
+
+  # Khmer Kantumruy
   - family: KantumruyPro-Regular
     fonts:
-      - asset: assets/fonts/Nunito-Regular.ttf
+      - asset: assets/fonts/KantumruyPro-Regular.ttf
   - family: KantumruyPro-Medium
     fonts:
-      - asset: assets/fonts/Nunito-Medium.ttf
+      - asset: assets/fonts/KantumruyPro-Medium.ttf
   - family: KantumruyPro-Bold
     fonts:
-      - asset: assets/fonts/Nunito-Bold.ttf
+      - asset: assets/fonts/KantumruyPro-Bold.ttf
+
+
 
 
 

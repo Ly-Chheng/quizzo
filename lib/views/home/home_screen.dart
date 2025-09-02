@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 4,
               ),
               ReusableSectionTitle(
-                title: 'Discover',
+                title: 'discover'.tr,
                 onTap: () {
                   Get.to(DiscoverListScreen());
                 },
@@ -105,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   itemBuilder: (context, index) {
                     final quiz = quizData[index];
                     return Container(
-                      margin: const EdgeInsets.only( right: 15),
+                      margin: const EdgeInsets.only(right: 15),
                       child: TopCollectionCard(
                         name: quiz['name']!,
                         imageUrl: quiz['imagesb']!,
